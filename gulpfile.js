@@ -23,9 +23,9 @@ gulp.task('bundle-vendor', (done) => {
 
 // minor tasks
 gulp.task('lint',       () => lint('src/darkroom.js'));
-gulp.task('sass-dist',  () => sass('style/darkroom.scss', 'darkroom', 'dist'));
-gulp.task('sass-lib',   () => sass('style/darkroom.scss', 'darkroom', 'lib'));
-gulp.task('sass-cont',  () => sass('style/darkroom.scss', 'style', 'example/css'));
+gulp.task('sass-dist',  () => sass('style/**/*.scss', 'darkroom', 'dist'));
+gulp.task('sass-lib',   () => sass('style/**/*.scss', 'darkroom', 'lib'));
+gulp.task('sass-cont',  () => sass('style/**/*.scss', 'darkroom', 'example/css'));
 gulp.task('minify-css', () => minifyCss('lib/darkroom.css', 'darkroom.min.css', 'dist'));
 gulp.task('header',     () => header('dist/**', 'dist'));
 gulp.task('sass',       ['sass-lib', 'sass-dist']);
@@ -48,10 +48,10 @@ gulp.task('watch', () => watch('src/container',  'container', 'example/js'));
 
 
 gulp.task('watch-sass', () => {
-  gutil.log('Watch src/style/**/*.scss');
-  gulp.watch('src/style/**/*.scss', (e) => {
+  gutil.log('Watch style/**/*.scss');
+  gulp.watch('style/**/*.scss', (e) => {
     gutil.log('File Changed', gutil.colors.cyan(e.path));
-    sass('src/style/main.scss', 'main', 'dist/style')
+    sass('style/darkroom.scss', 'darkroom', 'example/css')
   });
 });
 
