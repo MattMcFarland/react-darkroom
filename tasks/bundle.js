@@ -21,17 +21,17 @@ module.exports = function(entry, name, dest, callback) {
 
   var b = browserify({
     entries: entry,
-    standalone: 'MarkedArea'
+    debug: true
   });
+
 
   getNPMPackageIds().forEach(function (id) {
     b.external(id);
   });
 
+
   gutil.log('Creating bundle from', gutil.colors.cyan(entry + '.js'));
   b.on('log', gutil.log);
-
-  b.transform({global: true}, 'browserify-shim');
 
   return b.bundle()
     .on('nextTick', () => {

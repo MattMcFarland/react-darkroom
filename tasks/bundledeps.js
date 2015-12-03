@@ -1,35 +1,33 @@
 var
   browserify = require('browserify'),
   gulp = require('gulp'),
-  fs = require('fs'),
-  header = require('gulp-header'),
-  pkg = require('../package.json'),
   source = require('vinyl-source-stream'),
   buffer = require('vinyl-buffer'),
   uglify = require('gulp-uglify'),
   gutil = require('gulp-util'),
+  sourcemaps = require('gulp-sourcemaps'),
   getNPMPackageIds = require('./helpers').getNPMPackageIds,
+  nodeResolve = require('resolve'),
   compressionOptions = require('../config/gulpCompressionOptions');
 
-module.exports = function(entry, name, dest, callback) {
-  var b = browserify({
-    entries: entry,
-  });
+module.exports = function(name, dest, callback) {
+  var b = browserify({debug: false});
   var filename = name + ".min.js";
 
   getNPMPackageIds().forEach(function (id) {
-    b.external(id);
+    b.require(nodeResolve.sync(id), { expose: id });
   });
 
   return b.bundle()
     .on('error', gutil.log)
     .pipe(source(filename))
     .pipe(buffer())
+    .pipe(sourcemaps.init({loadMaps: true}))
     .pipe(uglify(compressionOptions))
+    .pipe(sourcemaps.write('./'))
     .on('end', () => {
       gutil.log('File Saved', gutil.colors.cyan(dest + '/' + name + '.min.js'));
     })
-    .pipe(header(fs.readFileSync('tasks/header.ejs', 'utf8'), {pkg: pkg}))
     .pipe(gulp.dest(dest));
 };
 

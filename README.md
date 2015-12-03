@@ -1,6 +1,17 @@
 React-Darkroom component
 
+Inspired by https://mattketmo.github.io/darkroomjs/
+
 WIP
+
+States:
+
+- select file
+- edit file
+  - active tooling
+    - cropping
+- upload file
+- file upload error
 
 
 TODOS:
