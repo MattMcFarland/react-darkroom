@@ -1,7 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Darkroom, Canvas} from './components';
+import { Darkroom, Canvas, History } from './components';
+import { historyController } from './lib/historyController';
 import { File } from './elements';
+
+
 /**
  * Darkroom API methods
  *
@@ -32,21 +35,56 @@ class DarkroomContainer extends React.Component {
     reader.readAsDataURL(e.target.files[0]);
   }
 
+  componentDidMount () {
+    // Every time the state changes, log it
+    this.unsubscribe = historyController.subscribe(() =>
+      this.setState({history: (historyController.getState())})
+    )
+    this.setState({history: (historyController.getState())});
+  }
+
+  componentWillUnMount () {
+    this.unsubscribe();
+  }
+
   render () {
 
     let { angle, image } = this.state;
 
+    let onUndo = () => {
+      console.log('onUndo clicked');
+    }
+    let onRedo = () => {
+      console.log('onRedo clicked');
+    }
+
     return (
       <div>
         <Darkroom>
+          <History controller={this.state.history}>
+            <button
+              action="back"
+              onClick={onUndo}
+              ifEmpty="disable"
+              data-tipsy="Undo"
+              className="tipsy tipsy--sw">
+              <span className="icon icon-undo2"/>
+            </button>
+            <button
+              action="forward"
+              onClick={onRedo}
+              ifEmpty="disable"
+              data-tipsy="Redo"
+              className="tipsy tipsy--sw">
+              <span className="icon icon-redo2"/>
+            </button>
+          </History>
           <File onChange={this.onFileChange}/>
           <Canvas source={image} angle={angle} width="300" height="300"/>
         </Darkroom>
       </div>
     )
   }
-
-
 }
 
 ReactDOM.render(

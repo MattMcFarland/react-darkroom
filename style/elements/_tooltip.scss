@@ -12,3 +12,10 @@
 .tipsy--s  { @include tipsy(s, 	#222, 0, 3px); 		line-height: 1.125;	}
 .tipsy--sw { @include tipsy(sw, #222, 5px, 0); 		line-height: 1.125; }
 .tipsy--w  { @include tipsy(w, 	#222, 0, 3px); 		line-height: 1.125;	}
+
+button[disabled].tipsy {
+  display: none;
+  &:before, &:after {
+    display: none;
+  }
+}

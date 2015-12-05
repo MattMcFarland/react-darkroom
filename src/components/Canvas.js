@@ -34,6 +34,8 @@ export class Canvas extends React.Component {
    * @param to {{width: number, height: number}}
    * @returns {{width: number, height: number}}
    */
+
+
   static constrainProportions (from, to) {
 
     let minRatio = Math.min(to.height / from.height, to.width / from.width);
@@ -68,39 +70,52 @@ export class Canvas extends React.Component {
 
   }
   getBitmapData (source) {
-    if (source !== this._data) {
-      this._cache = new Image();
-      this._data = Object.assign(source);
-      this._cache.src = this._data;
+    try {
+      if (source !== this._data) {
+        this._cache = new Image();
+        this._data = Object.assign(source);
+        this._cache.src = this._data;
+      }
+      return this._cache;
+    } catch (er) {
+      this._cache = null;
+      this._data = null;
+      this._cache.src = null;
+      return null;
     }
-    return this._cache;
   }
+
+
   componentDidUpdate () {
-    let
-      image = this.getBitmapData(this.props.source),
-      canvas = this.refs.canvas,
-      angle = parseInt(this.props.angle) || 0,
-      boundRect = {
-        width: parseInt(this.props.width),
-        height: parseInt(this.props.height)
-      },
-      dims = {
-        width: parseInt(image.width),
-        height: parseInt(image.height)
-      },
-      ctx = canvas.getContext('2d');
+    if (this.props.source) {
+      let
+        image = this.getBitmapData(this.props.source),
+        canvas = this.refs.canvas,
+        angle = parseInt(this.props.angle) || 0,
+        boundRect = {
+          width: parseInt(this.props.width),
+          height: parseInt(this.props.height)
+        },
+        dims = {
+          width: parseInt(image.width),
+          height: parseInt(image.height)
+        },
+        ctx = canvas.getContext('2d');
 
-    Canvas.clearCanvas(canvas, ctx);
-    Canvas.rotateImage(ctx, angle);
+      Canvas.clearCanvas(canvas, ctx);
+      Canvas.rotateImage(ctx, angle);
 
-    let scaledRect = Canvas.constrainProportions(dims, boundRect);
-    let position = Canvas.centerRect(scaledRect, boundRect);
+      let scaledRect = Canvas.constrainProportions(dims, boundRect);
+      let position = Canvas.centerRect(scaledRect, boundRect);
 
-    ctx.clearRect(0, 0, boundRect.width, boundRect.height);
+      ctx.clearRect(0, 0, boundRect.width, boundRect.height);
 
-    Canvas.renderImage(ctx, image, position, scaledRect);
+      Canvas.renderImage(ctx, image, position, scaledRect);
 
-    ctx.restore();
+      ctx.restore();
+    }
+
+
   }
 
   render () {
@@ -115,16 +130,4 @@ export class Canvas extends React.Component {
   }
 
 }
-
-Canvas.defaultProps = {
-  angle: 0,
-  width: 200,
-  height: 200
-};
-
-Canvas.propTypes = {
-
-};
-
-Canvas.displayName = "Canvas";
 
