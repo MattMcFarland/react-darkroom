@@ -1,54 +1,56 @@
 import BaseComponent from './BaseComponent';
 import Utils from '../lib/Utils';
 import React from 'react';
+import { File } from '../elements';
+
+
 
 export class DarkroomCanvas extends BaseComponent {
 
   constructor(props) {
     super(props);
     this._bind(
-      'readFile'
+      'updateCanvas'
     );
-  }
-
-  readFile (file) {
-    var reader = new FileReader();
-    reader.onload = (e => this.setState({_image: e.target.result, angle: 0}) );
-    reader.readAsDataURL(file);
+    this.state = {};
   }
 
   updateCanvas () {
-    let {canvas, image} = this.refs;
-    let ctx = canvas.getContext('2d');
+    let
+      { canvas, image } = this.refs,
+      angle = parseInt(this.props.angle) || 0,
+      boundRect = {
+        width: parseInt(this.props.width),
+        height: parseInt(this.props.height)
+      },
+      dims = Utils.getRotatedBoundingRect ({
+        width: parseInt(image.width),
+        height: parseInt(image.height)
+      }, angle),
+      ctx = canvas.getContext('2d');
+
+
     Utils.clearCanvas(canvas, ctx);
-    if (this.props.angle) {
-      Utils.rotateImage(ctx, this.props.angle);
-    }
-    Utils.renderImage(ctx, image);
+    Utils.rotateImage(ctx, angle);
+
+    let scaledRect = Utils.constrainProportions(dims, boundRect);
+    let position = Utils.centerRect(scaledRect, boundRect);
+    console.log('Maximum Size', boundRect);
+    console.log('Image Dimensions', dims);
+    console.log('Scaled Dimensions', scaledRect);
+    ctx.clearRect(0, 0, boundRect.width, boundRect.height);
+    Utils.renderImage(ctx, image, position, scaledRect);
+    ctx.restore();
   }
 
 
-  componentDidUpdate () {
-    if (this.state._image) {
-      setTimeout(this.updateCanvas, 100);
-    }
-  }
-
-  get image () {
-    // If image is passed in by prop it will take precedent. Otherwise
-    // internal _image will be used
-    if (this.props.image) {
-      return this.props.image
-    } else if (this.state && this.state._image) {
-      return this.state._image;
-    } else {
-      return undefined;
-    }
+  componentDidUpdate (a, b) {
+    setTimeout(this.updateCanvas, 100);
   }
 
   render () {
 
-    let image = this.image,
+    let image = this.props.image,
       { width, height } = this.props,
       theStyle = {};
 
@@ -59,16 +61,14 @@ export class DarkroomCanvas extends BaseComponent {
       theStyle.height = this.props.height;
     }
 
-    if (this.props.file) {
-      setTimeout (this.readFile(this.props.file), 100);
-    }
 
     return (
-      <div className="darkroom">
+      <div ref="container" className="darkroom">
         <div style={theStyle} className="darkroom-editor">
           <img ref="image" src={image} />
-          <canvas ref="canvas"/>
+          <canvas ref="canvas" width={width} height={height} ref="canvas"/>
         </div>
+        <File onChange={this.props.onFileChange}/>
       </div>
     );
   }

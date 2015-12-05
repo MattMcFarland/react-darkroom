@@ -20,18 +20,25 @@ class DarkroomContainer extends React.Component {
 
   constructor(props) {
     super(props);
+    this.state = {
+      angle: 0,
+      image: null
+    }
     this.onFileChange = this.onFileChange.bind(this);
   }
   onFileChange (e) {
-    this.setState({file: e.target.files[0]});
+    var reader = new FileReader();
+    reader.onload = (e => this.setState({image: e.target.result, angle: 0}) );
+    reader.readAsDataURL(e.target.files[0]);
   }
 
   render () {
-    let file = (this.state && this.state.file) ? this.state.file : null;
+
+    let { angle, image } = this.state;
+
     return (
       <div>
-        <DarkroomCanvas file={file} width="500" height="500"/>
-        <input type="file" onChange={this.onFileChange}/>
+        <DarkroomCanvas image={image} onFileChange={this.onFileChange} angle={angle} width="300" height="300"/>
       </div>
     )
   }

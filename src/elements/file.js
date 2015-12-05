@@ -1,7 +1,7 @@
 import React from 'react';
 
-export default ({
+export const File = ({
   onChange
   }) => (
-  <input type="file" onChange={onChange}/>
+  <input style={{marginTop: '40px'}}type="file" onChange={onChange}/>
 );
