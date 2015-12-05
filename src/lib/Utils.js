@@ -1,16 +1,17 @@
-export default class Mig {
 
+export default class Utils {
+  static clearCanvas (canvas, ctx) {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.save();
+  }
   static rotateImage (ctx, angle) {
-
     var canvas = ctx.canvas;
     ctx.translate(canvas.width* .5, canvas.height* .5);
     ctx.rotate(angle * Math.PI / 180);
     ctx.translate(-canvas.width*.5, -canvas.height*.5);
     ctx.save();
   }
-
   static renderImage (ctx, img) {
-
     var
       canvas = ctx.canvas,
       hRatio = canvas.width / img.width,
@@ -24,6 +25,4 @@ export default class Mig {
       x,y,img.width*ratio, img.height*ratio);
     ctx.restore();
   }
-
-
 }
