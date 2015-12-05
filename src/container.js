@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { DarkroomCanvas} from './components';
-
+import { Darkroom, Canvas} from './components';
+import { File } from './elements';
 /**
  * Darkroom API methods
  *
@@ -38,7 +38,10 @@ class DarkroomContainer extends React.Component {
 
     return (
       <div>
-        <DarkroomCanvas image={image} onFileChange={this.onFileChange} angle={angle} width="300" height="300"/>
+        <Darkroom>
+          <File onChange={this.onFileChange}/>
+          <Canvas source={image} angle={angle} width="300" height="300"/>
+        </Darkroom>
       </div>
     )
   }
