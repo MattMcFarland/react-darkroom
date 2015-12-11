@@ -1,0 +1,21 @@
+.tipsy {
+  &:before, &:after {
+    font-size: 12px;
+    line-height: 18px;
+  }
+}
+.tipsy--nw { @include tipsy(nw, #222, 0, 0); 		line-height: 1.125; }
+.tipsy--n  { @include tipsy(n, 	#222, 5px, 3px); 	line-height: 1.125;	}
+.tipsy--ne { @include tipsy(ne, #222, 0, 0); 		line-height: 1.125; }
+.tipsy--e  { @include tipsy(e, 	#222, 5px, 3px); 	line-height: 1.125;	}
+.tipsy--se { @include tipsy(se, #222, 0, 0); 		line-height: 1.125; }
+.tipsy--s  { @include tipsy(s, 	#222, 0, 3px); 		line-height: 1.125;	}
+.tipsy--sw { @include tipsy(sw, #222, 5px, 0); 		line-height: 1.125; }
+.tipsy--w  { @include tipsy(w, 	#222, 0, 3px); 		line-height: 1.125;	}
+
+
+button[disabled].tipsy {
+  &:before, &:after {
+    display: none;
+  }
+}
