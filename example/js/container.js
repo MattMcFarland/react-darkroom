@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "6faf913159c00b5e658b"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "33dc22cf5bdad6da8601"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -28054,7 +28054,7 @@
 	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(KitchenSink).call(this, props));
 	
 	    _this.state = { step: 0, thread: [{ crop: false, source: null, angle: 0 }] };
-	    ['onFileChange', 'update', 'onRedo', 'onUndo', 'onRotateLeft', 'onCrop', 'onRotateRight'].forEach(function (method) {
+	    ['onFileChange', 'update', 'onRedo', 'onUndo', 'onRotateLeft', 'onCropStart', 'onCropConfirm', 'onRotateRight'].forEach(function (method) {
 	      _this[method] = _this[method].bind(_this);
 	    });
 	    return _this;
@@ -28141,9 +28141,14 @@
 	      this.update({ type: 'ROTATE_RIGHT' });
 	    }
 	  }, {
-	    key: 'onCrop',
-	    value: function onCrop() {
+	    key: 'onCropStart',
+	    value: function onCropStart() {
 	      this.update({ type: 'START_CROPPING' });
+	    }
+	  }, {
+	    key: 'onCropConfirm',
+	    value: function onCropConfirm() {
+	      console.log(this.refs.canvasWrapper);
 	    }
 	  }, {
 	    key: 'render',
@@ -28167,7 +28172,7 @@
 	        _react2.default.createElement(
 	          'h2',
 	          null,
-	          'Darkroom test'
+	          'React Darkroom Kitchen Sink'
 	        ),
 	        _react2.default.createElement(
 	          'div',
@@ -28219,9 +28224,28 @@
 	                _react2.default.createElement('span', { className: 'icon icon-redo' })
 	              ),
 	              _react2.default.createElement(
-	                'button',
-	                { disabled: !hasFile, onClick: this.onCrop, 'data-tipsy': 'Crop', className: 'tipsy tipsy--sw' },
-	                _react2.default.createElement('span', { className: 'icon icon-crop' })
+	                _components.CropMenu,
+	                { isCropping: crop },
+	                _react2.default.createElement(
+	                  'button',
+	                  { disabled: !hasFile, showOnlyWhen: 'croppingIsOff', onClick: this.onCropStart, 'data-tipsy': 'Crop', className: 'tipsy tipsy--sw' },
+	                  _react2.default.createElement('span', { className: 'icon icon-crop' })
+	                ),
+	                _react2.default.createElement(
+	                  'button',
+	                  { disabled: !hasFile, showOnlyWhen: 'croppingIsOn', style: { color: 'cyan' } },
+	                  _react2.default.createElement('span', { className: 'icon icon-crop' })
+	                ),
+	                _react2.default.createElement(
+	                  'button',
+	                  { disabled: !hasFile, showOnlyWhen: 'croppingIsOn', onClick: this.onCropConfirm, style: { color: 'green' }, 'data-tipsy': 'Confirm', className: 'tipsy tipsy--sw' },
+	                  _react2.default.createElement('span', { className: 'icon icon-checkmark' })
+	                ),
+	                _react2.default.createElement(
+	                  'button',
+	                  { disabled: !hasFile, showOnlyWhen: 'croppingIsOn', onClick: this.onUndo, style: { color: 'red' }, 'data-tipsy': 'Cancel', className: 'tipsy tipsy--sw' },
+	                  _react2.default.createElement('span', { className: 'icon icon-cross' })
+	                )
 	              ),
 	              _react2.default.createElement(
 	                'button',
@@ -28231,7 +28255,7 @@
 	            ),
 	            _react2.default.createElement(
 	              _components.Canvas,
-	              { crop: crop, source: source, angle: angle, width: '300', height: '300' },
+	              { ref: 'canvasWrapper', crop: crop, source: source, angle: angle, width: '300', height: '300' },
 	              _react2.default.createElement(_components.FilePicker, { hasFile: hasFile, onChange: this.onFileChange })
 	            )
 	          )
@@ -28296,9 +28320,13 @@
 	
 	var _FilePicker2 = _interopRequireDefault(_FilePicker);
 	
+	var _CropMenu = __webpack_require__(258);
+	
+	var _CropMenu2 = _interopRequireDefault(_CropMenu);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	module.exports = { Canvas: _Canvas2.default, Darkroom: _Darkroom2.default, History: _History2.default, Toolbar: _Toolbar2.default, FilePicker: _FilePicker2.default };
+	module.exports = { Canvas: _Canvas2.default, Darkroom: _Darkroom2.default, History: _History2.default, Toolbar: _Toolbar2.default, FilePicker: _FilePicker2.default, CropMenu: _CropMenu2.default };
 	
 	/* REACT HOT LOADER */ }).call(this); } finally { if (true) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = __webpack_require__(250); if (makeExportsHot(module, __webpack_require__(139))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "index.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)(module)))
@@ -28377,7 +28405,7 @@
 	  }, {
 	    key: 'renderCanvas',
 	    value: function renderCanvas() {
-	      var canvas = this.refs.canvas,
+	      var canvas = document.createElement('canvas'),
 	          ctx = canvas.getContext('2d');
 	
 	      _utils.Transform.clearCanvas(canvas, ctx);
@@ -29408,6 +29436,50 @@
 	exports.default = FilePicker;
 	
 	/* REACT HOT LOADER */ }).call(this); } finally { if (true) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = __webpack_require__(250); if (makeExportsHot(module, __webpack_require__(139))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "FilePicker.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)(module)))
+
+/***/ },
+/* 258 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(module) {/* REACT HOT LOADER */ if (true) { (function () { var ReactHotAPI = __webpack_require__(77), RootInstanceProvider = __webpack_require__(85), ReactMount = __webpack_require__(87), React = __webpack_require__(139); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+	
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(139);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.default = function (_ref) {
+	  var isCropping = _ref.isCropping;
+	  var children = _ref.children;
+	
+	  var childNodes = [];
+	
+	  _react2.default.Children.forEach(children, function (child) {
+	    var showOnlyWhen = child.props.showOnlyWhen;
+	
+	    if (isCropping && showOnlyWhen === "croppingIsOn") {
+	      childNodes.push(child);
+	    } else if (!isCropping && showOnlyWhen === "croppingIsOff") {
+	      childNodes.push(child);
+	    }
+	  });
+	
+	  return _react2.default.createElement(
+	    "span",
+	    null,
+	    childNodes
+	  );
+	};
+	
+	/* REACT HOT LOADER */ }).call(this); } finally { if (true) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = __webpack_require__(250); if (makeExportsHot(module, __webpack_require__(139))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "CropMenu.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)(module)))
 
 /***/ }
