@@ -4,7 +4,7 @@ module.exports = {
   entry: [
     'webpack-dev-server/client?http://localhost:8080',
     'webpack/hot/only-dev-server',
-    './lib/example.js'
+    './lib/examples/kitchensink.js'
   ],
   devtool: 'source-map',
   module: {
