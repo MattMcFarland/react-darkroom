@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "7663d328be97101e7a17"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "0ee8a10bae212f2decfd"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -8030,7 +8030,7 @@
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _KitchenSink = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"../container/KitchenSink\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	var _KitchenSink = __webpack_require__(244);
 	
 	var _KitchenSink2 = _interopRequireDefault(_KitchenSink);
 	
@@ -8038,7 +8038,7 @@
 	
 	_reactDom2.default.render(_react2.default.createElement(_KitchenSink2.default, null), document.getElementById('index'));
 	
-	/* REACT HOT LOADER */ }).call(this); } finally { if (true) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = __webpack_require__(244); if (makeExportsHot(module, __webpack_require__(139))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "kitchensink.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+	/* REACT HOT LOADER */ }).call(this); } finally { if (true) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = __webpack_require__(250); if (makeExportsHot(module, __webpack_require__(139))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "kitchensink.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)(module)))
 
 /***/ },
@@ -27949,10 +27949,610 @@
 /* 244 */
 /***/ function(module, exports, __webpack_require__) {
 
+	/* WEBPACK VAR INJECTION */(function(module) {/* REACT HOT LOADER */ if (true) { (function () { var ReactHotAPI = __webpack_require__(77), RootInstanceProvider = __webpack_require__(85), ReactMount = __webpack_require__(87), React = __webpack_require__(139); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+	
 	'use strict';
 	
-	var isReactClassish = __webpack_require__(245),
-	    isReactElementish = __webpack_require__(246);
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _deepFreeze = __webpack_require__(245);
+	
+	var _deepFreeze2 = _interopRequireDefault(_deepFreeze);
+	
+	var _components = __webpack_require__(246);
+	
+	var _react = __webpack_require__(139);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /**
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * Darkroom Kitchen Sink
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * A bit overkill but use-able
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
+	
+	function fileController() {
+	  var thread = arguments.length <= 0 || arguments[0] === undefined ? { source: null } : arguments[0];
+	  var action = arguments[1];
+	
+	  (0, _deepFreeze2.default)(thread);
+	  switch (action.type) {
+	    case 'SET_FILE':
+	      return Object.assign({}, thread, {
+	        source: action.file,
+	        angle: 0
+	      });
+	    default:
+	      return thread;
+	  }
+	}
+	function imageController() {
+	  var thread = arguments.length <= 0 || arguments[0] === undefined ? { crop: false, source: null, angle: 0 } : arguments[0];
+	  var action = arguments[1];
+	
+	  (0, _deepFreeze2.default)(thread);
+	  switch (action.type) {
+	    case 'ROTATE_LEFT':
+	      return Object.assign({}, thread, {
+	        angle: thread.angle + 90
+	      });
+	    case 'ROTATE_RIGHT':
+	      return Object.assign({}, thread, {
+	        angle: thread.angle - 90
+	      });
+	    case 'START_CROPPING':
+	      return Object.assign({}, thread, {
+	        crop: true
+	      });
+	    case 'STOP_CROPPING':
+	      return Object.assign({}, thread, {
+	        crop: false
+	      });
+	    default:
+	      return thread;
+	  }
+	}
+	function readFile(file, done) {
+	  var reader = new FileReader();
+	  reader.onload = function (e) {
+	    return done(e.target.result);
+	  };
+	  reader.readAsDataURL(file);
+	}
+	
+	/**
+	 * Darkroom API methods
+	 *
+	 * Set image/width/height
+	 * Set Rotation
+	 * Use React.Children.foreach can iterate through each item
+	 * for a declarative API
+	 * Image rotation -> Should that be state?  Or should we set that
+	 * independantly and allow for image rotation to be easily set?
+	 *
+	 * Controls to be a separate and optional component for maximum
+	 * re-usability.
+	 */
+	
+	var KitchenSink = (function (_React$Component) {
+	  _inherits(KitchenSink, _React$Component);
+	
+	  function KitchenSink(props) {
+	    _classCallCheck(this, KitchenSink);
+	
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(KitchenSink).call(this, props));
+	
+	    _this.state = { step: 0, thread: [{ crop: false, source: null, angle: 0 }] };
+	    ['onFileChange', 'update', 'onRedo', 'onUndo', 'onRotateLeft', 'onCrop', 'onRotateRight'].forEach(function (method) {
+	      _this[method] = _this[method].bind(_this);
+	    });
+	    return _this;
+	  }
+	
+	  _createClass(KitchenSink, [{
+	    key: 'componentDidUpdate',
+	    value: function componentDidUpdate() {
+	      console.timeEnd('State changed');
+	    }
+	  }, {
+	    key: 'update',
+	    value: function update(action) {
+	      var state = this.state,
+	          nextThread,
+	          nextStep = state.thread.length,
+	          newState,
+	          newThread;
+	
+	      (0, _deepFreeze2.default)(state);
+	      switch (action.type) {
+	        case "SET_FILE":
+	          nextThread = fileController(state.thread[state.step], action);
+	          break;
+	
+	        case "UNDO":
+	          nextStep = state.step - 1;
+	          break;
+	
+	        case "REDO":
+	          nextStep = state.step + 1;
+	          break;
+	
+	        case "ROTATE_LEFT":
+	        case "ROTATE_RIGHT":
+	        case "START_CROPPING":
+	        case "STOP_CROPPING":
+	          nextThread = imageController(state.thread[state.step], action);
+	          break;
+	
+	      }
+	
+	      if (action.type !== "UNDO" && action.type !== "REDO" && state.step > 0 && state.step < state.thread.length - 1) {
+	        newThread = [].concat(_toConsumableArray(state.thread.slice(0, state.step)), [nextThread]);
+	        nextStep = newThread.length - 1;
+	      } else {
+	        newThread = nextThread ? [].concat(_toConsumableArray(state.thread), [nextThread]) : [].concat(state.thread);
+	      }
+	
+	      newState = Object.assign({}, state, {
+	        step: nextStep,
+	        thread: newThread
+	      });
+	      console.time('State changed');
+	      this.setState(newState);
+	    }
+	  }, {
+	    key: 'onFileChange',
+	    value: function onFileChange(e) {
+	      var _this2 = this;
+	
+	      readFile(e.target.files[0], function (file) {
+	        _this2.update({ type: 'SET_FILE', file: file });
+	      });
+	    }
+	  }, {
+	    key: 'onUndo',
+	    value: function onUndo() {
+	      this.update({ type: 'UNDO' });
+	    }
+	  }, {
+	    key: 'onRedo',
+	    value: function onRedo() {
+	      this.update({ type: 'REDO' });
+	    }
+	  }, {
+	    key: 'onRotateLeft',
+	    value: function onRotateLeft() {
+	      this.update({ type: 'ROTATE_LEFT' });
+	    }
+	  }, {
+	    key: 'onRotateRight',
+	    value: function onRotateRight() {
+	      this.update({ type: 'ROTATE_RIGHT' });
+	    }
+	  }, {
+	    key: 'onCrop',
+	    value: function onCrop() {
+	      this.update({ type: 'START_CROPPING' });
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var _this3 = this;
+	
+	      var current = this.state.thread[this.state.step];
+	      var angle = current.angle;
+	      var source = current.source;
+	      var crop = current.crop;
+	
+	      var hasFile = source !== null;
+	
+	      var selectFile = function selectFile() {
+	        _this3.refs.fileselect.click();
+	      };
+	
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(
+	          'h2',
+	          null,
+	          'Darkroom test'
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { style: { padding: "2em" } },
+	          _react2.default.createElement(
+	            _components.Darkroom,
+	            null,
+	            _react2.default.createElement(
+	              _components.Toolbar,
+	              null,
+	              _react2.default.createElement(
+	                'button',
+	                { onClick: selectFile, 'data-tipsy': 'Select Image', className: 'tipsy tipsy--s' },
+	                _react2.default.createElement('span', { className: 'icon icon-image' }),
+	                _react2.default.createElement('input', { type: 'file', ref: 'fileselect', onChange: this.onFileChange, style: { display: 'none' } })
+	              ),
+	              _react2.default.createElement(
+	                _components.History,
+	                { step: this.state.step, length: this.state.thread.length - 1 },
+	                _react2.default.createElement(
+	                  'button',
+	                  {
+	                    action: 'back',
+	                    onClick: this.onUndo,
+	                    ifEmpty: 'disable',
+	                    'data-tipsy': 'Undo',
+	                    className: 'tipsy tipsy--sw' },
+	                  _react2.default.createElement('span', { className: 'icon icon-undo2' })
+	                ),
+	                _react2.default.createElement(
+	                  'button',
+	                  {
+	                    action: 'forward',
+	                    onClick: this.onRedo,
+	                    ifEmpty: 'disable',
+	                    'data-tipsy': 'Redo',
+	                    className: 'tipsy tipsy--sw' },
+	                  _react2.default.createElement('span', { className: 'icon icon-redo2' })
+	                )
+	              ),
+	              _react2.default.createElement(
+	                'button',
+	                { disabled: !hasFile, onClick: this.onRotateLeft, 'data-tipsy': 'Rotate Left', className: 'tipsy tipsy--sw' },
+	                _react2.default.createElement('span', { className: 'icon icon-undo' })
+	              ),
+	              _react2.default.createElement(
+	                'button',
+	                { disabled: !hasFile, onClick: this.onRotateRight, 'data-tipsy': 'Rotate Right', className: 'tipsy tipsy--sw' },
+	                _react2.default.createElement('span', { className: 'icon icon-redo' })
+	              ),
+	              _react2.default.createElement(
+	                'button',
+	                { disabled: !hasFile, onClick: this.onCrop, 'data-tipsy': 'Crop', className: 'tipsy tipsy--sw' },
+	                _react2.default.createElement('span', { className: 'icon icon-crop' })
+	              ),
+	              _react2.default.createElement(
+	                'button',
+	                { disabled: !hasFile, onClick: this.onSave, 'data-tipsy': 'Save', className: 'tipsy tipsy--sw' },
+	                _react2.default.createElement('span', { className: 'icon icon-floppy-disk' })
+	              )
+	            ),
+	            _react2.default.createElement(
+	              _components.Canvas,
+	              { crop: crop, source: source, angle: angle, width: '300', height: '300' },
+	              _react2.default.createElement(_components.FilePicker, { hasFile: hasFile, onChange: this.onFileChange })
+	            )
+	          )
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return KitchenSink;
+	})(_react2.default.Component);
+	
+	exports.default = KitchenSink;
+	
+	/* REACT HOT LOADER */ }).call(this); } finally { if (true) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = __webpack_require__(250); if (makeExportsHot(module, __webpack_require__(139))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "KitchenSink.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)(module)))
+
+/***/ },
+/* 245 */
+/***/ function(module, exports) {
+
+	module.exports = function deepFreeze (o) {
+	  Object.freeze(o);
+	
+	  Object.getOwnPropertyNames(o).forEach(function (prop) {
+	    if (o.hasOwnProperty(prop)
+	    && o[prop] !== null
+	    && (typeof o[prop] === "object" || typeof o[prop] === "function")
+	    && !Object.isFrozen(o[prop])) {
+	      deepFreeze(o[prop]);
+	    }
+	  });
+	  
+	  return o;
+	};
+
+
+/***/ },
+/* 246 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(module) {/* REACT HOT LOADER */ if (true) { (function () { var ReactHotAPI = __webpack_require__(77), RootInstanceProvider = __webpack_require__(85), ReactMount = __webpack_require__(87), React = __webpack_require__(139); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+	
+	'use strict';
+	
+	var _Canvas = __webpack_require__(247);
+	
+	var _Canvas2 = _interopRequireDefault(_Canvas);
+	
+	var _Darkroom = __webpack_require__(254);
+	
+	var _Darkroom2 = _interopRequireDefault(_Darkroom);
+	
+	var _History = __webpack_require__(255);
+	
+	var _History2 = _interopRequireDefault(_History);
+	
+	var _Toolbar = __webpack_require__(256);
+	
+	var _Toolbar2 = _interopRequireDefault(_Toolbar);
+	
+	var _FilePicker = __webpack_require__(257);
+	
+	var _FilePicker2 = _interopRequireDefault(_FilePicker);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	module.exports = { Canvas: _Canvas2.default, Darkroom: _Darkroom2.default, History: _History2.default, Toolbar: _Toolbar2.default, FilePicker: _FilePicker2.default };
+	
+	/* REACT HOT LOADER */ }).call(this); } finally { if (true) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = __webpack_require__(250); if (makeExportsHot(module, __webpack_require__(139))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "index.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)(module)))
+
+/***/ },
+/* 247 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(module) {/* REACT HOT LOADER */ if (true) { (function () { var ReactHotAPI = __webpack_require__(77), RootInstanceProvider = __webpack_require__(85), ReactMount = __webpack_require__(87), React = __webpack_require__(139); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+	
+	'use strict';
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(139);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _utils = __webpack_require__(248);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var Canvas = (function (_React$Component) {
+	  _inherits(Canvas, _React$Component);
+	
+	  function Canvas(props) {
+	    _classCallCheck(this, Canvas);
+	
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Canvas).call(this, props));
+	
+	    _this.getBitmapData = _this.getBitmapData.bind(_this);
+	    _this.renderCanvas = _this.renderCanvas.bind(_this);
+	    // private properties
+	    _this._prevAngle = 0;
+	    _this._data = null;
+	    _this._cache = null;
+	    return _this;
+	  }
+	
+	  /**
+	   * Constrain proportions to rect while considering its angle
+	   * @param from {{width: number, height: number}}
+	   * @param to {{width: number, height: number}}
+	   * @returns {{width: number, height: number}}
+	   */
+	
+	  _createClass(Canvas, [{
+	    key: 'getBitmapData',
+	    value: function getBitmapData(source) {
+	      try {
+	        if (source !== this._data) {
+	          this._cache = new Image();
+	          this._data = Object.assign(source);
+	          this._cache.src = this._data;
+	        }
+	        return this._cache;
+	      } catch (er) {
+	        this._cache = null;
+	        this._data = null;
+	        this._cache.src = null;
+	        return null;
+	      }
+	    }
+	  }, {
+	    key: 'renderCanvas',
+	    value: function renderCanvas() {
+	      var canvas = this.refs.canvas,
+	          ctx = canvas.getContext('2d');
+	
+	      _utils.Transform.clearCanvas(canvas, ctx);
+	      if (this.props.source) {
+	
+	        var image = this.getBitmapData(this.props.source),
+	            angle = parseInt(this.props.angle) || 0,
+	            boundRect = {
+	          width: parseInt(this.props.width),
+	          height: parseInt(this.props.height)
+	        },
+	            dims = {
+	          width: parseInt(image.width),
+	          height: parseInt(image.height)
+	        };
+	
+	        _utils.Transform.rotateImage(ctx, angle);
+	
+	        var scaledRect = _utils.Transform.constrainProportions(dims, boundRect);
+	        var position = _utils.Transform.centerRect(scaledRect, boundRect);
+	
+	        _utils.Transform.renderImage(ctx, image, position, scaledRect);
+	
+	        if (this.props.crop) {
+	          if (!this.cropBox) {
+	            this.cropBox = new _utils.CropBox({ canvas: canvas, ctx: ctx });
+	          }
+	          this.cropBox.render();
+	        }
+	      }
+	    }
+	  }, {
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      var _this2 = this;
+	
+	      var canvas = this.refs.canvas,
+	          ctx = canvas.getContext('2d');
+	
+	      setInterval(function () {
+	        _this2.renderCanvas();
+	      }, 30);
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var _props = this.props;
+	      var source = _props.source;
+	      var width = _props.width;
+	      var height = _props.height;
+	      var children = _props.children;
+	      var crop = _props.crop;
+	
+	      var canvasStyle = {
+	        display: source ? 'block' : 'none'
+	      };
+	
+	      return _react2.default.createElement(
+	        'div',
+	        _extends({}, this.props, { style: { width: width, height: height }, className: 'darkroom-canvas' }),
+	        children,
+	        _react2.default.createElement('canvas', { style: canvasStyle, ref: 'canvas', width: width, height: height })
+	      );
+	    }
+	  }]);
+	
+	  return Canvas;
+	})(_react2.default.Component);
+	
+	exports.default = Canvas;
+	
+	/* REACT HOT LOADER */ }).call(this); } finally { if (true) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = __webpack_require__(250); if (makeExportsHot(module, __webpack_require__(139))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "Canvas.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)(module)))
+
+/***/ },
+/* 248 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(module) {/* REACT HOT LOADER */ if (true) { (function () { var ReactHotAPI = __webpack_require__(77), RootInstanceProvider = __webpack_require__(85), ReactMount = __webpack_require__(87), React = __webpack_require__(139); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+	
+	'use strict';
+	
+	var _Transform = __webpack_require__(249);
+	
+	var _Transform2 = _interopRequireDefault(_Transform);
+	
+	var _CropBox = __webpack_require__(253);
+	
+	var _CropBox2 = _interopRequireDefault(_CropBox);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	module.exports = { Transform: _Transform2.default, CropBox: _CropBox2.default };
+	
+	/* REACT HOT LOADER */ }).call(this); } finally { if (true) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = __webpack_require__(250); if (makeExportsHot(module, __webpack_require__(139))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "index.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)(module)))
+
+/***/ },
+/* 249 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(module) {/* REACT HOT LOADER */ if (true) { (function () { var ReactHotAPI = __webpack_require__(77), RootInstanceProvider = __webpack_require__(85), ReactMount = __webpack_require__(87), React = __webpack_require__(139); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+	
+	"use strict";
+	
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	var Transform = (function () {
+	  function Transform() {
+	    _classCallCheck(this, Transform);
+	  }
+	
+	  _createClass(Transform, null, [{
+	    key: "constrainProportions",
+	    value: function constrainProportions(from, to) {
+	
+	      var minRatio = Math.min(to.height / from.height, to.width / from.width);
+	      return {
+	        width: from.width > to.width ? from.width * minRatio : from.width,
+	        height: from.height > to.height ? from.height * minRatio : from.height
+	      };
+	    }
+	  }, {
+	    key: "centerRect",
+	    value: function centerRect(rect, container) {
+	      return {
+	        x: container.width * 0.5 - rect.width * 0.5,
+	        y: container.height * 0.5 - rect.height * 0.5
+	      };
+	    }
+	  }, {
+	    key: "clearCanvas",
+	    value: function clearCanvas(canvas, ctx) {
+	      ctx.clearRect(0, 0, canvas.width, canvas.height);
+	      ctx.save();
+	    }
+	  }, {
+	    key: "rotateImage",
+	    value: function rotateImage(ctx, angle) {
+	      var canvas = ctx.canvas;
+	      ctx.translate(canvas.width * .5, canvas.height * .5);
+	      ctx.rotate(angle * Math.PI / 180);
+	      ctx.translate(-canvas.width * .5, -canvas.height * .5);
+	    }
+	  }, {
+	    key: "renderImage",
+	    value: function renderImage(ctx, img, position, boundRect) {
+	
+	      ctx.drawImage(img, position.x, position.y, boundRect.width, boundRect.height);
+	      ctx.restore();
+	    }
+	  }]);
+	
+	  return Transform;
+	})();
+	
+	exports.default = Transform;
+	
+	/* REACT HOT LOADER */ }).call(this); } finally { if (true) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = __webpack_require__(250); if (makeExportsHot(module, __webpack_require__(139))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "Transform.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)(module)))
+
+/***/ },
+/* 250 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var isReactClassish = __webpack_require__(251),
+	    isReactElementish = __webpack_require__(252);
 	
 	function makeExportsHot(m, React) {
 	  if (isReactElementish(m.exports, React)) {
@@ -28006,7 +28606,7 @@
 
 
 /***/ },
-/* 245 */
+/* 251 */
 /***/ function(module, exports) {
 
 	function hasRender(Class) {
@@ -28056,10 +28656,10 @@
 	module.exports = isReactClassish;
 
 /***/ },
-/* 246 */
+/* 252 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isReactClassish = __webpack_require__(245);
+	var isReactClassish = __webpack_require__(251);
 	
 	function isReactElementish(obj, React) {
 	  if (!obj) {
@@ -28071,6 +28671,640 @@
 	}
 	
 	module.exports = isReactElementish;
+
+/***/ },
+/* 253 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(module) {/* REACT HOT LOADER */ if (true) { (function () { var ReactHotAPI = __webpack_require__(77), RootInstanceProvider = __webpack_require__(85), ReactMount = __webpack_require__(87), React = __webpack_require__(139); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+	
+	'use strict';
+	
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	var Handle = (function () {
+	  function Handle(ctx) {
+	    var _this = this;
+	
+	    _classCallCheck(this, Handle);
+	
+	    this.ctx = ctx;
+	    this.render = function (ctx) {
+	      ctx.fillStyle = 'rgba(255, 255, 255, 0.6)';
+	      ctx.fillRect(_this.x - 3, _this.y - 3, 6, 6);
+	    };
+	    this.isHover = function (x, y) {
+	      var xx = _this.x;
+	      var yy = _this.y;
+	      return x > xx - 6 && x < xx + 6 && y > yy - 3 && y < yy + 3;
+	    };
+	  }
+	
+	  _createClass(Handle, [{
+	    key: 'coords',
+	    set: function set(xy) {
+	      this.x = xy[0];
+	      this.y = xy[1];
+	    },
+	    get: function get() {
+	      return {
+	        x: this.x,
+	        y: this.y
+	      };
+	    }
+	  }]);
+	
+	  return Handle;
+	})();
+	
+	var CropBox = (function () {
+	  function CropBox(args) {
+	    var _this2 = this;
+	
+	    _classCallCheck(this, CropBox);
+	
+	    this.x = args.x || 0;
+	    this.y = args.y || 0;
+	    this.width = 50;
+	    this.height = 50;
+	    this.dragging = false;
+	    this.canvas = args.canvas;
+	    this.ctx = args.ctx;
+	
+	    this.selectionHandles = [];
+	
+	    for (var i = 0; i < 8; i++) {
+	      var rect = new Handle(this.ctx);
+	      this.selectionHandles.push(rect);
+	    }
+	
+	    this.canvas.addEventListener('mousedown', function (e) {
+	
+	      var pointer = e,
+	          mx = pointer.x - 46,
+	          my = pointer.y - 116;
+	
+	      if (_this2.hasFocus) {
+	        _this2.dragX = mx - _this2.x;
+	        _this2.dragY = my - _this2.y;
+	        _this2.dragging = true;
+	      } else {
+	        _this2.dragX = mx - _this2.x;
+	        _this2.dragY = my - _this2.y;
+	        _this2.x = mx;
+	        _this2.y = my;
+	      }
+	      _this2.hasFocus = true;
+	    }, true);
+	
+	    this.canvas.addEventListener('mousemove', function (e) {
+	      var pointer = e,
+	          mx = pointer.x - 46,
+	          my = pointer.y - 116;
+	
+	      if (_this2.dragging) {
+	        _this2.canvas.style.cursor = 'move';
+	
+	        var tx = mx - _this2.dragX,
+	            ty = my - _this2.dragY,
+	            maxX = _this2.canvas.width - _this2.width,
+	            maxY = _this2.canvas.height - _this2.height;
+	
+	        _this2.x = tx < 0 ? 0 : tx > maxX ? maxX : tx;
+	        _this2.y = ty < 0 ? 0 : ty > maxY ? maxY : ty;
+	      } else if (mx > _this2.x + 3 && mx < _this2.x - 3 + _this2.width && my > _this2.y + 3 && my < _this2.height + _this2.y - 3) {
+	        _this2.canvas.style.cursor = 'move';
+	      } else {
+	        _this2.canvas.style.cursor = 'crosshair';
+	        _this2.selectionHandles.forEach(function (handle, i) {
+	
+	          var cursors = ['nwse-resize', 'ns-resize', 'nesw-resize', 'ew-resize', 'nwse-resize', 'ns-resize', 'nesw-resize', 'ew-resize'];
+	          if (i === 0) console.log(handle.coords, mx, my);
+	          if (handle.isHover(mx, my)) {
+	            _this2.canvas.style.cursor = cursors[i];
+	          }
+	        });
+	      }
+	    }, true);
+	
+	    this.canvas.addEventListener('mouseup', function (e) {
+	      _this2.dragging = false;
+	    }, true);
+	
+	    this.render = this.render.bind(this);
+	    this.getWidth = this.getWidth.bind(this);
+	    this.getHeight = this.getHeight.bind(this);
+	    this.getLeft = this.getLeft.bind(this);
+	    this.getTop = this.getTop.bind(this);
+	    this.setWidth = this.setWidth.bind(this);
+	    this.setHeight = this.setHeight.bind(this);
+	    this.setLeft = this.setLeft.bind(this);
+	    this.setTop = this.setTop.bind(this);
+	
+	    this.remove = function () {
+	      _this2.canvas.removeEventListener('mouseup');
+	      _this2.canvas.removeEventListener('mousedown');
+	      _this2.canvas.removeEventListener('mousemove');
+	    };
+	  }
+	
+	  _createClass(CropBox, [{
+	    key: 'getWidth',
+	    value: function getWidth() {
+	      return this.width;
+	    }
+	  }, {
+	    key: 'getHeight',
+	    value: function getHeight() {
+	      return this.height;
+	    }
+	  }, {
+	    key: 'getScaleX',
+	    value: function getScaleX() {
+	      return this.scaleX;
+	    }
+	  }, {
+	    key: 'getScaleY',
+	    value: function getScaleY() {
+	      return this.scaleY;
+	    }
+	  }, {
+	    key: 'getLeft',
+	    value: function getLeft() {
+	      return this.x;
+	    }
+	  }, {
+	    key: 'getTop',
+	    value: function getTop() {
+	      return this.y;
+	    }
+	  }, {
+	    key: 'setWidth',
+	    value: function setWidth(value) {
+	      this.lastWidth = Object.assign({}, this.width);
+	      this.width = value;
+	    }
+	  }, {
+	    key: 'setHeight',
+	    value: function setHeight(value) {
+	      this.lastHeight = Object.assign({}, this.height);
+	      this.height = value;
+	    }
+	  }, {
+	    key: 'setLeft',
+	    value: function setLeft(value) {
+	      this.lastLeft = Object.assign({}, this.x);
+	      this.x = value;
+	    }
+	  }, {
+	    key: 'setTop',
+	    value: function setTop(value) {
+	      this.lastTop = Object.assign({}, this.y);
+	      this.y = value;
+	    }
+	  }, {
+	    key: 'setScaleX',
+	    value: function setScaleX(value) {
+	      this.lastScaleX = Object.assign({}, this.scaleX);
+	      this.scaleX = value;
+	    }
+	  }, {
+	    key: 'setScaleY',
+	    value: function setScaleY(value) {
+	      this.lastScaleY = Object.assign({}, this.scaleY);
+	      this.scaleY = value;
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var flipX = this.flipX ? -1 : 1;
+	      var flipY = this.flipY ? -1 : 1;
+	      var scaleX = flipX / this.scaleX;
+	      var scaleY = flipY / this.scaleY;
+	
+	      if (this.hasFocus) {
+	        var ctx = this.ctx;
+	        var dashWidth = 7;
+	
+	        ctx.scale(scaleX, scaleY);
+	        // Overlay rendering
+	        ctx.fillStyle = 'rgba(0, 0, 0, 0.5)';
+	
+	        //ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+	        this.renderOverlay(ctx);
+	
+	        // Set dashed borders
+	        if (ctx.setLineDash !== undefined) ctx.setLineDash([dashWidth, dashWidth]);else if (ctx.mozDash !== undefined) ctx.mozDash = [dashWidth, dashWidth];
+	
+	        // First lines rendering with black
+	        ctx.strokeStyle = 'rgba(0, 0, 0, 0.2)';
+	        //this.ctx.strokeRect(this.x, this.y, this.width, this.height);
+	        this.renderBorders(ctx);
+	        this.renderGrid(ctx);
+	
+	        // Re render lines in white
+	        ctx.lineDashOffset = dashWidth;
+	        ctx.strokeStyle = 'rgba(255, 255, 255, 0.4)';
+	        //this.ctx.strokeRect(this.x, this.y, this.width, this.height);
+	        this.renderBorders(ctx);
+	        this.renderGrid(ctx);
+	        this.renderHandles(ctx);
+	        // Reset scale
+	        ctx.scale(1 / scaleX, 1 / scaleY);
+	      }
+	    }
+	  }, {
+	    key: 'renderOverlay',
+	    value: function renderOverlay(ctx) {
+	      var canvas = ctx.canvas;
+	
+	      //
+	      //    x0    x1        x2      x3
+	      // y0 +------------------------+
+	      //    |\\\\\\\\\\\\\\\\\\\\\\\\|
+	      //    |\\\\\\\\\\\\\\\\\\\\\\\\|
+	      // y1 +------+---------+-------+
+	      //    |\\\\\\|         |\\\\\\\|
+	      //    |\\\\\\|    0    |\\\\\\\|
+	      //    |\\\\\\|         |\\\\\\\|
+	      // y2 +------+---------+-------+
+	      //    |\\\\\\\\\\\\\\\\\\\\\\\\|
+	      //    |\\\\\\\\\\\\\\\\\\\\\\\\|
+	      // y3 +------------------------+
+	      //
+	
+	      var x0 = 0;
+	      var x1 = this.x;
+	      var x2 = this.x + this.width;
+	      var x3 = canvas.width;
+	
+	      var y0 = 0;
+	      var y1 = this.y;
+	      var y2 = this.y + this.height;
+	      var y3 = canvas.height;
+	
+	      ctx.beginPath();
+	
+	      // Draw outer rectangle.
+	      // Numbers are +/-1 so that overlay edges don't get blurry.
+	      ctx.moveTo(x0 - 1, y0 - 1);
+	      ctx.lineTo(x3 + 1, y0 - 1);
+	      ctx.lineTo(x3 + 1, y3 + 1);
+	      ctx.lineTo(x0 - 1, y3 - 1);
+	      ctx.lineTo(x0 - 1, y0 - 1);
+	      ctx.closePath();
+	
+	      // Draw inner rectangle.
+	      ctx.moveTo(x1, y1);
+	      ctx.lineTo(x1, y2);
+	      ctx.lineTo(x2, y2);
+	      ctx.lineTo(x2, y1);
+	      ctx.lineTo(x1, y1);
+	
+	      ctx.closePath();
+	      ctx.fill();
+	      ctx.moveTo(0, 0);
+	    }
+	  }, {
+	    key: 'renderBorders',
+	    value: function renderBorders(ctx) {
+	      ctx.beginPath();
+	      ctx.moveTo(this.x, this.y); // upper left
+	      ctx.lineTo(this.x + this.width, this.y); // upper right
+	      ctx.lineTo(this.x + this.width, this.y + this.height); // down right
+	      ctx.lineTo(this.x, this.y + this.height); // down left
+	      ctx.lineTo(this.x, this.y); // upper left
+	      ctx.stroke();
+	    }
+	  }, {
+	    key: 'renderHandles',
+	    value: function renderHandles(ctx) {
+	      var _this3 = this;
+	
+	      var canvas = ctx.canvas;
+	
+	      this.selectionHandles.forEach(function (handle, i) {
+	        var top = _this3.y,
+	            left = _this3.x,
+	            centerX = _this3.x + _this3.width / 2,
+	            centerY = _this3.y + _this3.height / 2,
+	            right = _this3.x + _this3.width,
+	            bottom = _this3.y + _this3.height,
+	            setCoords = [[left, top], [centerX, top], [right, top], [right, centerY], [right, bottom], [centerX, bottom], [left, bottom], [left, centerY]];
+	
+	        handle.coords = setCoords[i];
+	
+	        handle.render(ctx);
+	      });
+	    }
+	  }, {
+	    key: 'renderGrid',
+	    value: function renderGrid(ctx) {
+	
+	      ctx.beginPath();
+	      ctx.moveTo(this.x + 1 / 3 * this.width, this.y);
+	      ctx.lineTo(this.x + 1 / 3 * this.width, this.y + this.height);
+	      ctx.stroke();
+	      ctx.beginPath();
+	      ctx.moveTo(this.x + 2 / 3 * this.width, this.y);
+	      ctx.lineTo(this.x + 2 / 3 * this.width, this.y + this.height);
+	      ctx.stroke();
+	      // Horizontal lines
+	      ctx.beginPath();
+	      ctx.moveTo(this.x, this.y + 1 / 3 * this.height);
+	      ctx.lineTo(this.x + this.width, this.y + 1 / 3 * this.height);
+	      ctx.stroke();
+	      ctx.beginPath();
+	      ctx.moveTo(this.x, this.y + 2 / 3 * this.height);
+	      ctx.lineTo(this.x + this.width, this.y + 2 / 3 * this.height);
+	      ctx.stroke();
+	    }
+	  }]);
+	
+	  return CropBox;
+	})();
+	
+	exports.default = CropBox;
+	
+	/* REACT HOT LOADER */ }).call(this); } finally { if (true) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = __webpack_require__(250); if (makeExportsHot(module, __webpack_require__(139))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "CropBox.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)(module)))
+
+/***/ },
+/* 254 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(module) {/* REACT HOT LOADER */ if (true) { (function () { var ReactHotAPI = __webpack_require__(77), RootInstanceProvider = __webpack_require__(85), ReactMount = __webpack_require__(87), React = __webpack_require__(139); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+	
+	"use strict";
+	
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(139);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var Darkroom = (function (_React$Component) {
+	  _inherits(Darkroom, _React$Component);
+	
+	  function Darkroom(props) {
+	    _classCallCheck(this, Darkroom);
+	
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Darkroom).call(this, props));
+	  }
+	
+	  _createClass(Darkroom, [{
+	    key: "render",
+	    value: function render() {
+	      return _react2.default.createElement(
+	        "div",
+	        { ref: "container", className: "darkroom" },
+	        this.props.children
+	      );
+	    }
+	  }]);
+	
+	  return Darkroom;
+	})(_react2.default.Component);
+	
+	exports.default = Darkroom;
+	
+	/* REACT HOT LOADER */ }).call(this); } finally { if (true) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = __webpack_require__(250); if (makeExportsHot(module, __webpack_require__(139))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "Darkroom.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)(module)))
+
+/***/ },
+/* 255 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(module) {/* REACT HOT LOADER */ if (true) { (function () { var ReactHotAPI = __webpack_require__(77), RootInstanceProvider = __webpack_require__(85), ReactMount = __webpack_require__(87), React = __webpack_require__(139); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+	
+	"use strict";
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(139);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var onEmpty = function onEmpty(setting) {
+	  switch (setting) {
+	    case "disabled":
+	      break;
+	    case "hidden":
+	      break;
+	  }
+	};
+	
+	var History = function History(_ref) {
+	  var step = _ref.step;
+	  var length = _ref.length;
+	  var children = _ref.children;
+	
+	  var backButton,
+	      fwdButton,
+	      childNodes = [];
+	
+	  _react2.default.Children.forEach(children, function (child) {
+	    var _child$props = child.props;
+	    var ifEmpty = _child$props.ifEmpty;
+	    var action = _child$props.action;
+	
+	    if (action === "back") {
+	
+	      backButton = _react2.default.createElement("button", _extends({
+	        disabled: step === 0 && ifEmpty === "disable",
+	        style: { display: step === 0 && ifEmpty === "hide" ? 'none' : 'inherit' }
+	      }, child.props));
+	      childNodes.push(backButton);
+	    } else if (action === "forward") {
+	      fwdButton = _react2.default.createElement("button", _extends({
+	        disabled: step === length && ifEmpty === "disable",
+	        style: { display: step === length && ifEmpty === "hide" ? 'none' : 'inherit' }
+	      }, child.props));
+	      childNodes.push(fwdButton);
+	    } else {
+	      childNodes.push(child);
+	    }
+	  });
+	
+	  return _react2.default.createElement(
+	    "span",
+	    null,
+	    childNodes.map(function (childNode, index) {
+	      return _react2.default.createElement(
+	        "span",
+	        { key: index },
+	        childNode
+	      );
+	    })
+	  );
+	};
+	
+	exports.default = History;
+	
+	/* REACT HOT LOADER */ }).call(this); } finally { if (true) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = __webpack_require__(250); if (makeExportsHot(module, __webpack_require__(139))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "History.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)(module)))
+
+/***/ },
+/* 256 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(module) {/* REACT HOT LOADER */ if (true) { (function () { var ReactHotAPI = __webpack_require__(77), RootInstanceProvider = __webpack_require__(85), ReactMount = __webpack_require__(87), React = __webpack_require__(139); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+	
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(139);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.default = function (_ref) {
+	  var children = _ref.children;
+	
+	  var childNodes = [];
+	
+	  _react2.default.Children.forEach(children, function (child) {
+	    childNodes.push(child);
+	  });
+	
+	  return _react2.default.createElement(
+	    'menu',
+	    null,
+	    _react2.default.createElement(
+	      'ul',
+	      null,
+	      childNodes.map(function (childNode, index) {
+	        return _react2.default.createElement(
+	          'li',
+	          { key: index },
+	          childNode
+	        );
+	      })
+	    )
+	  );
+	};
+	
+	/* REACT HOT LOADER */ }).call(this); } finally { if (true) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = __webpack_require__(250); if (makeExportsHot(module, __webpack_require__(139))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "Toolbar.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)(module)))
+
+/***/ },
+/* 257 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(module) {/* REACT HOT LOADER */ if (true) { (function () { var ReactHotAPI = __webpack_require__(77), RootInstanceProvider = __webpack_require__(85), ReactMount = __webpack_require__(87), React = __webpack_require__(139); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+	
+	'use strict';
+	
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(139);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var FilePicker = (function (_React$Component) {
+	  _inherits(FilePicker, _React$Component);
+	
+	  function FilePicker() {
+	    _classCallCheck(this, FilePicker);
+	
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(FilePicker).apply(this, arguments));
+	  }
+	
+	  _createClass(FilePicker, [{
+	    key: 'render',
+	    value: function render() {
+	      var _this2 = this;
+	
+	      var _props = this.props;
+	      var onChange = _props.onChange;
+	      var hasFile = _props.hasFile;
+	      var btnStyle = {
+	        display: hasFile ? 'none' : 'block',
+	        width: '100%',
+	        background: 'inherit',
+	        border: 'inherit',
+	        color: '#bbb'
+	      };
+	      var iconStyle = {
+	        width: '100%',
+	        display: 'block',
+	        fontSize: '240px'
+	      };
+	      var textStyle = {
+	        fontSize: '34px'
+	      };
+	      var onClick = function onClick() {
+	        _this2.refs.fileInput.click();
+	      };
+	      return _react2.default.createElement(
+	        'button',
+	        { style: btnStyle, onClick: onClick, type: 'button', className: 'filepicker' },
+	        _react2.default.createElement('span', { style: iconStyle, className: 'icon icon-image' }),
+	        _react2.default.createElement(
+	          'span',
+	          { style: textStyle },
+	          'Select image'
+	        ),
+	        _react2.default.createElement('input', { ref: 'fileInput', style: { display: 'none' }, type: 'file', onChange: onChange })
+	      );
+	    }
+	  }]);
+	
+	  return FilePicker;
+	})(_react2.default.Component);
+	/*
+	onChange,
+	hasFile,
+	onClick:  => {
+	 },
+	}) => (
+	);
+	*/
+	
+	exports.default = FilePicker;
+	
+	/* REACT HOT LOADER */ }).call(this); } finally { if (true) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = __webpack_require__(250); if (makeExportsHot(module, __webpack_require__(139))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "FilePicker.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)(module)))
 
 /***/ }
 /******/ ]);
