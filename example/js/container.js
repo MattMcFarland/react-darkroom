@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "0ee8a10bae212f2decfd"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "6faf913159c00b5e658b"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -28744,29 +28744,52 @@
 	      this.selectionHandles.push(rect);
 	    }
 	
+	    this.isInDraggableArea = function (x, y) {
+	      return x > _this2.x + 3 && x < _this2.x - 3 + _this2.width && y > _this2.y + 3 && y < _this2.height + _this2.y - 3;
+	    };
+	    this.isInResizeArea = function (x, y) {
+	      var result = -1;
+	      _this2.selectionHandles.forEach(function (handle, i) {
+	        if (handle.isHover(x, y)) {
+	          result = i;
+	        }
+	      });
+	      return result;
+	    };
 	    this.canvas.addEventListener('mousedown', function (e) {
 	
 	      var pointer = e,
-	          mx = pointer.x - 46,
-	          my = pointer.y - 116;
+	          mx = pointer.offsetX,
+	          my = pointer.offsetY;
 	
-	      if (_this2.hasFocus) {
-	        _this2.dragX = mx - _this2.x;
-	        _this2.dragY = my - _this2.y;
-	        _this2.dragging = true;
-	      } else {
+	      if (!_this2.hasFocus) {
 	        _this2.dragX = mx - _this2.x;
 	        _this2.dragY = my - _this2.y;
 	        _this2.x = mx;
 	        _this2.y = my;
 	      }
+	
+	      if (_this2.isInDraggableArea(mx, my)) {
+	        if (_this2.hasFocus) {
+	          _this2.dragX = mx - _this2.x;
+	          _this2.dragY = my - _this2.y;
+	          _this2.dragging = true;
+	        }
+	      } else {
+	        _this2.dragging = false;
+	        _this2.expectResize = _this2.isInResizeArea(mx, my);
+	        if (_this2.expectResize > -1 && _this2.hasFocus) {
+	          _this2.resizing = true;
+	        }
+	      }
+	
 	      _this2.hasFocus = true;
 	    }, true);
 	
 	    this.canvas.addEventListener('mousemove', function (e) {
 	      var pointer = e,
-	          mx = pointer.x - 46,
-	          my = pointer.y - 116;
+	          mx = pointer.offsetX,
+	          my = pointer.offsetY;
 	
 	      if (_this2.dragging) {
 	        _this2.canvas.style.cursor = 'move';
@@ -28778,14 +28801,93 @@
 	
 	        _this2.x = tx < 0 ? 0 : tx > maxX ? maxX : tx;
 	        _this2.y = ty < 0 ? 0 : ty > maxY ? maxY : ty;
-	      } else if (mx > _this2.x + 3 && mx < _this2.x - 3 + _this2.width && my > _this2.y + 3 && my < _this2.height + _this2.y - 3) {
+	      } else if (_this2.resizing) {
+	        var oldx = _this2.x;
+	        var oldy = _this2.y;
+	
+	        var cursors = ['nwse-resize', 'ns-resize', 'nesw-resize', 'ew-resize', 'nwse-resize', 'ns-resize', 'nesw-resize', 'ew-resize'];
+	
+	        switch (_this2.expectResize) {
+	          case 0:
+	            _this2.x = mx;
+	            _this2.y = my;
+	            _this2.width += oldx - mx;
+	            _this2.height += oldy - my;
+	            break;
+	          case 1:
+	            _this2.y = my;
+	            _this2.height += oldy - my;
+	            break;
+	          case 2:
+	            _this2.y = my;
+	            _this2.width = mx - oldx;
+	            _this2.height += oldy - my;
+	            break;
+	          case 7:
+	            _this2.x = mx;
+	            _this2.width += oldx - mx;
+	            break;
+	          case 3:
+	            _this2.width = mx - oldx;
+	            break;
+	          case 6:
+	            _this2.x = mx;
+	            _this2.width += oldx - mx;
+	            _this2.height = my - oldy;
+	            break;
+	          case 5:
+	            _this2.height = my - oldy;
+	            break;
+	          case 4:
+	            _this2.width = mx - oldx;
+	            _this2.height = my - oldy;
+	            break;
+	        }
+	        // 0 1 2
+	        // 7   3
+	        // 6 5 4
+	        if (_this2.width < 0) {
+	          _this2.width = 0;
+	          if (_this2.expectResize === 2) {
+	            _this2.expectResize = 0;
+	          } else if (_this2.expectResize === 0) {
+	            _this2.expectResize = 2;
+	          } else if (_this2.expectResize === 3) {
+	            _this2.expectResize = 7;
+	          } else if (_this2.expectResize === 7) {
+	            _this2.expectResize = 3;
+	          } else if (_this2.expectResize === 4) {
+	            _this2.expectResize = 6;
+	          } else if (_this2.expectResize === 6) {
+	            _this2.expectResize = 4;
+	          }
+	        } else if (_this2.height < 0) {
+	          _this2.height = 0;
+	          if (_this2.expectResize === 0) {
+	            _this2.expectResize = 6;
+	          } else if (_this2.expectResize === 6) {
+	            _this2.expectResize = 0;
+	          } else if (_this2.expectResize === 1) {
+	            _this2.expectResize = 5;
+	          } else if (_this2.expectResize === 5) {
+	            _this2.expectResize = 1;
+	          } else if (_this2.expectResize === 2) {
+	            _this2.expectResize = 4;
+	          } else if (_this2.expectResize === 4) {
+	            _this2.expectResize = 2;
+	          }
+	        }
+	        _this2.canvas.style.cursor = cursors[_this2.expectResize];
+	        if (_this2.width < 0 || _this2.height < 0) {
+	          console.log(_this2.width, _this2.height);
+	        }
+	      } else if (_this2.isInDraggableArea(mx, my)) {
 	        _this2.canvas.style.cursor = 'move';
 	      } else {
 	        _this2.canvas.style.cursor = 'crosshair';
 	        _this2.selectionHandles.forEach(function (handle, i) {
 	
 	          var cursors = ['nwse-resize', 'ns-resize', 'nesw-resize', 'ew-resize', 'nwse-resize', 'ns-resize', 'nesw-resize', 'ew-resize'];
-	          if (i === 0) console.log(handle.coords, mx, my);
 	          if (handle.isHover(mx, my)) {
 	            _this2.canvas.style.cursor = cursors[i];
 	          }
@@ -28795,6 +28897,8 @@
 	
 	    this.canvas.addEventListener('mouseup', function (e) {
 	      _this2.dragging = false;
+	      _this2.resizing = false;
+	      _this2.expectResize = false;
 	    }, true);
 	
 	    this.render = this.render.bind(this);
