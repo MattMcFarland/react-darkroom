@@ -1,6 +1,6 @@
 {
   "name": "react-darkroom",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Advanced HTML 5 React Component.",
   "engines": {
     "node": ">=4.2.1"
