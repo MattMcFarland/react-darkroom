@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "33dc22cf5bdad6da8601"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "bd9d64a80730c8c07504"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -27965,6 +27965,10 @@
 	
 	var _components = __webpack_require__(246);
 	
+	var _Transform = __webpack_require__(249);
+	
+	var _Transform2 = _interopRequireDefault(_Transform);
+	
 	var _react = __webpack_require__(139);
 	
 	var _react2 = _interopRequireDefault(_react);
@@ -27981,6 +27985,9 @@
 	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * Darkroom Kitchen Sink
 	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * A bit overkill but use-able
 	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
+	
+	var canvasWidth = 300,
+	    canvasHeight = 300;
 	
 	function fileController() {
 	  var thread = arguments.length <= 0 || arguments[0] === undefined ? { source: null } : arguments[0];
@@ -28019,6 +28026,11 @@
 	      return Object.assign({}, thread, {
 	        crop: false
 	      });
+	    case 'CONFIRM_CROP':
+	      return Object.assign({}, thread, {
+	        crop: false,
+	        source: action.image
+	      });
 	    default:
 	      return thread;
 	  }
@@ -28054,7 +28066,7 @@
 	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(KitchenSink).call(this, props));
 	
 	    _this.state = { step: 0, thread: [{ crop: false, source: null, angle: 0 }] };
-	    ['onFileChange', 'update', 'onRedo', 'onUndo', 'onRotateLeft', 'onCropStart', 'onCropConfirm', 'onRotateRight'].forEach(function (method) {
+	    ['onFileChange', 'update', 'onRedo', 'onUndo', 'onRotateLeft', 'onCropStart', 'onCropConfirm', 'onCropCancel', 'onRotateRight'].forEach(function (method) {
 	      _this[method] = _this[method].bind(_this);
 	    });
 	    return _this;
@@ -28092,6 +28104,7 @@
 	        case "ROTATE_RIGHT":
 	        case "START_CROPPING":
 	        case "STOP_CROPPING":
+	        case "CONFIRM_CROP":
 	          nextThread = imageController(state.thread[state.step], action);
 	          break;
 	
@@ -28146,14 +28159,30 @@
 	      this.update({ type: 'START_CROPPING' });
 	    }
 	  }, {
+	    key: 'onCropCancel',
+	    value: function onCropCancel() {
+	      this.update({ type: 'STOP_CROPPING' });
+	    }
+	  }, {
 	    key: 'onCropConfirm',
 	    value: function onCropConfirm() {
-	      console.log(this.refs.canvasWrapper);
+	      var _this3 = this;
+	
+	      var source = this.state.thread[this.state.step].source;
+	      var _refs$canvasWrapper$c = this.refs.canvasWrapper.cropBox;
+	      var x = _refs$canvasWrapper$c.x;
+	      var y = _refs$canvasWrapper$c.y;
+	      var width = _refs$canvasWrapper$c.width;
+	      var height = _refs$canvasWrapper$c.height;
+	
+	      var newImage = _Transform2.default.cropImage(source, { x: x, y: y, width: width, height: height }, { width: canvasWidth, height: canvasHeight }).then(function (newImage) {
+	        return _this3.update({ type: 'CONFIRM_CROP', image: newImage });
+	      });
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var _this3 = this;
+	      var _this4 = this;
 	
 	      var current = this.state.thread[this.state.step];
 	      var angle = current.angle;
@@ -28163,7 +28192,7 @@
 	      var hasFile = source !== null;
 	
 	      var selectFile = function selectFile() {
-	        _this3.refs.fileselect.click();
+	        _this4.refs.fileselect.click();
 	      };
 	
 	      return _react2.default.createElement(
@@ -28243,7 +28272,7 @@
 	                ),
 	                _react2.default.createElement(
 	                  'button',
-	                  { disabled: !hasFile, showOnlyWhen: 'croppingIsOn', onClick: this.onUndo, style: { color: 'red' }, 'data-tipsy': 'Cancel', className: 'tipsy tipsy--sw' },
+	                  { disabled: !hasFile, showOnlyWhen: 'croppingIsOn', onClick: this.onCropCancel, style: { color: 'red' }, 'data-tipsy': 'Cancel', className: 'tipsy tipsy--sw' },
 	                  _react2.default.createElement('span', { className: 'icon icon-cross' })
 	                )
 	              ),
@@ -28255,7 +28284,7 @@
 	            ),
 	            _react2.default.createElement(
 	              _components.Canvas,
-	              { ref: 'canvasWrapper', crop: crop, source: source, angle: angle, width: '300', height: '300' },
+	              { ref: 'canvasWrapper', crop: crop, source: source, angle: angle, width: canvasWidth, height: canvasHeight },
 	              _react2.default.createElement(_components.FilePicker, { hasFile: hasFile, onChange: this.onFileChange })
 	            )
 	          )
@@ -28405,11 +28434,30 @@
 	  }, {
 	    key: 'renderCanvas',
 	    value: function renderCanvas() {
+	      var _this2 = this;
+	
 	      var canvas = document.createElement('canvas'),
 	          ctx = canvas.getContext('2d');
 	
-	      _utils.Transform.clearCanvas(canvas, ctx);
-	      if (this.props.source) {
+	      canvas.width = this.props.width;
+	      canvas.height = this.props.height;
+	
+	      if (this.cache) {
+	        canvas = this.refs.canvas;
+	        ctx = canvas.getContext('2d');
+	
+	        _utils.Transform.clearCanvas(canvas, ctx);
+	
+	        ctx.drawImage(this.cache, 0, 0);
+	        if (this.props.crop) {
+	          if (!this.cropBox) {
+	            this.cropBox = new _utils.CropBox({ canvas: canvas, ctx: ctx });
+	          }
+	          this.cropBox.render();
+	        }
+	      }
+	
+	      if (this.props.source && !this.cache) {
 	
 	        var image = this.getBitmapData(this.props.source),
 	            angle = parseInt(this.props.angle) || 0,
@@ -28428,26 +28476,29 @@
 	        var position = _utils.Transform.centerRect(scaledRect, boundRect);
 	
 	        _utils.Transform.renderImage(ctx, image, position, scaledRect);
-	
-	        if (this.props.crop) {
-	          if (!this.cropBox) {
-	            this.cropBox = new _utils.CropBox({ canvas: canvas, ctx: ctx });
-	          }
-	          this.cropBox.render();
-	        }
+	        setTimeout(function () {
+	          var img = new Image();
+	          img.src = canvas.toDataURL("image/png");
+	          _this2.cache = img;
+	        }, 100);
 	      }
 	    }
 	  }, {
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
-	      var _this2 = this;
+	      var _this3 = this;
 	
 	      var canvas = this.refs.canvas,
 	          ctx = canvas.getContext('2d');
 	
 	      setInterval(function () {
-	        _this2.renderCanvas();
+	        _this3.renderCanvas();
 	      }, 30);
+	    }
+	  }, {
+	    key: 'componentWillUpdate',
+	    value: function componentWillUpdate() {
+	      this.cache = null;
 	    }
 	  }, {
 	    key: 'render',
@@ -28509,7 +28560,7 @@
 
 	/* WEBPACK VAR INJECTION */(function(module) {/* REACT HOT LOADER */ if (true) { (function () { var ReactHotAPI = __webpack_require__(77), RootInstanceProvider = __webpack_require__(85), ReactMount = __webpack_require__(87), React = __webpack_require__(139); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
 	
-	"use strict";
+	'use strict';
 	
 	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 	
@@ -28525,7 +28576,7 @@
 	  }
 	
 	  _createClass(Transform, null, [{
-	    key: "constrainProportions",
+	    key: 'constrainProportions',
 	    value: function constrainProportions(from, to) {
 	
 	      var minRatio = Math.min(to.height / from.height, to.width / from.width);
@@ -28535,7 +28586,7 @@
 	      };
 	    }
 	  }, {
-	    key: "centerRect",
+	    key: 'centerRect',
 	    value: function centerRect(rect, container) {
 	      return {
 	        x: container.width * 0.5 - rect.width * 0.5,
@@ -28543,13 +28594,13 @@
 	      };
 	    }
 	  }, {
-	    key: "clearCanvas",
+	    key: 'clearCanvas',
 	    value: function clearCanvas(canvas, ctx) {
 	      ctx.clearRect(0, 0, canvas.width, canvas.height);
 	      ctx.save();
 	    }
 	  }, {
-	    key: "rotateImage",
+	    key: 'rotateImage',
 	    value: function rotateImage(ctx, angle) {
 	      var canvas = ctx.canvas;
 	      ctx.translate(canvas.width * .5, canvas.height * .5);
@@ -28557,11 +28608,88 @@
 	      ctx.translate(-canvas.width * .5, -canvas.height * .5);
 	    }
 	  }, {
-	    key: "renderImage",
+	    key: 'renderImage',
 	    value: function renderImage(ctx, img, position, boundRect) {
 	
 	      ctx.drawImage(img, position.x, position.y, boundRect.width, boundRect.height);
 	      ctx.restore();
+	    }
+	  }, {
+	    key: 'getBitmapData',
+	    value: function getBitmapData(source) {
+	      var img = new Image();
+	      img.src = Object.assign(source);
+	      return img;
+	    }
+	  }, {
+	    key: 'renderCentered',
+	    value: function renderCentered(ctx, image, boundRect) {
+	
+	      var imgRect = {
+	        width: parseInt(image.width),
+	        height: parseInt(image.height)
+	      },
+	          scaledRect = Transform.constrainProportions(imgRect, boundRect),
+	          position = Transform.centerRect(scaledRect, boundRect);
+	
+	      Transform.renderImage(ctx, image, position, scaledRect);
+	    }
+	
+	    /**
+	     * Crop an image and return the new image object
+	     * @param image {Image}
+	     * @param cropRect  {Object}
+	     * @param     cropRect.x {number}
+	     * @param     cropRect.y {number}
+	     * @param     cropRect.width {number}
+	     * @param     cropRect.height {number}
+	     * @param boundRect {Object}
+	     * @param     boundRect.width {number}
+	     * @param     boundRect.height {number}
+	     * @returns {Promise}
+	     */
+	
+	  }, {
+	    key: 'cropImage',
+	    value: function cropImage(image, cropRect, boundRect) {
+	      console.log('crop image', cropRect, boundRect);
+	      return new Promise(function (resolve, reject) {
+	        var resultCanvas = document.createElement('canvas');
+	        var resultCtx = resultCanvas.getContext('2d');
+	        var tempCanvas = document.createElement('canvas');
+	        var tempCtx = tempCanvas.getContext('2d');
+	        var img = new Image();
+	
+	        img.onload = function () {
+	          try {
+	            (function () {
+	
+	              var scaledCrop = {
+	                y: cropRect.y,
+	                x: cropRect.x,
+	                width: cropRect.width,
+	                height: cropRect.height
+	              };
+	              console.log('scaledCrop', scaledCrop);
+	
+	              tempCtx.drawImage(Transform.getBitmapData(image), 0, 0, img.width, img.height);
+	              var tempImage = new Image();
+	
+	              tempImage.onload = function () {
+	                Transform.renderCentered(resultCtx, tempImage, boundRect);
+	                var resultImage = new Image();
+	                resultImage.src = resultCanvas.toDataURL("image/png");
+	                resolve(resultImage.src);
+	              };
+	              tempImage.src = tempCanvas.toDataURL("image/png");
+	              //resolve(tempImage.src);
+	            })();
+	          } catch (err) {
+	            reject(err);
+	          }
+	        };
+	        img.src = image;
+	      });
 	    }
 	  }]);
 	
@@ -28713,6 +28841,12 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
+	
+	var _Transform = __webpack_require__(249);
+	
+	var _Transform2 = _interopRequireDefault(_Transform);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
