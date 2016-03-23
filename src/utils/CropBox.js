@@ -1,4 +1,4 @@
-import Transform from './Transform';
+import { Transform } from './Transform';
 
 class Handle {
 
@@ -25,7 +25,7 @@ class Handle {
     }
   }
 }
-export default class CropBox {
+export class CropBox {
 
   constructor(args) {
 

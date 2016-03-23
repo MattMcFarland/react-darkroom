@@ -1,4 +1,4 @@
-export default class Transform {
+export class Transform {
   static constrainProportions (from, to) {
 
     let minRatio = Math.min(to.height / from.height, to.width / from.width);
