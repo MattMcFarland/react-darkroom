@@ -199,3 +199,12 @@ The CropMenu is entirely optional, and you can create your own composition for t
 
 Component state is managed by you, and each of the different sub-components that react-component comes with are considered
 "dumb" components, so you have to explicitly define and update each component.
+
+## Changelog
+
+### 0.2.0-2
+
+- Expose utils to components list
+- Update build pipeline to transpile es6 to es5
+- add example to cloud9 ide
+
