@@ -1,6 +1,10 @@
-React-Darkroom component
+## React-Darkroom component
 
-Inspired by https://mattketmo.github.io/darkroomjs/
+View the live demo here: https://react-darkroom-example-mattmcfarland.c9users.io/public/
+
+See the code in use via cloud9 live IDE here: https://ide.c9.io/mattmcfarland/react-darkroom-example
+
+Inspired by a jquery component called "Darkroom.JS" https://mattketmo.github.io/darkroomjs/
 
 
 ## View example
