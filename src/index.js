@@ -5,10 +5,10 @@ export {
   Toolbar,
   FilePicker,
   CropMenu
-} from './src/components';
+} from './components';
 
 export {
   CropBox,
   Transform
-} from './src/utils';
+} from './utils';
 

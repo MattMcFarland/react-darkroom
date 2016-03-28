@@ -1,7 +1,7 @@
 {
   "name": "react-darkroom",
   "version": "0.2.0",
-  "description": "Advanced HTML 5 React Component.",
+  "description": "HTML5 Image upload and edit React Component.",
   "engines": {
     "node": ">=4.2.1"
   },
@@ -13,7 +13,6 @@
   "scripts": {
     "test": "mocha",
     "start": "webpack && webpack-dev-server",
-    "postinstall": "npm run build",
     "prepublish": "npm run build",
     "build": "rm -rf lib/* && babel src --ignore __tests__ --out-dir lib && npm run copy && gulp sass-lib",
     "copy": "npm run copy:fonts",
