@@ -10,7 +10,8 @@ const History = ({
   let childNodes = [];
 
   React.Children.forEach(children, child => {
-    var { ifEmpty, action } = child.props;
+    const ifEmpty = child.props['data-ifEmpty'];
+    const action = child.props.action;
     if (action === "back") {
 
       backButton = (

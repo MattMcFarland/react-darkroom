@@ -28455,7 +28455,7 @@
 /* 245 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -28469,9 +28469,7 @@
 	
 	var _components = __webpack_require__(247);
 	
-	var _Transform = __webpack_require__(250);
-	
-	var _Transform2 = _interopRequireDefault(_Transform);
+	var _utils = __webpack_require__(249);
 	
 	var _react = __webpack_require__(75);
 	
@@ -28680,7 +28678,7 @@
 	      var height = _refs$canvasWrapper$c.height;
 	
 	
-	      var newImage = _Transform2.default.cropImage(source, { x: x, y: y, width: width, height: height }, { width: canvasWidth, height: canvasHeight }).then(function (image) {
+	      var newImage = _utils.Transform.cropImage(source, { x: x, y: y, width: width, height: height }, { width: canvasWidth, height: canvasHeight }).then(function (image) {
 	        return _this3.update({ type: 'CONFIRM_CROP', image: image });
 	      });
 	    }
@@ -28710,6 +28708,11 @@
 	        ),
 	        _react2.default.createElement(
 	          'div',
+	          null,
+	          process.env.npm_package_version
+	        ),
+	        _react2.default.createElement(
+	          'div',
 	          { style: { padding: "2em" } },
 	          _react2.default.createElement(
 	            _components.Darkroom,
@@ -28731,7 +28734,7 @@
 	                  {
 	                    action: 'back',
 	                    onClick: this.onUndo,
-	                    ifEmpty: 'disable',
+	                    'data-ifEmpty': 'disable',
 	                    'data-tipsy': 'Undo',
 	                    className: 'tipsy tipsy--sw' },
 	                  _react2.default.createElement('span', { className: 'icon icon-undo2' })
@@ -28741,7 +28744,7 @@
 	                  {
 	                    action: 'forward',
 	                    onClick: this.onRedo,
-	                    ifEmpty: 'disable',
+	                    'data-ifEmpty': 'disable',
 	                    'data-tipsy': 'Redo',
 	                    className: 'tipsy tipsy--sw' },
 	                  _react2.default.createElement('span', { className: 'icon icon-redo2' })
@@ -28772,7 +28775,7 @@
 	                  'button',
 	                  {
 	                    disabled: !hasFile,
-	                    showOnlyWhen: 'croppingIsOff',
+	                    'data-showOnlyWhen': 'croppingIsOff',
 	                    onClick: this.onCropStart,
 	                    'data-tipsy': 'Crop',
 	                    className: 'tipsy tipsy--sw' },
@@ -28787,7 +28790,7 @@
 	                  'button',
 	                  {
 	                    disabled: !hasFile,
-	                    showOnlyWhen: 'croppingIsOn',
+	                    'data-showOnlyWhen': 'croppingIsOn',
 	                    onClick: this.onCropConfirm,
 	                    style: { color: 'green' },
 	                    'data-tipsy': 'Confirm',
@@ -28798,7 +28801,7 @@
 	                  'button',
 	                  {
 	                    disabled: !hasFile,
-	                    showOnlyWhen: 'croppingIsOn',
+	                    'data-showOnlyWhen': 'croppingIsOn',
 	                    onClick: this.onCropCancel,
 	                    style: { color: 'red' },
 	                    'data-tipsy': 'Cancel',
@@ -28833,6 +28836,7 @@
 	}(_react2.default.Component);
 	
 	exports.default = KitchenSink;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(11)))
 
 /***/ },
 /* 246 */
@@ -28907,8 +28911,6 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
@@ -29045,7 +29047,7 @@
 	
 	      return _react2.default.createElement(
 	        'div',
-	        _extends({}, this.props, { style: { width: width, height: height }, className: 'darkroom-canvas' }),
+	        { style: { width: width, height: height }, className: 'darkroom-canvas' },
 	        children,
 	        _react2.default.createElement('canvas', { style: canvasStyle, ref: 'canvas', width: width, height: height })
 	      );
@@ -29743,7 +29745,7 @@
 /* 253 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -29768,19 +29770,17 @@
 	  var childNodes = [];
 	
 	  _react2.default.Children.forEach(children, function (child) {
-	    var _child$props = child.props;
-	    var ifEmpty = _child$props.ifEmpty;
-	    var action = _child$props.action;
-	
+	    var ifEmpty = child.props['data-ifEmpty'];
+	    var action = child.props.action;
 	    if (action === "back") {
 	
-	      backButton = _react2.default.createElement("button", _extends({
+	      backButton = _react2.default.createElement('button', _extends({
 	        disabled: step === 0 && ifEmpty === "disable",
 	        style: { display: step === 0 && ifEmpty === "hide" ? 'none' : 'inherit' }
 	      }, child.props));
 	      childNodes.push(backButton);
 	    } else if (action === "forward") {
-	      fwdButton = _react2.default.createElement("button", _extends({
+	      fwdButton = _react2.default.createElement('button', _extends({
 	        disabled: step === length && ifEmpty === "disable",
 	        style: { display: step === length && ifEmpty === "hide" ? 'none' : 'inherit' }
 	      }, child.props));
@@ -29791,11 +29791,11 @@
 	  });
 	
 	  return _react2.default.createElement(
-	    "span",
+	    'span',
 	    null,
 	    childNodes.map(function (childNode, index) {
 	      return _react2.default.createElement(
-	        "span",
+	        'span',
 	        { key: index },
 	        childNode
 	      );
@@ -29931,7 +29931,7 @@
 /* 256 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -29951,8 +29951,7 @@
 	  var childNodes = [];
 	
 	  _react2.default.Children.forEach(children, function (child) {
-	    var showOnlyWhen = child.props.showOnlyWhen;
-	
+	    var showOnlyWhen = child.props['data-showOnlyWhen'];
 	
 	    if (isCropping && showOnlyWhen === "croppingIsOn") {
 	      childNodes.push(child);
@@ -29962,7 +29961,7 @@
 	  });
 	
 	  return _react2.default.createElement(
-	    "span",
+	    'span',
 	    null,
 	    childNodes
 	  );

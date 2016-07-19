@@ -1,6 +1,6 @@
 {
   "name": "react-darkroom",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "HTML5 Image upload and edit React Component.",
   "engines": {
     "node": ">=4.2.1"

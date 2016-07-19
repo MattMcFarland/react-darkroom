@@ -5,7 +5,7 @@
 
 import deepFreeze from 'deep-freeze';
 import { Darkroom, Canvas, History, Toolbar, FilePicker, CropMenu } from '../components';
-import Transform from '../utils/Transform';
+import { Transform } from '../utils';
 import React from 'react';
 
 const canvasWidth = 300;
@@ -196,9 +196,15 @@ export default class KitchenSink extends React.Component {
 
 
     return (
-      <div>
-        <h2>React Darkroom Kitchen Sink</h2>
-        <div style={{padding: "2em"}}>
+      <div style={{padding: "0 1em"}}>
+        <header>
+          <h2>React Darkroom Kitchen Sink v3</h2>
+          <a href="https://github.com/MattMcFarland/react-darkroom">
+            https://github.com/MattMcFarland/react-darkroom
+          </a>
+          <hr/>
+        </header>
+        <div style={{padding: "1em"}}>
           <Darkroom>
             <Toolbar>
               <button onClick={selectFile} data-tipsy="Select Image" className="tipsy tipsy--s">
@@ -209,7 +215,7 @@ export default class KitchenSink extends React.Component {
                 <button
                   action="back"
                   onClick={this.onUndo}
-                  ifEmpty="disable"
+                  data-ifEmpty="disable"
                   data-tipsy="Undo"
                   className="tipsy tipsy--sw">
                   <span className="icon icon-undo2"/>
@@ -217,7 +223,7 @@ export default class KitchenSink extends React.Component {
                 <button
                   action="forward"
                   onClick={this.onRedo}
-                  ifEmpty="disable"
+                  data-ifEmpty="disable"
                   data-tipsy="Redo"
                   className="tipsy tipsy--sw">
                   <span className="icon icon-redo2"/>
@@ -240,7 +246,7 @@ export default class KitchenSink extends React.Component {
               <CropMenu isCropping={crop}>
                 <button
                   disabled={!hasFile}
-                  showOnlyWhen='croppingIsOff'
+                  data-showOnlyWhen='croppingIsOff'
                   onClick={this.onCropStart}
                   data-tipsy="Crop"
                   className="tipsy tipsy--sw">
@@ -251,7 +257,7 @@ export default class KitchenSink extends React.Component {
                 </button>
                 <button
                   disabled={!hasFile}
-                  showOnlyWhen='croppingIsOn'
+                  data-showOnlyWhen='croppingIsOn'
                   onClick={this.onCropConfirm}
                   style={{color: 'green'}}
                   data-tipsy="Confirm"
@@ -260,7 +266,7 @@ export default class KitchenSink extends React.Component {
                 </button>
                 <button
                   disabled={!hasFile}
-                  showOnlyWhen='croppingIsOn'
+                  data-showOnlyWhen='croppingIsOn'
                   onClick={this.onCropCancel}
                   style={{color: 'red'}}
                   data-tipsy="Cancel"

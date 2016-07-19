@@ -8,7 +8,7 @@ export default ({
     childNodes = [];
 
   React.Children.forEach(children, child => {
-    var { showOnlyWhen } = child.props;
+    var showOnlyWhen = child.props['data-showOnlyWhen'];
 
     if (isCropping && showOnlyWhen === "croppingIsOn") {
       childNodes.push(child);

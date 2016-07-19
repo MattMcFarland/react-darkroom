@@ -1,5 +1,7 @@
 ## React-Darkroom component
 
+See the live demo: http://blog.mmcfarland.net/react-darkroom/
+
 *Inspired by a jquery component called "Darkroom.JS" https://mattketmo.github.io/darkroomjs/*
 
 
@@ -62,7 +64,7 @@ at beginning or end of history.
   <button
     action="back"
     onClick={this.onUndo}
-    ifEmpty="disable">
+    data-ifEmpty="disable">
 
     Undo
 
@@ -70,7 +72,7 @@ at beginning or end of history.
   <button
     action="forward"
     onClick={this.onRedo}
-    ifEmpty="disable">
+    data-ifEmpty="disable">
 
     Redo
 
@@ -116,16 +118,16 @@ The CropMenu is entirely optional, and you can create your own composition for t
 
 ```jsx
     <CropMenu isCropping={crop}>
-      <button disabled={!hasFile} showOnlyWhen='croppingIsOff' onClick={this.onCropStart} data-tipsy="Crop" className="tipsy tipsy--sw">
+      <button disabled={!hasFile} data-showOnlyWhen='croppingIsOff' onClick={this.onCropStart} data-tipsy="Crop" className="tipsy tipsy--sw">
         <span className="icon icon-crop"/>
       </button>
-      <button disabled={!hasFile} showOnlyWhen='croppingIsOn' style={{color: 'cyan'}}>
+      <button disabled={!hasFile} data-showOnlyWhen='croppingIsOn' style={{color: 'cyan'}}>
         <span className="icon icon-crop"/>
       </button>
-      <button disabled={!hasFile} showOnlyWhen='croppingIsOn' onClick={this.onCropConfirm} style={{color: 'green'}} data-tipsy="Confirm" className="tipsy tipsy--sw">
+      <button disabled={!hasFile} data-showOnlyWhen='croppingIsOn' onClick={this.onCropConfirm} style={{color: 'green'}} data-tipsy="Confirm" className="tipsy tipsy--sw">
         <span className="icon icon-checkmark"/>
       </button>
-      <button disabled={!hasFile} showOnlyWhen='croppingIsOn' onClick={this.onCropCancel} style={{color: 'red'}} data-tipsy="Cancel" className="tipsy tipsy--sw">
+      <button disabled={!hasFile} data-showOnlyWhen='croppingIsOn' onClick={this.onCropCancel} style={{color: 'red'}} data-tipsy="Cancel" className="tipsy tipsy--sw">
         <span className="icon icon-cross"/>
       </button>
     </CropMenu>
@@ -167,16 +169,16 @@ The CropMenu is entirely optional, and you can create your own composition for t
       <span className="icon icon-redo"/>
     </button>
     <CropMenu isCropping={crop}>
-      <button disabled={!hasFile} showOnlyWhen='croppingIsOff' onClick={this.onCropStart} data-tipsy="Crop" className="tipsy tipsy--sw">
+      <button disabled={!hasFile} data-showOnlyWhen='croppingIsOff' onClick={this.onCropStart} data-tipsy="Crop" className="tipsy tipsy--sw">
         <span className="icon icon-crop"/>
       </button>
-      <button disabled={!hasFile} showOnlyWhen='croppingIsOn' style={{color: 'cyan'}}>
+      <button disabled={!hasFile} data-showOnlyWhen='croppingIsOn' style={{color: 'cyan'}}>
         <span className="icon icon-crop"/>
       </button>
-      <button disabled={!hasFile} showOnlyWhen='croppingIsOn' onClick={this.onCropConfirm} style={{color: 'green'}} data-tipsy="Confirm" className="tipsy tipsy--sw">
+      <button disabled={!hasFile} data-showOnlyWhen='croppingIsOn' onClick={this.onCropConfirm} style={{color: 'green'}} data-tipsy="Confirm" className="tipsy tipsy--sw">
         <span className="icon icon-checkmark"/>
       </button>
-      <button disabled={!hasFile} showOnlyWhen='croppingIsOn' onClick={this.onCropCancel} style={{color: 'red'}} data-tipsy="Cancel" className="tipsy tipsy--sw">
+      <button disabled={!hasFile} data-showOnlyWhen='croppingIsOn' onClick={this.onCropCancel} style={{color: 'red'}} data-tipsy="Cancel" className="tipsy tipsy--sw">
         <span className="icon icon-cross"/>
       </button>
     </CropMenu>
@@ -203,7 +205,7 @@ Component state is managed by you, and each of the different sub-components that
  - Reduce Dependency amount
  - Update all dependencies to latest.
  - Implement CI system
- 
+
 ### 0.2.0-2
 
 - Expose utils to components list

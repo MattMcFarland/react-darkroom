@@ -99,7 +99,7 @@ export default class Canvas extends React.Component {
 
 
     return (
-      <div {...this.props} style={{width, height}} className="darkroom-canvas">
+      <div style={{width, height}} className="darkroom-canvas">
         {children}
         <canvas style={canvasStyle} ref="canvas" width={width} height={height} />
       </div>
