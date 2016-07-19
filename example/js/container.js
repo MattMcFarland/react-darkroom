@@ -28467,9 +28467,9 @@
 	
 	var _deepFreeze2 = _interopRequireDefault(_deepFreeze);
 	
-	var _components = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"../components\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	var _components = __webpack_require__(247);
 	
-	var _Transform = __webpack_require__(248);
+	var _Transform = __webpack_require__(250);
 	
 	var _Transform2 = _interopRequireDefault(_Transform);
 	
@@ -28490,8 +28490,8 @@
 	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * A bit overkill but use-able
 	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
 	
-	var canvasWidth = 300,
-	    canvasHeight = 300;
+	var canvasWidth = 300;
+	var canvasHeight = 300;
 	
 	function fileController() {
 	  var thread = arguments.length <= 0 || arguments[0] === undefined ? { source: null } : arguments[0];
@@ -28584,11 +28584,11 @@
 	  }, {
 	    key: 'update',
 	    value: function update(action) {
-	      var state = this.state,
-	          nextThread,
-	          nextStep = state.thread.length,
-	          newState,
-	          newThread;
+	      var state = this.state;
+	      var nextThread = void 0;
+	      var nextStep = state.thread.length;
+	      var newState = void 0;
+	      var newThread = void 0;
 	
 	      (0, _deepFreeze2.default)(state);
 	      switch (action.type) {
@@ -28680,8 +28680,8 @@
 	      var height = _refs$canvasWrapper$c.height;
 	
 	
-	      var newImage = _Transform2.default.cropImage(source, { x: x, y: y, width: width, height: height }, { width: canvasWidth, height: canvasHeight }).then(function (newImage) {
-	        return _this3.update({ type: 'CONFIRM_CROP', image: newImage });
+	      var newImage = _Transform2.default.cropImage(source, { x: x, y: y, width: width, height: height }, { width: canvasWidth, height: canvasHeight }).then(function (image) {
+	        return _this3.update({ type: 'CONFIRM_CROP', image: image });
 	      });
 	    }
 	  }, {
@@ -28749,12 +28749,20 @@
 	              ),
 	              _react2.default.createElement(
 	                'button',
-	                { disabled: !hasFile, onClick: this.onRotateLeft, 'data-tipsy': 'Rotate Left', className: 'tipsy tipsy--sw' },
+	                {
+	                  disabled: !hasFile,
+	                  onClick: this.onRotateLeft,
+	                  'data-tipsy': 'Rotate Left',
+	                  className: 'tipsy tipsy--sw' },
 	                _react2.default.createElement('span', { className: 'icon icon-undo' })
 	              ),
 	              _react2.default.createElement(
 	                'button',
-	                { disabled: !hasFile, onClick: this.onRotateRight, 'data-tipsy': 'Rotate Right', className: 'tipsy tipsy--sw' },
+	                {
+	                  disabled: !hasFile,
+	                  onClick: this.onRotateRight,
+	                  'data-tipsy': 'Rotate Right',
+	                  className: 'tipsy tipsy--sw' },
 	                _react2.default.createElement('span', { className: 'icon icon-redo' })
 	              ),
 	              _react2.default.createElement(
@@ -28762,7 +28770,12 @@
 	                { isCropping: crop },
 	                _react2.default.createElement(
 	                  'button',
-	                  { disabled: !hasFile, showOnlyWhen: 'croppingIsOff', onClick: this.onCropStart, 'data-tipsy': 'Crop', className: 'tipsy tipsy--sw' },
+	                  {
+	                    disabled: !hasFile,
+	                    showOnlyWhen: 'croppingIsOff',
+	                    onClick: this.onCropStart,
+	                    'data-tipsy': 'Crop',
+	                    className: 'tipsy tipsy--sw' },
 	                  _react2.default.createElement('span', { className: 'icon icon-crop' })
 	                ),
 	                _react2.default.createElement(
@@ -28772,12 +28785,24 @@
 	                ),
 	                _react2.default.createElement(
 	                  'button',
-	                  { disabled: !hasFile, showOnlyWhen: 'croppingIsOn', onClick: this.onCropConfirm, style: { color: 'green' }, 'data-tipsy': 'Confirm', className: 'tipsy tipsy--sw' },
+	                  {
+	                    disabled: !hasFile,
+	                    showOnlyWhen: 'croppingIsOn',
+	                    onClick: this.onCropConfirm,
+	                    style: { color: 'green' },
+	                    'data-tipsy': 'Confirm',
+	                    className: 'tipsy tipsy--sw' },
 	                  _react2.default.createElement('span', { className: 'icon icon-checkmark' })
 	                ),
 	                _react2.default.createElement(
 	                  'button',
-	                  { disabled: !hasFile, showOnlyWhen: 'croppingIsOn', onClick: this.onCropCancel, style: { color: 'red' }, 'data-tipsy': 'Cancel', className: 'tipsy tipsy--sw' },
+	                  {
+	                    disabled: !hasFile,
+	                    showOnlyWhen: 'croppingIsOn',
+	                    onClick: this.onCropCancel,
+	                    style: { color: 'red' },
+	                    'data-tipsy': 'Cancel',
+	                    className: 'tipsy tipsy--sw' },
 	                  _react2.default.createElement('span', { className: 'icon icon-cross' })
 	                )
 	              ),
@@ -28789,7 +28814,13 @@
 	            ),
 	            _react2.default.createElement(
 	              _components.Canvas,
-	              { ref: 'canvasWrapper', crop: crop, source: source, angle: angle, width: canvasWidth, height: canvasHeight },
+	              {
+	                ref: 'canvasWrapper',
+	                crop: crop,
+	                source: source,
+	                angle: angle,
+	                width: canvasWidth,
+	                height: canvasHeight },
 	              _react2.default.createElement(_components.FilePicker, { hasFile: hasFile, onChange: this.onFileChange })
 	            )
 	          )
@@ -28824,8 +28855,238 @@
 
 
 /***/ },
-/* 247 */,
+/* 247 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.FilePicker = exports.Toolbar = exports.History = exports.Darkroom = exports.CropMenu = exports.Canvas = undefined;
+	
+	var _Canvas = __webpack_require__(248);
+	
+	var _Canvas2 = _interopRequireDefault(_Canvas);
+	
+	var _Darkroom = __webpack_require__(252);
+	
+	var _Darkroom2 = _interopRequireDefault(_Darkroom);
+	
+	var _History = __webpack_require__(253);
+	
+	var _History2 = _interopRequireDefault(_History);
+	
+	var _Toolbar = __webpack_require__(254);
+	
+	var _Toolbar2 = _interopRequireDefault(_Toolbar);
+	
+	var _FilePicker = __webpack_require__(255);
+	
+	var _FilePicker2 = _interopRequireDefault(_FilePicker);
+	
+	var _CropMenu = __webpack_require__(256);
+	
+	var _CropMenu2 = _interopRequireDefault(_CropMenu);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.Canvas = _Canvas2.default;
+	exports.CropMenu = _CropMenu2.default;
+	exports.Darkroom = _Darkroom2.default;
+	exports.History = _History2.default;
+	exports.Toolbar = _Toolbar2.default;
+	exports.FilePicker = _FilePicker2.default;
+
+/***/ },
 /* 248 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(75);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _utils = __webpack_require__(249);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var Canvas = function (_React$Component) {
+	  _inherits(Canvas, _React$Component);
+	
+	  function Canvas(props) {
+	    _classCallCheck(this, Canvas);
+	
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Canvas).call(this, props));
+	
+	    _this.getBitmapData = _this.getBitmapData.bind(_this);
+	    _this.renderCanvas = _this.renderCanvas.bind(_this);
+	    // private properties
+	    _this._prevAngle = 0;
+	    _this._data = null;
+	    _this._cache = null;
+	    return _this;
+	  }
+	
+	  /**
+	   * Constrain proportions to rect while considering its angle
+	   * @param from {{width: number, height: number}}
+	   * @param to {{width: number, height: number}}
+	   * @returns {{width: number, height: number}}
+	   */
+	
+	
+	  _createClass(Canvas, [{
+	    key: 'getBitmapData',
+	    value: function getBitmapData(source) {
+	      try {
+	        if (source !== this._data) {
+	          this._cache = new Image();
+	          this._data = Object.assign(source);
+	          this._cache.src = this._data;
+	        }
+	        return this._cache;
+	      } catch (er) {
+	        this._cache = null;
+	        this._data = null;
+	        this._cache.src = null;
+	        return null;
+	      }
+	    }
+	  }, {
+	    key: 'renderCanvas',
+	    value: function renderCanvas() {
+	      var _this2 = this;
+	
+	      var canvas = document.createElement('canvas');
+	      var ctx = canvas.getContext('2d');
+	
+	      canvas.width = this.props.width;
+	      canvas.height = this.props.height;
+	      if (this.cache) {
+	        canvas = this.refs.canvas;
+	        ctx = canvas.getContext('2d');
+	        _utils.Transform.clearCanvas(canvas, ctx);
+	        ctx.drawImage(this.cache, 0, 0);
+	        if (this.props.crop) {
+	          if (!this.cropBox) {
+	            this.cropBox = new _utils.CropBox({ canvas: canvas, ctx: ctx });
+	          }
+	          this.cropBox.render();
+	        }
+	      }
+	      if (this.props.source && !this.cache) {
+	        var image = this.getBitmapData(this.props.source);
+	        var angle = parseInt(this.props.angle) || 0;
+	        var boundRect = {
+	          width: parseInt(this.props.width),
+	          height: parseInt(this.props.height)
+	        };
+	        var dims = {
+	          width: parseInt(image.width),
+	          height: parseInt(image.height)
+	        };
+	
+	        _utils.Transform.rotateImage(ctx, angle);
+	
+	        var scaledRect = _utils.Transform.constrainProportions(dims, boundRect);
+	        var position = _utils.Transform.centerRect(scaledRect, boundRect);
+	
+	        _utils.Transform.renderImage(ctx, image, position, scaledRect);
+	        setTimeout(function () {
+	          var img = new Image();
+	          img.src = canvas.toDataURL("image/png");
+	          _this2.cache = img;
+	        }, 100);
+	      }
+	    }
+	  }, {
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      var _this3 = this;
+	
+	      setInterval(function () {
+	        _this3.renderCanvas();
+	      }, 30);
+	    }
+	  }, {
+	    key: 'componentWillUpdate',
+	    value: function componentWillUpdate() {
+	      this.cache = null;
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var _props = this.props;
+	      var source = _props.source;
+	      var width = _props.width;
+	      var height = _props.height;
+	      var children = _props.children;
+	
+	
+	      var canvasStyle = {
+	        display: source ? 'block' : 'none'
+	      };
+	
+	      return _react2.default.createElement(
+	        'div',
+	        _extends({}, this.props, { style: { width: width, height: height }, className: 'darkroom-canvas' }),
+	        children,
+	        _react2.default.createElement('canvas', { style: canvasStyle, ref: 'canvas', width: width, height: height })
+	      );
+	    }
+	  }]);
+	
+	  return Canvas;
+	}(_react2.default.Component);
+	
+	exports.default = Canvas;
+
+/***/ },
+/* 249 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _Transform = __webpack_require__(250);
+	
+	Object.defineProperty(exports, 'Transform', {
+	  enumerable: true,
+	  get: function get() {
+	    return _Transform.Transform;
+	  }
+	});
+	
+	var _CropBox = __webpack_require__(251);
+	
+	Object.defineProperty(exports, 'CropBox', {
+	  enumerable: true,
+	  get: function get() {
+	    return _CropBox.CropBox;
+	  }
+	});
+
+/***/ },
+/* 250 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -28871,9 +29132,9 @@
 	    key: 'rotateImage',
 	    value: function rotateImage(ctx, angle) {
 	      var canvas = ctx.canvas;
-	      ctx.translate(canvas.width * .5, canvas.height * .5);
+	      ctx.translate(canvas.width * 0.5, canvas.height * 0.5);
 	      ctx.rotate(angle * Math.PI / 180);
-	      ctx.translate(-canvas.width * .5, -canvas.height * .5);
+	      ctx.translate(-canvas.width * 0.5, -canvas.height * 0.5);
 	    }
 	  }, {
 	    key: 'renderImage',
@@ -28902,9 +29163,9 @@
 	  }, {
 	    key: 'renderCentered',
 	    value: function renderCentered(ctx, image, imgRect, boundRect) {
+	      var scaledRect = Transform.constrainProportions(imgRect, boundRect);
+	      var position = Transform.centerRect(scaledRect, boundRect);
 	
-	      var scaledRect = Transform.constrainProportions(imgRect, boundRect),
-	          position = Transform.centerRect(scaledRect, boundRect);
 	      Transform.renderImage(ctx, image, position, scaledRect);
 	    }
 	  }, {
@@ -28967,6 +29228,745 @@
 
 	  return Transform;
 	}();
+
+/***/ },
+/* 251 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	var Handle = function () {
+	  function Handle(context) {
+	    var _this = this;
+	
+	    _classCallCheck(this, Handle);
+	
+	    this.ctx = context;
+	    this.render = function (ctx) {
+	      ctx.fillStyle = 'rgba(255, 255, 255, 0.6)';
+	      ctx.fillRect(_this.x - 3, _this.y - 3, 6, 6);
+	    };
+	    this.isHover = function (x, y) {
+	      var xx = _this.x;
+	      var yy = _this.y;
+	      return x > xx - 6 && x < xx + 6 && y > yy - 3 && y < yy + 3;
+	    };
+	  }
+	
+	  _createClass(Handle, [{
+	    key: 'coords',
+	    set: function set(xy) {
+	      this.x = xy[0];
+	      this.y = xy[1];
+	    },
+	    get: function get() {
+	      return {
+	        x: this.x,
+	        y: this.y
+	      };
+	    }
+	  }]);
+	
+	  return Handle;
+	}();
+	
+	var CropBox = exports.CropBox = function () {
+	  function CropBox(args) {
+	    var _this2 = this;
+	
+	    _classCallCheck(this, CropBox);
+	
+	    this.x = args.x || 0;
+	    this.y = args.y || 0;
+	    this.width = 50;
+	    this.height = 50;
+	    this.dragging = false;
+	    this.canvas = args.canvas;
+	    this.ctx = args.ctx;
+	
+	    this.selectionHandles = [];
+	
+	    for (var i = 0; i < 8; i++) {
+	      var rect = new Handle(this.ctx);
+	      this.selectionHandles.push(rect);
+	    }
+	
+	    this.isInDraggableArea = function (x, y) {
+	      return x > _this2.x + 3 && x < _this2.x - 3 + _this2.width && y > _this2.y + 3 && y < _this2.height + _this2.y - 3;
+	    };
+	    this.isInResizeArea = function (x, y) {
+	      var result = -1;
+	      _this2.selectionHandles.forEach(function (handle, j) {
+	        if (handle.isHover(x, y)) {
+	          result = j;
+	        }
+	      });
+	      return result;
+	    };
+	    this.canvas.addEventListener('mousedown', function (e) {
+	
+	      var pointer = e;
+	      var mx = pointer.offsetX;
+	      var my = pointer.offsetY;
+	
+	      if (!_this2.hasFocus) {
+	        _this2.dragX = mx - _this2.x;
+	        _this2.dragY = my - _this2.y;
+	        _this2.x = mx;
+	        _this2.y = my;
+	      }
+	
+	      if (_this2.isInDraggableArea(mx, my)) {
+	        if (_this2.hasFocus) {
+	          _this2.dragX = mx - _this2.x;
+	          _this2.dragY = my - _this2.y;
+	          _this2.dragging = true;
+	        }
+	      } else {
+	        _this2.dragging = false;
+	        _this2.expectResize = _this2.isInResizeArea(mx, my);
+	        if (_this2.expectResize > -1 && _this2.hasFocus) {
+	          _this2.resizing = true;
+	        }
+	      }
+	
+	      _this2.hasFocus = true;
+	    }, true);
+	
+	    this.canvas.addEventListener('mousemove', function (e) {
+	      var pointer = e;
+	      var mx = pointer.offsetX;
+	      var my = pointer.offsetY;
+	
+	      if (_this2.dragging) {
+	        _this2.canvas.style.cursor = 'move';
+	
+	        var tx = mx - _this2.dragX;
+	        var ty = my - _this2.dragY;
+	        var maxX = _this2.canvas.width - _this2.width;
+	        var maxY = _this2.canvas.height - _this2.height;
+	
+	        _this2.x = tx < 0 ? 0 : tx > maxX ? maxX : tx;
+	        _this2.y = ty < 0 ? 0 : ty > maxY ? maxY : ty;
+	      } else if (_this2.resizing) {
+	        var oldx = _this2.x;
+	        var oldy = _this2.y;
+	
+	        var cursors = ['nwse-resize', 'ns-resize', 'nesw-resize', 'ew-resize', 'nwse-resize', 'ns-resize', 'nesw-resize', 'ew-resize'];
+	
+	        switch (_this2.expectResize) {
+	          case 0:
+	            _this2.x = mx;
+	            _this2.y = my;
+	            _this2.width += oldx - mx;
+	            _this2.height += oldy - my;
+	            break;
+	          case 1:
+	            _this2.y = my;
+	            _this2.height += oldy - my;
+	            break;
+	          case 2:
+	            _this2.y = my;
+	            _this2.width = mx - oldx;
+	            _this2.height += oldy - my;
+	            break;
+	          case 7:
+	            _this2.x = mx;
+	            _this2.width += oldx - mx;
+	            break;
+	          case 3:
+	            _this2.width = mx - oldx;
+	            break;
+	          case 6:
+	            _this2.x = mx;
+	            _this2.width += oldx - mx;
+	            _this2.height = my - oldy;
+	            break;
+	          case 5:
+	            _this2.height = my - oldy;
+	            break;
+	          case 4:
+	            _this2.width = mx - oldx;
+	            _this2.height = my - oldy;
+	            break;
+	        }
+	        // 0 1 2
+	        // 7   3
+	        // 6 5 4
+	        if (_this2.width < 0) {
+	          _this2.width = 0;
+	          if (_this2.expectResize === 2) {
+	            _this2.expectResize = 0;
+	          } else if (_this2.expectResize === 0) {
+	            _this2.expectResize = 2;
+	          } else if (_this2.expectResize === 3) {
+	            _this2.expectResize = 7;
+	          } else if (_this2.expectResize === 7) {
+	            _this2.expectResize = 3;
+	          } else if (_this2.expectResize === 4) {
+	            _this2.expectResize = 6;
+	          } else if (_this2.expectResize === 6) {
+	            _this2.expectResize = 4;
+	          }
+	        } else if (_this2.height < 0) {
+	          _this2.height = 0;
+	          if (_this2.expectResize === 0) {
+	            _this2.expectResize = 6;
+	          } else if (_this2.expectResize === 6) {
+	            _this2.expectResize = 0;
+	          } else if (_this2.expectResize === 1) {
+	            _this2.expectResize = 5;
+	          } else if (_this2.expectResize === 5) {
+	            _this2.expectResize = 1;
+	          } else if (_this2.expectResize === 2) {
+	            _this2.expectResize = 4;
+	          } else if (_this2.expectResize === 4) {
+	            _this2.expectResize = 2;
+	          }
+	        }
+	        _this2.canvas.style.cursor = cursors[_this2.expectResize];
+	        if (_this2.width < 0 || _this2.height < 0) {
+	          console.log(_this2.width, _this2.height);
+	        }
+	      } else if (_this2.isInDraggableArea(mx, my)) {
+	        _this2.canvas.style.cursor = 'move';
+	      } else {
+	        _this2.canvas.style.cursor = 'crosshair';
+	        _this2.selectionHandles.forEach(function (handle, j) {
+	
+	          var cursors = ['nwse-resize', 'ns-resize', 'nesw-resize', 'ew-resize', 'nwse-resize', 'ns-resize', 'nesw-resize', 'ew-resize'];
+	          if (handle.isHover(mx, my)) {
+	            _this2.canvas.style.cursor = cursors[j];
+	          }
+	        });
+	      }
+	    }, true);
+	
+	    this.canvas.addEventListener('mouseup', function () {
+	      _this2.dragging = false;
+	      _this2.resizing = false;
+	      _this2.expectResize = false;
+	    }, true);
+	
+	    this.render = this.render.bind(this);
+	    this.getWidth = this.getWidth.bind(this);
+	    this.getHeight = this.getHeight.bind(this);
+	    this.getLeft = this.getLeft.bind(this);
+	    this.getTop = this.getTop.bind(this);
+	    this.setWidth = this.setWidth.bind(this);
+	    this.setHeight = this.setHeight.bind(this);
+	    this.setLeft = this.setLeft.bind(this);
+	    this.setTop = this.setTop.bind(this);
+	
+	    this.remove = function () {
+	      _this2.canvas.removeEventListener('mouseup');
+	      _this2.canvas.removeEventListener('mousedown');
+	      _this2.canvas.removeEventListener('mousemove');
+	    };
+	  }
+	
+	  _createClass(CropBox, [{
+	    key: 'getWidth',
+	    value: function getWidth() {
+	      return this.width;
+	    }
+	  }, {
+	    key: 'getHeight',
+	    value: function getHeight() {
+	      return this.height;
+	    }
+	  }, {
+	    key: 'getScaleX',
+	    value: function getScaleX() {
+	      return this.scaleX;
+	    }
+	  }, {
+	    key: 'getScaleY',
+	    value: function getScaleY() {
+	      return this.scaleY;
+	    }
+	  }, {
+	    key: 'getLeft',
+	    value: function getLeft() {
+	      return this.x;
+	    }
+	  }, {
+	    key: 'getTop',
+	    value: function getTop() {
+	      return this.y;
+	    }
+	  }, {
+	    key: 'setWidth',
+	    value: function setWidth(value) {
+	      this.lastWidth = Object.assign({}, this.width);
+	      this.width = value;
+	    }
+	  }, {
+	    key: 'setHeight',
+	    value: function setHeight(value) {
+	      this.lastHeight = Object.assign({}, this.height);
+	      this.height = value;
+	    }
+	  }, {
+	    key: 'setLeft',
+	    value: function setLeft(value) {
+	      this.lastLeft = Object.assign({}, this.x);
+	      this.x = value;
+	    }
+	  }, {
+	    key: 'setTop',
+	    value: function setTop(value) {
+	      this.lastTop = Object.assign({}, this.y);
+	      this.y = value;
+	    }
+	  }, {
+	    key: 'setScaleX',
+	    value: function setScaleX(value) {
+	      this.lastScaleX = Object.assign({}, this.scaleX);
+	      this.scaleX = value;
+	    }
+	  }, {
+	    key: 'setScaleY',
+	    value: function setScaleY(value) {
+	      this.lastScaleY = Object.assign({}, this.scaleY);
+	      this.scaleY = value;
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var flipX = this.flipX ? -1 : 1;
+	      var flipY = this.flipY ? -1 : 1;
+	      var scaleX = flipX / this.scaleX;
+	      var scaleY = flipY / this.scaleY;
+	
+	      if (this.hasFocus) {
+	        var ctx = this.ctx;
+	        var dashWidth = 7;
+	
+	        ctx.scale(scaleX, scaleY);
+	        // Overlay rendering
+	        ctx.fillStyle = 'rgba(0, 0, 0, 0.5)';
+	
+	        // ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+	        this.renderOverlay(ctx);
+	
+	        // Set dashed borders
+	        if (ctx.setLineDash !== undefined) {
+	          ctx.setLineDash([dashWidth, dashWidth]);
+	        } else if (ctx.mozDash !== undefined) {
+	          ctx.mozDash = [dashWidth, dashWidth];
+	        }
+	
+	        // First lines rendering with black
+	        ctx.strokeStyle = 'rgba(0, 0, 0, 0.2)';
+	        // this.ctx.strokeRect(this.x, this.y, this.width, this.height);
+	        this.renderBorders(ctx);
+	        this.renderGrid(ctx);
+	
+	        // Re render lines in white
+	        ctx.lineDashOffset = dashWidth;
+	        ctx.strokeStyle = 'rgba(255, 255, 255, 0.4)';
+	        // this.ctx.strokeRect(this.x, this.y, this.width, this.height);
+	        this.renderBorders(ctx);
+	        this.renderGrid(ctx);
+	        this.renderHandles(ctx);
+	        // Reset scale
+	        ctx.scale(1 / scaleX, 1 / scaleY);
+	      }
+	    }
+	  }, {
+	    key: 'renderOverlay',
+	    value: function renderOverlay(ctx) {
+	      var canvas = ctx.canvas;
+	
+	      //
+	      //    x0    x1        x2      x3
+	      // y0 +------------------------+
+	      //    |\\\\\\\\\\\\\\\\\\\\\\\\|
+	      //    |\\\\\\\\\\\\\\\\\\\\\\\\|
+	      // y1 +------+---------+-------+
+	      //    |\\\\\\|         |\\\\\\\|
+	      //    |\\\\\\|    0    |\\\\\\\|
+	      //    |\\\\\\|         |\\\\\\\|
+	      // y2 +------+---------+-------+
+	      //    |\\\\\\\\\\\\\\\\\\\\\\\\|
+	      //    |\\\\\\\\\\\\\\\\\\\\\\\\|
+	      // y3 +------------------------+
+	      //
+	
+	      var x0 = 0;
+	      var x1 = this.x;
+	      var x2 = this.x + this.width;
+	      var x3 = canvas.width;
+	
+	      var y0 = 0;
+	      var y1 = this.y;
+	      var y2 = this.y + this.height;
+	      var y3 = canvas.height;
+	
+	      ctx.beginPath();
+	
+	      // Draw outer rectangle.
+	      // Numbers are +/-1 so that overlay edges don't get blurry.
+	      ctx.moveTo(x0 - 1, y0 - 1);
+	      ctx.lineTo(x3 + 1, y0 - 1);
+	      ctx.lineTo(x3 + 1, y3 + 1);
+	      ctx.lineTo(x0 - 1, y3 - 1);
+	      ctx.lineTo(x0 - 1, y0 - 1);
+	      ctx.closePath();
+	
+	      // Draw inner rectangle.
+	      ctx.moveTo(x1, y1);
+	      ctx.lineTo(x1, y2);
+	      ctx.lineTo(x2, y2);
+	      ctx.lineTo(x2, y1);
+	      ctx.lineTo(x1, y1);
+	
+	      ctx.closePath();
+	      ctx.fill();
+	      ctx.moveTo(0, 0);
+	    }
+	  }, {
+	    key: 'renderBorders',
+	    value: function renderBorders(ctx) {
+	      ctx.beginPath();
+	      ctx.moveTo(this.x, this.y); // upper left
+	      ctx.lineTo(this.x + this.width, this.y); // upper right
+	      ctx.lineTo(this.x + this.width, this.y + this.height); // down right
+	      ctx.lineTo(this.x, this.y + this.height); // down left
+	      ctx.lineTo(this.x, this.y); // upper left
+	      ctx.stroke();
+	    }
+	  }, {
+	    key: 'renderHandles',
+	    value: function renderHandles(ctx) {
+	      var _this3 = this;
+	
+	      this.selectionHandles.forEach(function (handle, i) {
+	        var top = _this3.y;
+	        var left = _this3.x;
+	        var centerX = _this3.x + _this3.width / 2;
+	        var centerY = _this3.y + _this3.height / 2;
+	        var right = _this3.x + _this3.width;
+	        var bottom = _this3.y + _this3.height;
+	        var setCoords = [[left, top], [centerX, top], [right, top], [right, centerY], [right, bottom], [centerX, bottom], [left, bottom], [left, centerY]];
+	
+	        handle.coords = setCoords[i];
+	        handle.render(ctx);
+	      });
+	    }
+	  }, {
+	    key: 'renderGrid',
+	    value: function renderGrid(ctx) {
+	
+	      ctx.beginPath();
+	      ctx.moveTo(this.x + 1 / 3 * this.width, this.y);
+	      ctx.lineTo(this.x + 1 / 3 * this.width, this.y + this.height);
+	      ctx.stroke();
+	      ctx.beginPath();
+	      ctx.moveTo(this.x + 2 / 3 * this.width, this.y);
+	      ctx.lineTo(this.x + 2 / 3 * this.width, this.y + this.height);
+	      ctx.stroke();
+	      // Horizontal lines
+	      ctx.beginPath();
+	      ctx.moveTo(this.x, this.y + 1 / 3 * this.height);
+	      ctx.lineTo(this.x + this.width, this.y + 1 / 3 * this.height);
+	      ctx.stroke();
+	      ctx.beginPath();
+	      ctx.moveTo(this.x, this.y + 2 / 3 * this.height);
+	      ctx.lineTo(this.x + this.width, this.y + 2 / 3 * this.height);
+	      ctx.stroke();
+	    }
+	  }]);
+
+	  return CropBox;
+	}();
+
+/***/ },
+/* 252 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(75);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var Darkroom = function (_React$Component) {
+	  _inherits(Darkroom, _React$Component);
+	
+	  function Darkroom(props) {
+	    _classCallCheck(this, Darkroom);
+	
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Darkroom).call(this, props));
+	  }
+	
+	  _createClass(Darkroom, [{
+	    key: "render",
+	    value: function render() {
+	      return _react2.default.createElement(
+	        "div",
+	        { ref: "container", className: "darkroom" },
+	        this.props.children
+	      );
+	    }
+	  }]);
+	
+	  return Darkroom;
+	}(_react2.default.Component);
+	
+	exports.default = Darkroom;
+
+/***/ },
+/* 253 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(75);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var History = function History(_ref) {
+	  var step = _ref.step;
+	  var length = _ref.length;
+	  var children = _ref.children;
+	
+	
+	  var backButton = void 0;
+	  var fwdButton = void 0;
+	  var childNodes = [];
+	
+	  _react2.default.Children.forEach(children, function (child) {
+	    var _child$props = child.props;
+	    var ifEmpty = _child$props.ifEmpty;
+	    var action = _child$props.action;
+	
+	    if (action === "back") {
+	
+	      backButton = _react2.default.createElement("button", _extends({
+	        disabled: step === 0 && ifEmpty === "disable",
+	        style: { display: step === 0 && ifEmpty === "hide" ? 'none' : 'inherit' }
+	      }, child.props));
+	      childNodes.push(backButton);
+	    } else if (action === "forward") {
+	      fwdButton = _react2.default.createElement("button", _extends({
+	        disabled: step === length && ifEmpty === "disable",
+	        style: { display: step === length && ifEmpty === "hide" ? 'none' : 'inherit' }
+	      }, child.props));
+	      childNodes.push(fwdButton);
+	    } else {
+	      childNodes.push(child);
+	    }
+	  });
+	
+	  return _react2.default.createElement(
+	    "span",
+	    null,
+	    childNodes.map(function (childNode, index) {
+	      return _react2.default.createElement(
+	        "span",
+	        { key: index },
+	        childNode
+	      );
+	    })
+	  );
+	};
+	
+	exports.default = History;
+
+/***/ },
+/* 254 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(75);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.default = function (_ref) {
+	  var children = _ref.children;
+	
+	
+	  var childNodes = [];
+	
+	  _react2.default.Children.forEach(children, function (child) {
+	    childNodes.push(child);
+	  });
+	
+	  return _react2.default.createElement(
+	    'menu',
+	    null,
+	    _react2.default.createElement(
+	      'ul',
+	      null,
+	      childNodes.map(function (childNode, index) {
+	        return _react2.default.createElement(
+	          'li',
+	          { key: index },
+	          childNode
+	        );
+	      })
+	    )
+	  );
+	};
+
+/***/ },
+/* 255 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(75);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var FilePicker = function (_React$Component) {
+	  _inherits(FilePicker, _React$Component);
+	
+	  function FilePicker() {
+	    _classCallCheck(this, FilePicker);
+	
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(FilePicker).apply(this, arguments));
+	  }
+	
+	  _createClass(FilePicker, [{
+	    key: 'render',
+	    value: function render() {
+	      var _this2 = this;
+	
+	      var _props = this.props;
+	      var onChange = _props.onChange;
+	      var hasFile = _props.hasFile;
+	
+	      var btnStyle = {
+	        display: hasFile ? 'none' : 'block',
+	        width: '100%',
+	        background: 'inherit',
+	        border: 'inherit',
+	        color: '#bbb'
+	      };
+	      var iconStyle = {
+	        width: '100%',
+	        display: 'block',
+	        fontSize: '240px'
+	      };
+	      var textStyle = {
+	        fontSize: '34px'
+	      };
+	
+	      return _react2.default.createElement(
+	        'button',
+	        { style: btnStyle, onClick: function onClick() {
+	            return _this2.refs.fileInput.click();
+	          }, type: 'button', className: 'filepicker' },
+	        _react2.default.createElement('span', { style: iconStyle, className: 'icon icon-image' }),
+	        _react2.default.createElement(
+	          'span',
+	          { style: textStyle },
+	          'Select image'
+	        ),
+	        _react2.default.createElement('input', { ref: 'fileInput', style: { display: 'none' }, type: 'file', onChange: onChange })
+	      );
+	    }
+	  }]);
+	
+	  return FilePicker;
+	}(_react2.default.Component);
+	
+	exports.default = FilePicker;
+
+/***/ },
+/* 256 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(75);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.default = function (_ref) {
+	  var isCropping = _ref.isCropping;
+	  var children = _ref.children;
+	
+	
+	  var childNodes = [];
+	
+	  _react2.default.Children.forEach(children, function (child) {
+	    var showOnlyWhen = child.props.showOnlyWhen;
+	
+	
+	    if (isCropping && showOnlyWhen === "croppingIsOn") {
+	      childNodes.push(child);
+	    } else if (!isCropping && showOnlyWhen === "croppingIsOff") {
+	      childNodes.push(child);
+	    }
+	  });
+	
+	  return _react2.default.createElement(
+	    "span",
+	    null,
+	    childNodes
+	  );
+	};
 
 /***/ }
 /******/ ]);
