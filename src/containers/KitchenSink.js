@@ -198,7 +198,7 @@ export default class KitchenSink extends React.Component {
     return (
       <div style={{padding: "0 1em"}}>
         <header>
-          <h2>React Darkroom Kitchen Sink v3</h2>
+          <h2>React Darkroom Kitchen Sink v0.3.5</h2>
           <a href="https://github.com/MattMcFarland/react-darkroom">
             https://github.com/MattMcFarland/react-darkroom
           </a>
