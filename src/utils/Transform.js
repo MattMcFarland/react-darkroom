@@ -20,9 +20,9 @@ export class Transform {
   }
   static rotateImage(ctx, angle) {
     var canvas = ctx.canvas;
-    ctx.translate(canvas.width * .5, canvas.height * .5);
+    ctx.translate(canvas.width * 0.5, canvas.height * 0.5);
     ctx.rotate((angle) * Math.PI / 180);
-    ctx.translate(-canvas.width * .5, -canvas.height * .5);
+    ctx.translate(-canvas.width * 0.5, -canvas.height * 0.5);
   }
   static renderImage(ctx, img, position, boundRect) {
 
@@ -45,10 +45,9 @@ export class Transform {
   }
 
   static renderCentered(ctx, image, imgRect, boundRect) {
-
-    let
-      scaledRect = Transform.constrainProportions(imgRect, boundRect),
-      position = Transform.centerRect(scaledRect, boundRect);
+    let scaledRect = Transform.constrainProportions(imgRect, boundRect);
+    let position = Transform.centerRect(scaledRect, boundRect);
+    
     Transform.renderImage(ctx, image, position, scaledRect);
   }
 

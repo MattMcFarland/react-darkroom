@@ -1,23 +1,13 @@
 import React from 'react';
 
-const onEmpty = (setting) => {
-  switch (setting) {
-    case "disabled":
-      break;
-    case "hidden":
-      break;
-  }
-};
-
 const History = ({
   step, length,
   children
   }) => {
 
-  var
-    backButton,
-    fwdButton,
-    childNodes = [];
+  let backButton;
+  let fwdButton;
+  let childNodes = [];
 
   React.Children.forEach(children, child => {
     var { ifEmpty, action } = child.props;

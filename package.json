@@ -1,6 +1,6 @@
 {
   "name": "react-darkroom",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "description": "HTML5 Image upload and edit React Component.",
   "engines": {
     "node": ">=4.2.1"
@@ -11,7 +11,7 @@
     "lib/"
   ],
   "scripts": {
-    "test": "eslint src --fix && mocha",
+    "test": "eslint src --fix",
     "start": "webpack && webpack-dev-server",
     "prepublish": "npm run test && npm run build",
     "build": "rm -rf lib/* && babel src --ignore __tests__ --out-dir lib && npm run copy",

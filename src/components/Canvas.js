@@ -2,10 +2,8 @@ import React from 'react';
 import { Transform, CropBox } from '../utils';
 
 export default class Canvas extends React.Component {
-
   constructor(props) {
     super(props);
-
     this.getBitmapData = this.getBitmapData.bind(this);
     this.renderCanvas = this.renderCanvas.bind(this);
     // private properties
@@ -14,16 +12,12 @@ export default class Canvas extends React.Component {
     this._cache = null;
   }
 
-
   /**
    * Constrain proportions to rect while considering its angle
    * @param from {{width: number, height: number}}
    * @param to {{width: number, height: number}}
    * @returns {{width: number, height: number}}
    */
-
-
-
   getBitmapData(source) {
     try {
       if (source !== this._data) {
@@ -40,21 +34,16 @@ export default class Canvas extends React.Component {
     }
   }
 
-
   renderCanvas() {
-    let canvas = document.createElement('canvas'),
-      ctx = canvas.getContext('2d');
+    let canvas = document.createElement('canvas');
+    let ctx = canvas.getContext('2d');
 
     canvas.width = this.props.width;
     canvas.height = this.props.height;
-
-
     if (this.cache) {
       canvas = this.refs.canvas;
       ctx = canvas.getContext('2d');
-
       Transform.clearCanvas(canvas, ctx);
-
       ctx.drawImage(this.cache, 0,0);
       if (this.props.crop) {
         if (!this.cropBox) {
@@ -63,20 +52,17 @@ export default class Canvas extends React.Component {
         this.cropBox.render();
       }
     }
-
     if (this.props.source && !this.cache) {
-
-      let
-        image = this.getBitmapData(this.props.source),
-        angle = parseInt(this.props.angle) || 0,
-        boundRect = {
-          width: parseInt(this.props.width),
-          height: parseInt(this.props.height)
-        },
-        dims = {
-          width: parseInt(image.width),
-          height: parseInt(image.height)
-        };
+      let image = this.getBitmapData(this.props.source);
+      let angle = parseInt(this.props.angle) || 0;
+      let boundRect = {
+        width: parseInt(this.props.width),
+        height: parseInt(this.props.height)
+      };
+      let dims = {
+        width: parseInt(image.width),
+        height: parseInt(image.height)
+      };
 
       Transform.rotateImage(ctx, angle);
 
@@ -95,20 +81,16 @@ export default class Canvas extends React.Component {
   }
 
   componentDidMount() {
-    let canvas = this.refs.canvas,
-      ctx = canvas.getContext('2d');
-
     setInterval(() => {
       this.renderCanvas();
     }, 30);
   }
-
   componentWillUpdate() {
     this.cache = null;
   }
   render() {
 
-    let {source, width, height, children, crop} = this.props;
+    let {source, width, height, children} = this.props;
 
 
     let canvasStyle = {

@@ -1,9 +1,8 @@
-import { Transform } from './Transform';
 
 class Handle {
 
-  constructor(ctx) {
-    this.ctx = ctx;
+  constructor(context) {
+    this.ctx = context;
     this.render = (ctx) => {
       ctx.fillStyle = 'rgba(255, 255, 255, 0.6)';
       ctx.fillRect(this.x - 3, this.y - 3, 6, 6);
@@ -51,18 +50,18 @@ export class CropBox {
     };
     this.isInResizeArea = (x, y) => {
       let result = -1;
-      this.selectionHandles.forEach((handle, i) => {
+      this.selectionHandles.forEach((handle, j) => {
         if (handle.isHover(x, y)) {
-          result = i;
+          result = j;
         }
       });
       return result;
     };
     this.canvas.addEventListener('mousedown', e => {
 
-      let pointer = e,
-        mx = pointer.offsetX,
-        my = pointer.offsetY;
+      let pointer = e;
+      let mx = pointer.offsetX;
+      let my = pointer.offsetY;
 
       if (!this.hasFocus) {
         this.dragX = mx - this.x;
@@ -91,18 +90,17 @@ export class CropBox {
     }, true);
 
     this.canvas.addEventListener('mousemove', e => {
-      let pointer = e,
-        mx = pointer.offsetX,
-        my = pointer.offsetY;
+      let pointer = e;
+      let mx = pointer.offsetX;
+      let my = pointer.offsetY;
 
       if (this.dragging) {
         this.canvas.style.cursor = 'move';
 
-        let
-          tx = mx - this.dragX,
-          ty = my - this.dragY,
-          maxX = this.canvas.width - this.width,
-          maxY = this.canvas.height - this.height;
+        let tx = mx - this.dragX;
+        let ty = my - this.dragY;
+        let maxX = this.canvas.width - this.width;
+        let maxY = this.canvas.height - this.height;
 
         this.x = tx < 0 ? 0 : tx > maxX ? maxX : tx;
         this.y = ty < 0 ? 0 : ty > maxY ? maxY : ty;
@@ -201,7 +199,7 @@ export class CropBox {
         this.canvas.style.cursor = 'move';
       } else {
         this.canvas.style.cursor = 'crosshair';
-        this.selectionHandles.forEach((handle, i) => {
+        this.selectionHandles.forEach((handle, j) => {
 
           let cursors = [
             'nwse-resize',
@@ -214,7 +212,7 @@ export class CropBox {
             'ew-resize'
           ];
           if (handle.isHover(mx, my)) {
-            this.canvas.style.cursor = cursors[i];
+            this.canvas.style.cursor = cursors[j];
           }
 
         });
@@ -222,7 +220,7 @@ export class CropBox {
 
     }, true);
 
-    this.canvas.addEventListener('mouseup', e => {
+    this.canvas.addEventListener('mouseup', () => {
       this.dragging = false;
       this.resizing = false;
       this.expectResize = false;
@@ -310,10 +308,11 @@ export class CropBox {
       this.renderOverlay(ctx);
 
       // Set dashed borders
-      if (ctx.setLineDash !== undefined)
+      if (ctx.setLineDash !== undefined) {
         ctx.setLineDash([dashWidth, dashWidth]);
-      else if (ctx.mozDash !== undefined)
+      } else if (ctx.mozDash !== undefined) {
         ctx.mozDash = [dashWidth, dashWidth];
+      }
 
       // First lines rendering with black
       ctx.strokeStyle = 'rgba(0, 0, 0, 0.2)';
@@ -396,17 +395,15 @@ export class CropBox {
   }
 
   renderHandles(ctx) {
-    var canvas = ctx.canvas;
 
     this.selectionHandles.forEach((handle, i) => {
-      let
-        top = this.y,
-        left = this.x,
-        centerX = this.x + this.width / 2,
-        centerY = this.y + this.height / 2,
-        right = this.x + this.width,
-        bottom = this.y + this.height,
-        setCoords = [
+      let top = this.y;
+      let left = this.x;
+      let centerX = this.x + this.width / 2;
+      let centerY = this.y + this.height / 2;
+      let right = this.x + this.width;
+      let bottom = this.y + this.height;
+      let setCoords = [
           [left, top],
           [centerX, top],
           [right, top],
@@ -418,7 +415,6 @@ export class CropBox {
         ];
 
       handle.coords = setCoords[i];
-
       handle.render(ctx);
 
     });

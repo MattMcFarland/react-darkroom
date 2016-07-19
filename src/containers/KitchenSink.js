@@ -8,7 +8,8 @@ import { Darkroom, Canvas, History, Toolbar, FilePicker, CropMenu } from '../com
 import Transform from '../utils/Transform';
 import React from 'react';
 
-const canvasWidth = 300, canvasHeight = 300;
+const canvasWidth = 300;
+const canvasHeight = 300;
 
 function fileController(thread = {source: null}, action) {
   deepFreeze(thread);
@@ -92,8 +93,11 @@ export default class KitchenSink extends React.Component {
     console.timeEnd('State changed');
   }
   update(action) {
-    var state = this.state,
-      nextThread, nextStep = state.thread.length, newState, newThread;
+    const state = this.state;
+    let nextThread;
+    let nextStep = state.thread.length;
+    let newState;
+    let newThread;
 
     deepFreeze(state);
     switch (action.type) {
@@ -119,7 +123,8 @@ export default class KitchenSink extends React.Component {
 
     }
 
-    if ((action.type !== "UNDO" && action.type !== "REDO") && (state.step > 0 && state.step < state.thread.length - 1)) {
+    if ((action.type !== "UNDO" && action.type !== "REDO") &&
+    (state.step > 0 && state.step < state.thread.length - 1)) {
       newThread = [
         ...state.thread.slice(0, state.step),
         nextThread
@@ -175,7 +180,7 @@ export default class KitchenSink extends React.Component {
     let { x, y, width, height } = this.refs.canvasWrapper.cropBox;
 
     let newImage = Transform.cropImage(source, {x, y, width, height}, { width: canvasWidth, height: canvasHeight })
-      .then(newImage => this.update({ type: 'CONFIRM_CROP', image: newImage}));
+      .then(image => this.update({ type: 'CONFIRM_CROP', image }));
 
 
   }
@@ -218,23 +223,48 @@ export default class KitchenSink extends React.Component {
                   <span className="icon icon-redo2"/>
                 </button>
               </History>
-              <button disabled={!hasFile} onClick={this.onRotateLeft} data-tipsy="Rotate Left" className="tipsy tipsy--sw">
+              <button
+                disabled={!hasFile}
+                onClick={this.onRotateLeft}
+                data-tipsy="Rotate Left"
+                className="tipsy tipsy--sw">
                 <span className="icon icon-undo"/>
               </button>
-              <button disabled={!hasFile} onClick={this.onRotateRight} data-tipsy="Rotate Right" className="tipsy tipsy--sw">
+              <button
+                disabled={!hasFile}
+                onClick={this.onRotateRight}
+                data-tipsy="Rotate Right"
+                className="tipsy tipsy--sw">
                 <span className="icon icon-redo"/>
               </button>
               <CropMenu isCropping={crop}>
-                <button disabled={!hasFile} showOnlyWhen='croppingIsOff' onClick={this.onCropStart} data-tipsy="Crop" className="tipsy tipsy--sw">
+                <button
+                  disabled={!hasFile}
+                  showOnlyWhen='croppingIsOff'
+                  onClick={this.onCropStart}
+                  data-tipsy="Crop"
+                  className="tipsy tipsy--sw">
                   <span className="icon icon-crop"/>
                 </button>
                 <button disabled={!hasFile} showOnlyWhen='croppingIsOn' style={{color: 'cyan'}}>
                   <span className="icon icon-crop"/>
                 </button>
-                <button disabled={!hasFile} showOnlyWhen='croppingIsOn' onClick={this.onCropConfirm} style={{color: 'green'}} data-tipsy="Confirm" className="tipsy tipsy--sw">
+                <button
+                  disabled={!hasFile}
+                  showOnlyWhen='croppingIsOn'
+                  onClick={this.onCropConfirm}
+                  style={{color: 'green'}}
+                  data-tipsy="Confirm"
+                  className="tipsy tipsy--sw">
                   <span className="icon icon-checkmark"/>
                 </button>
-                <button disabled={!hasFile} showOnlyWhen='croppingIsOn' onClick={this.onCropCancel} style={{color: 'red'}} data-tipsy="Cancel" className="tipsy tipsy--sw">
+                <button
+                  disabled={!hasFile}
+                  showOnlyWhen='croppingIsOn'
+                  onClick={this.onCropCancel}
+                  style={{color: 'red'}}
+                  data-tipsy="Cancel"
+                  className="tipsy tipsy--sw">
                   <span className="icon icon-cross"/>
                 </button>
               </CropMenu>
@@ -242,7 +272,13 @@ export default class KitchenSink extends React.Component {
                 <span className="icon icon-floppy-disk"/>
               </button>
             </Toolbar>
-            <Canvas ref="canvasWrapper" crop={crop} source={source} angle={angle} width={canvasWidth} height={canvasHeight}>
+            <Canvas
+              ref="canvasWrapper"
+              crop={crop}
+              source={source}
+              angle={angle}
+              width={canvasWidth}
+              height={canvasHeight}>
               <FilePicker hasFile={hasFile} onChange={this.onFileChange}/>
             </Canvas>
           </Darkroom>
@@ -251,4 +287,3 @@ export default class KitchenSink extends React.Component {
     );
   }
 }
-
