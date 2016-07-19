@@ -28707,7 +28707,7 @@
 	          _react2.default.createElement(
 	            'h2',
 	            null,
-	            'React Darkroom Kitchen Sink v3'
+	            'React Darkroom Kitchen Sink v0.3.5'
 	          ),
 	          _react2.default.createElement(
 	            'a',
