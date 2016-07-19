@@ -1,21 +1,24 @@
-var webpack = require('webpack');
+const webpack = require('webpack');
+
+require('babel-core/register')
 
 module.exports = {
   entry: [
     'webpack-dev-server/client?http://localhost:8080',
-    'webpack/hot/only-dev-server',
     './src/examples/kitchensink.js'
   ],
   devtool: 'source-map',
-  module: {
-    loaders: [{
-      test: /\.js?$/,
-      exclude: /node_modules/,
-      loader: 'react-hot!babel'
-    }]
-  },
   resolve: {
     extensions: ['', '.js']
+  },
+  module: {
+    loaders: [
+      {
+        test: /\.js$/,
+        exclude: /(node_modules|bower_components)/,
+        loader: 'babel'
+      }
+    ]
   },
   output: {
     path: 'example',
@@ -25,8 +28,5 @@ module.exports = {
   devServer: {
     contentBase: './example',
     hot: true
-  },
-  plugins: [
-    new webpack.HotModuleReplacementPlugin()
-  ]
+  }
 };

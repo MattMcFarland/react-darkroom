@@ -1,6 +1,15 @@
-export Canvas from './Canvas';
-export Darkroom from './Darkroom';
-export History from './History';
-export Toolbar from './Toolbar';
-export FilePicker from './FilePicker';
-export CropMenu from './CropMenu';
+import Canvas from './Canvas';
+import Darkroom from './Darkroom';
+import History from './History';
+import Toolbar from './Toolbar';
+import FilePicker from './FilePicker';
+import CropMenu from './CropMenu';
+
+export {
+  Canvas,
+  CropMenu,
+  Darkroom,
+  History,
+  Toolbar,
+  FilePicker
+};

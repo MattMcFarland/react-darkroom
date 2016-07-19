@@ -1,4 +1,4 @@
-export {
+import {
   Canvas,
   Darkroom,
   History,
@@ -7,8 +7,18 @@ export {
   CropMenu
 } from './components';
 
-export {
+import {
   CropBox,
   Transform
 } from './utils';
 
+export {
+  Canvas,
+  Darkroom,
+  History,
+  Toolbar,
+  FilePicker,
+  CropMenu,
+  CropBox,
+  Transform
+};
