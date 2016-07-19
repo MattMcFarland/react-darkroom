@@ -6,23 +6,23 @@ class Handle {
     this.ctx = ctx;
     this.render = (ctx) => {
       ctx.fillStyle = 'rgba(255, 255, 255, 0.6)';
-      ctx.fillRect(this.x-3, this.y-3, 6, 6);
-    }
+      ctx.fillRect(this.x - 3, this.y - 3, 6, 6);
+    };
     this.isHover = (x, y) => {
       let xx = this.x;
       let yy = this.y;
-      return x > xx-6 && x < xx+6 && y > yy-3 && y < yy+3;
-    }
+      return x > xx - 6 && x < xx + 6 && y > yy - 3 && y < yy + 3;
+    };
   }
-  set coords (xy) {
+  set coords(xy) {
     this.x = xy[0];
     this.y = xy[1];
   }
-  get coords () {
+  get coords() {
     return {
       x: this.x,
       y: this.y
-    }
+    };
   }
 }
 export class CropBox {
@@ -40,15 +40,15 @@ export class CropBox {
 
     this.selectionHandles = [];
 
-    for (var i = 0; i < 8; i ++) {
+    for (var i = 0; i < 8; i++) {
       var rect = new Handle(this.ctx);
       this.selectionHandles.push(rect);
     }
 
 
     this.isInDraggableArea = (x, y) => {
-      return x > this.x+3 && x < this.x-3 + this.width && y > this.y+3 && y < this.height + this.y-3;
-    }
+      return x > this.x + 3 && x < this.x - 3 + this.width && y > this.y + 3 && y < this.height + this.y - 3;
+    };
     this.isInResizeArea = (x, y) => {
       let result = -1;
       this.selectionHandles.forEach((handle, i) => {
@@ -57,7 +57,7 @@ export class CropBox {
         }
       });
       return result;
-    }
+    };
     this.canvas.addEventListener('mousedown', e => {
 
       let pointer = e,
@@ -120,7 +120,7 @@ export class CropBox {
           'ns-resize',
           'nesw-resize',
           'ew-resize'
-        ]
+        ];
 
         switch (this.expectResize) {
           case 0:
@@ -192,7 +192,7 @@ export class CropBox {
             this.expectResize = 2;
           }
         }
-        this.canvas.style.cursor = cursors[this.expectResize]
+        this.canvas.style.cursor = cursors[this.expectResize];
         if (this.width < 0 || this.height < 0) {
           console.log(this.width, this.height);
         }
@@ -212,7 +212,7 @@ export class CropBox {
             'ns-resize',
             'nesw-resize',
             'ew-resize'
-          ]
+          ];
           if (handle.isHover(mx, my)) {
             this.canvas.style.cursor = cursors[i];
           }
@@ -243,56 +243,56 @@ export class CropBox {
       this.canvas.removeEventListener('mouseup');
       this.canvas.removeEventListener('mousedown');
       this.canvas.removeEventListener('mousemove');
-    }
+    };
 
 
 
 
   }
-  getWidth () {
+  getWidth() {
     return this.width;
   }
-  getHeight () {
+  getHeight() {
     return this.height;
   }
-  getScaleX () {
+  getScaleX() {
     return this.scaleX;
   }
-  getScaleY () {
+  getScaleY() {
     return this.scaleY;
   }
-  getLeft () {
+  getLeft() {
     return this.x;
   }
-  getTop () {
+  getTop() {
     return this.y;
   }
-  setWidth (value) {
+  setWidth(value) {
     this.lastWidth = Object.assign({}, this.width);
     this.width = value;
   }
-  setHeight (value) {
+  setHeight(value) {
     this.lastHeight = Object.assign({}, this.height);
     this.height = value;
   }
-  setLeft (value) {
+  setLeft(value) {
     this.lastLeft = Object.assign({}, this.x);
     this.x = value;
   }
-  setTop (value) {
+  setTop(value) {
     this.lastTop = Object.assign({}, this.y);
     this.y = value;
   }
-  setScaleX (value) {
+  setScaleX(value) {
     this.lastScaleX = Object.assign({}, this.scaleX);
     this.scaleX = value;
   }
-  setScaleY (value) {
+  setScaleY(value) {
     this.lastScaleY = Object.assign({}, this.scaleY);
     this.scaleY = value;
   }
 
-  render () {
+  render() {
     var flipX = this.flipX ? -1 : 1;
     var flipY = this.flipY ? -1 : 1;
     var scaleX = flipX / this.scaleX;
@@ -306,7 +306,7 @@ export class CropBox {
       // Overlay rendering
       ctx.fillStyle = 'rgba(0, 0, 0, 0.5)';
 
-      //ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+      // ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
       this.renderOverlay(ctx);
 
       // Set dashed borders
@@ -317,24 +317,24 @@ export class CropBox {
 
       // First lines rendering with black
       ctx.strokeStyle = 'rgba(0, 0, 0, 0.2)';
-      //this.ctx.strokeRect(this.x, this.y, this.width, this.height);
+      // this.ctx.strokeRect(this.x, this.y, this.width, this.height);
       this.renderBorders(ctx);
       this.renderGrid(ctx);
 
       // Re render lines in white
       ctx.lineDashOffset = dashWidth;
       ctx.strokeStyle = 'rgba(255, 255, 255, 0.4)';
-      //this.ctx.strokeRect(this.x, this.y, this.width, this.height);
+      // this.ctx.strokeRect(this.x, this.y, this.width, this.height);
       this.renderBorders(ctx);
       this.renderGrid(ctx);
       this.renderHandles(ctx);
       // Reset scale
-      ctx.scale(1/scaleX, 1/scaleY);
+      ctx.scale(1 / scaleX, 1 / scaleY);
 
     }
   }
 
-  renderOverlay (ctx) {
+  renderOverlay(ctx) {
     var canvas = ctx.canvas;
 
     //
@@ -385,7 +385,7 @@ export class CropBox {
     ctx.moveTo(0,0);
   }
 
-  renderBorders (ctx) {
+  renderBorders(ctx) {
     ctx.beginPath();
     ctx.moveTo(this.x, this.y); // upper left
     ctx.lineTo(this.x + this.width, this.y); // upper right
@@ -395,7 +395,7 @@ export class CropBox {
     ctx.stroke();
   }
 
-  renderHandles (ctx) {
+  renderHandles(ctx) {
     var canvas = ctx.canvas;
 
     this.selectionHandles.forEach((handle, i) => {
@@ -415,7 +415,7 @@ export class CropBox {
           [centerX, bottom],
           [left, bottom],
           [left, centerY]
-        ]
+        ];
 
       handle.coords = setCoords[i];
 
@@ -424,25 +424,25 @@ export class CropBox {
     });
   }
 
-  renderGrid (ctx) {
+  renderGrid(ctx) {
 
 
     ctx.beginPath();
-    ctx.moveTo(this.x + 1/3 * this.width, this.y);
-    ctx.lineTo(this.x + 1/3 * this.width, this.y + this.height);
+    ctx.moveTo(this.x + 1 / 3 * this.width, this.y);
+    ctx.lineTo(this.x + 1 / 3 * this.width, this.y + this.height);
     ctx.stroke();
     ctx.beginPath();
-    ctx.moveTo(this.x + 2/3 * this.width, this.y);
-    ctx.lineTo(this.x + 2/3 * this.width, this.y + this.height);
+    ctx.moveTo(this.x + 2 / 3 * this.width, this.y);
+    ctx.lineTo(this.x + 2 / 3 * this.width, this.y + this.height);
     ctx.stroke();
     // Horizontal lines
     ctx.beginPath();
-    ctx.moveTo(this.x, this.y + 1/3 * this.height);
-    ctx.lineTo(this.x + this.width, this.y + 1/3 * this.height);
+    ctx.moveTo(this.x, this.y + 1 / 3 * this.height);
+    ctx.lineTo(this.x + this.width, this.y + 1 / 3 * this.height);
     ctx.stroke();
     ctx.beginPath();
-    ctx.moveTo(this.x, this.y + 2/3 * this.height);
-    ctx.lineTo(this.x + this.width, this.y + 2/3 * this.height);
+    ctx.moveTo(this.x, this.y + 2 / 3 * this.height);
+    ctx.lineTo(this.x + this.width, this.y + 2 / 3 * this.height);
     ctx.stroke();
   }
 

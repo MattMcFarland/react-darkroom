@@ -15,7 +15,7 @@ export default ({
     <menu>
       <ul>
         {childNodes.map((childNode, index) => {
-          return (<li key={index}>{childNode}</li>)
+          return (<li key={index}>{childNode}</li>);
         })}
       </ul>
     </menu>

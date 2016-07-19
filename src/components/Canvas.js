@@ -24,7 +24,7 @@ export default class Canvas extends React.Component {
 
 
 
-  getBitmapData (source) {
+  getBitmapData(source) {
     try {
       if (source !== this._data) {
         this._cache = new Image();
@@ -41,7 +41,7 @@ export default class Canvas extends React.Component {
   }
 
 
-  renderCanvas () {
+  renderCanvas() {
     let canvas = document.createElement('canvas'),
       ctx = canvas.getContext('2d');
 
@@ -84,7 +84,7 @@ export default class Canvas extends React.Component {
       let position = Transform.centerRect(scaledRect, boundRect);
 
       Transform.renderImage(ctx, image, position, scaledRect);
-      setTimeout (() => {
+      setTimeout(() => {
         let img = new Image();
         img.src = canvas.toDataURL("image/png");
         this.cache = img;
@@ -94,26 +94,26 @@ export default class Canvas extends React.Component {
     }
   }
 
-  componentDidMount () {
+  componentDidMount() {
     let canvas = this.refs.canvas,
       ctx = canvas.getContext('2d');
 
     setInterval(() => {
-      this.renderCanvas()
+      this.renderCanvas();
     }, 30);
   }
 
-  componentWillUpdate () {
+  componentWillUpdate() {
     this.cache = null;
   }
-  render () {
+  render() {
 
     let {source, width, height, children, crop} = this.props;
 
 
     let canvasStyle = {
       display: source ? 'block' : 'none'
-    }
+    };
 
 
     return (

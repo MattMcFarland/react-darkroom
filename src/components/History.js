@@ -7,7 +7,7 @@ const onEmpty = (setting) => {
     case "hidden":
       break;
   }
-}
+};
 
 const History = ({
   step, length,
@@ -26,7 +26,7 @@ const History = ({
       backButton = (
         <button
           disabled={step === 0 && ifEmpty === "disable"}
-          style={{display: step === 0 && ifEmpty === "hide" ? 'none': 'inherit'}}
+          style={{display: step === 0 && ifEmpty === "hide" ? 'none' : 'inherit'}}
           {...child.props}
         />);
       childNodes.push(backButton);
@@ -34,7 +34,7 @@ const History = ({
       fwdButton = (
         <button
           disabled={step === (length) && ifEmpty === "disable"}
-          style={{display: step === (length) && ifEmpty === "hide" ? 'none': 'inherit'}}
+          style={{display: step === (length) && ifEmpty === "hide" ? 'none' : 'inherit'}}
           {...child.props}
         />);
       childNodes.push(fwdButton);
@@ -46,7 +46,7 @@ const History = ({
   return (
     <span>
       {childNodes.map((childNode, index) => {
-        return (<span key={index}>{childNode}</span>)
+        return (<span key={index}>{childNode}</span>);
       })}
     </span>
   );

@@ -17,9 +17,9 @@ function fileController(thread = {source: null}, action) {
       return Object.assign({}, thread, {
         source: action.file,
         angle: 0
-      })
+      });
     default:
-      return thread
+      return thread;
   }
 }
 function imageController(thread = {crop: false, source: null, angle: 0}, action) {
@@ -28,26 +28,26 @@ function imageController(thread = {crop: false, source: null, angle: 0}, action)
     case 'ROTATE_LEFT':
       return Object.assign({}, thread, {
         angle: thread.angle + 90
-      })
+      });
     case 'ROTATE_RIGHT':
       return Object.assign({}, thread, {
         angle: thread.angle - 90
-      })
+      });
     case 'START_CROPPING':
       return Object.assign({}, thread, {
         crop: true
-      })
+      });
     case 'STOP_CROPPING':
       return Object.assign({}, thread, {
         crop: false
-      })
+      });
     case 'CONFIRM_CROP':
       return Object.assign({}, thread, {
         crop: false,
         source: action.image
-      })
+      });
     default:
-      return thread
+      return thread;
   }
 }
 function readFile(file, done) {
@@ -85,13 +85,13 @@ export default class KitchenSink extends React.Component {
       'onCropCancel',
       'onRotateRight'].forEach((method) => {
       this[method] = this[method].bind(this);
-    })
+    });
   }
 
-  componentDidUpdate () {
+  componentDidUpdate() {
     console.timeEnd('State changed');
   }
-  update (action) {
+  update(action) {
     var state = this.state,
       nextThread, nextStep = state.thread.length, newState, newThread;
 
@@ -119,14 +119,14 @@ export default class KitchenSink extends React.Component {
 
     }
 
-    if ((action.type !== "UNDO" && action.type !== "REDO") && (state.step > 0 && state.step < state.thread.length-1)) {
+    if ((action.type !== "UNDO" && action.type !== "REDO") && (state.step > 0 && state.step < state.thread.length - 1)) {
       newThread = [
         ...state.thread.slice(0, state.step),
         nextThread
-      ]
-      nextStep = newThread.length -1;
+      ];
+      nextStep = newThread.length - 1;
     } else {
-      newThread = nextThread ? [...state.thread, nextThread ] : [].concat(state.thread)
+      newThread = nextThread ? [...state.thread, nextThread ] : [].concat(state.thread);
     }
 
     newState = Object.assign({}, state, {
@@ -138,56 +138,56 @@ export default class KitchenSink extends React.Component {
 
   }
 
-  onFileChange (e) {
+  onFileChange(e) {
 
     readFile(e.target.files[0], file => {
       this.update({type: 'SET_FILE', file });
     });
   }
 
-  onUndo () {
+  onUndo() {
     this.update({type: 'UNDO'});
   }
 
-  onRedo () {
+  onRedo() {
     this.update({type: 'REDO'});
   }
 
-  onRotateLeft () {
+  onRotateLeft() {
     this.update({type: 'ROTATE_LEFT'});
   }
 
-  onRotateRight () {
+  onRotateRight() {
     this.update({type: 'ROTATE_RIGHT'});
   }
 
-  onCropStart () {
+  onCropStart() {
     this.update({type: 'START_CROPPING'});
   }
 
-  onCropCancel () {
+  onCropCancel() {
     this.update({type: 'STOP_CROPPING'});
   }
 
-  onCropConfirm () {
+  onCropConfirm() {
 
     let { source } = this.state.thread[this.state.step];
     let { x, y, width, height } = this.refs.canvasWrapper.cropBox;
 
     let newImage = Transform.cropImage(source, {x, y, width, height}, { width: canvasWidth, height: canvasHeight })
-      .then(newImage => this.update({  type: 'CONFIRM_CROP', image: newImage}));
+      .then(newImage => this.update({ type: 'CONFIRM_CROP', image: newImage}));
 
 
   }
 
-  render () {
+  render() {
     let current = this.state.thread[this.state.step];
     let { angle, source, crop } = current;
     let hasFile = source !== null;
 
     let selectFile = () => {
       this.refs.fileselect.click();
-    }
+    };
 
 
     return (
@@ -200,7 +200,7 @@ export default class KitchenSink extends React.Component {
                 <span className="icon icon-image"/>
                 <input type="file" ref="fileselect" onChange={this.onFileChange} style={{display: 'none'}}/>
               </button>
-              <History step={this.state.step} length={this.state.thread.length-1}>
+              <History step={this.state.step} length={this.state.thread.length - 1}>
                 <button
                   action="back"
                   onClick={this.onUndo}
@@ -248,7 +248,7 @@ export default class KitchenSink extends React.Component {
           </Darkroom>
         </div>
       </div>
-    )
+    );
   }
 }
 

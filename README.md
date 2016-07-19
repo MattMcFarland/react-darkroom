@@ -1,10 +1,6 @@
 ## React-Darkroom component
 
-View the live demo here: https://react-darkroom-example-mattmcfarland.c9users.io/public/
-
-See the code in use via cloud9 live IDE here: https://ide.c9.io/mattmcfarland/react-darkroom-example
-
-Inspired by a jquery component called "Darkroom.JS" https://mattketmo.github.io/darkroomjs/
+*Inspired by a jquery component called "Darkroom.JS" https://mattketmo.github.io/darkroomjs/*
 
 
 ## View example
@@ -202,9 +198,14 @@ Component state is managed by you, and each of the different sub-components that
 
 ## Changelog
 
+### 0.3
+ - Remove gulp
+ - Reduce Dependency amount
+ - Update all dependencies to latest.
+ - Implement CI system
+ 
 ### 0.2.0-2
 
 - Expose utils to components list
 - Update build pipeline to transpile es6 to es5
 - add example to cloud9 ide
-

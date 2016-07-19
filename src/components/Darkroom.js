@@ -6,7 +6,7 @@ export default class Darkroom extends React.Component {
     super(props);
   }
 
-  render () {
+  render() {
     return (
       <div ref="container" className="darkroom">
         {this.props.children}

@@ -1,42 +1,42 @@
 export class Transform {
-  static constrainProportions (from, to) {
+  static constrainProportions(from, to) {
 
     let minRatio = Math.min(to.height / from.height, to.width / from.width);
     return {
-      width: from.width  > to.width ? from.width  * minRatio : from.width,
+      width: from.width > to.width ? from.width * minRatio : from.width,
       height: from.height > to.height ? from.height * minRatio : from.height
-    }
+    };
 
   }
-  static centerRect (rect, container) {
+  static centerRect(rect, container) {
     return {
-      x:  (container.width * 0.5)  - (rect.width  * 0.5),
-      y: (container.height * 0.5)  - (rect.height * 0.5)
-    }
+      x: (container.width * 0.5) - (rect.width * 0.5),
+      y: (container.height * 0.5) - (rect.height * 0.5)
+    };
   }
-  static clearCanvas (canvas, ctx) {
+  static clearCanvas(canvas, ctx) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.save();
   }
-  static rotateImage (ctx, angle) {
+  static rotateImage(ctx, angle) {
     var canvas = ctx.canvas;
-    ctx.translate(canvas.width* .5, canvas.height* .5);
+    ctx.translate(canvas.width * .5, canvas.height * .5);
     ctx.rotate((angle) * Math.PI / 180);
-    ctx.translate(-canvas.width*.5, -canvas.height*.5);
+    ctx.translate(-canvas.width * .5, -canvas.height * .5);
   }
-  static renderImage (ctx, img, position, boundRect) {
+  static renderImage(ctx, img, position, boundRect) {
 
     ctx.drawImage(img, position.x, position.y, boundRect.width, boundRect.height);
     ctx.restore();
   }
 
-  static loadBitmapData (source) {
+  static loadBitmapData(source) {
     return new Promise((resolve, reject) => {
       try {
         let img = new Image();
         img.onload = () => {
-          resolve(img)
-        }
+          resolve(img);
+        };
         img.src = Object.assign(source);
       } catch (er) {
         reject(er);
@@ -44,7 +44,7 @@ export class Transform {
     });
   }
 
-  static renderCentered (ctx, image, imgRect, boundRect) {
+  static renderCentered(ctx, image, imgRect, boundRect) {
 
     let
       scaledRect = Transform.constrainProportions(imgRect, boundRect),
@@ -52,13 +52,13 @@ export class Transform {
     Transform.renderImage(ctx, image, position, scaledRect);
   }
 
-  static getRealDimensions (cropRect, imgRect) {
+  static getRealDimensions(cropRect, imgRect) {
     return {
       x: (cropRect.x - imgRect.x) / imgRect.width,
       y: (cropRect.y - imgRect.y) / imgRect.height,
       width: cropRect.width / imgRect.width,
       height: cropRect.height / imgRect.height
-    }
+    };
   }
 
 
@@ -76,7 +76,7 @@ export class Transform {
    * @param angle {number}
    * @returns {Promise}
    */
-  static cropImage (image, cropRect, boundRect, angle) {
+  static cropImage(image, cropRect, boundRect, angle) {
     console.log('crop image', cropRect, boundRect);
     return new Promise((resolve, reject) => {
       let scaledCanvas = document.createElement('canvas');
@@ -112,9 +112,9 @@ export class Transform {
 
             resolve(croppedCanvas.toDataURL("image/png"));
 
-          }
+          };
           scaledImage.src = scaledCanvas.toDataURL("image/png");
-        })
+        });
     });
 
   }
