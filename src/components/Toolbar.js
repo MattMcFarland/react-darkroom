@@ -1,23 +1,10 @@
 import React from 'react';
 
-export default ({
-  children
-  }) => {
+const toList = (node, index) => <li key={index}>{node}</li>;
 
-  var
-    childNodes = [];
-
-  React.Children.forEach(children, child => {
-    childNodes.push(child);
-  });
-
-  return (
-    <menu>
-      <ul>
-        {childNodes.map((childNode, index) => {
-          return (<li key={index}>{childNode}</li>);
-        })}
-      </ul>
-    </menu>
-  );
-};
+export default ({children}) => 
+  <menu>
+    <ul>
+      {React.Children.toArray(children).map(toList)}
+    </ul>
+  </menu>;

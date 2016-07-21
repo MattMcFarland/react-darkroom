@@ -1,24 +1,16 @@
 import React from 'react';
-export default ({
-  isCropping,
-  children
-  }) => {
 
-  var
-    childNodes = [];
+export default ({isCropping, children}) =>
+  <span>
+    {
+      React.Children.map(children, child => {
+        const showOnlyWhen = child.props['data-showOnlyWhen'];
 
-  React.Children.forEach(children, child => {
-    var showOnlyWhen = child.props['data-showOnlyWhen'];
-
-    if (isCropping && showOnlyWhen === "croppingIsOn") {
-      childNodes.push(child);
-    } else if (!isCropping && showOnlyWhen === "croppingIsOff") {
-      childNodes.push(child);
+        if (isCropping && showOnlyWhen === "croppingIsOn") {
+          return child;
+        } else if (!isCropping && showOnlyWhen === "croppingIsOff") {
+          return child;
+        }
+      })
     }
-  });
-
-  return (
-    <span>{childNodes}</span>
-  );
-
-};
+  </span>;

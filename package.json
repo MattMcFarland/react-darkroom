@@ -1,6 +1,6 @@
 {
   "name": "react-darkroom",
-  "version": "0.3.5",
+  "version": "0.3.6",
   "description": "HTML5 Image upload and edit React Component.",
   "engines": {
     "node": ">=4.2.1"
@@ -40,7 +40,6 @@
     "babel-loader": "^6.2.4",
     "babel-preset-es2015": "^6.9.0",
     "babel-preset-react": "^6.11.1",
-    "deep-freeze": "0.0.1",
     "eslint": "^3.1.1",
     "eslint-plugin-babel": "^3.3.0",
     "eslint-plugin-react": "^5.2.2",

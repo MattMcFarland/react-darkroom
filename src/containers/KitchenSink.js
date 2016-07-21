@@ -3,7 +3,6 @@
  * A bit overkill but use-able
  */
 
-import deepFreeze from 'deep-freeze';
 import { Darkroom, Canvas, History, Toolbar, FilePicker, CropMenu } from '../components';
 import { Transform } from '../utils';
 import React from 'react';
@@ -12,7 +11,6 @@ const canvasWidth = 300;
 const canvasHeight = 300;
 
 function fileController(thread = {source: null}, action) {
-  deepFreeze(thread);
   switch (action.type) {
     case 'SET_FILE':
       return Object.assign({}, thread, {
@@ -24,7 +22,6 @@ function fileController(thread = {source: null}, action) {
   }
 }
 function imageController(thread = {crop: false, source: null, angle: 0}, action) {
-  deepFreeze(thread);
   switch (action.type) {
     case 'ROTATE_LEFT':
       return Object.assign({}, thread, {
@@ -99,7 +96,6 @@ export default class KitchenSink extends React.Component {
     let newState;
     let newThread;
 
-    deepFreeze(state);
     switch (action.type) {
       case "SET_FILE":
         nextThread = fileController(state.thread[state.step], action);

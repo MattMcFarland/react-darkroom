@@ -1,7 +1,6 @@
 import React from 'react';
 
 export default class FilePicker extends React.Component {
-
   render() {
 
     let {onChange, hasFile} = this.props;

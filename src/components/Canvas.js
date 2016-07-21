@@ -52,6 +52,7 @@ export default class Canvas extends React.Component {
         this.cropBox.render();
       }
     }
+    
     if (this.props.source && !this.cache) {
       let image = this.getBitmapData(this.props.source);
       let angle = parseInt(this.props.angle) || 0;
@@ -75,8 +76,6 @@ export default class Canvas extends React.Component {
         img.src = canvas.toDataURL("image/png");
         this.cache = img;
       }, 100);
-
-
     }
   }
 
@@ -85,18 +84,16 @@ export default class Canvas extends React.Component {
       this.renderCanvas();
     }, 30);
   }
+
   componentWillUpdate() {
     this.cache = null;
   }
+
   render() {
-
     let {source, width, height, children} = this.props;
-
-
     let canvasStyle = {
       display: source ? 'block' : 'none'
     };
-
 
     return (
       <div style={{width, height}} className="darkroom-canvas">
@@ -105,5 +102,4 @@ export default class Canvas extends React.Component {
       </div>
     );
   }
-
 }
