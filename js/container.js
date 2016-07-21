@@ -28463,13 +28463,9 @@
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	var _deepFreeze = __webpack_require__(246);
+	var _components = __webpack_require__(246);
 	
-	var _deepFreeze2 = _interopRequireDefault(_deepFreeze);
-	
-	var _components = __webpack_require__(247);
-	
-	var _utils = __webpack_require__(249);
+	var _utils = __webpack_require__(248);
 	
 	var _react = __webpack_require__(75);
 	
@@ -28495,7 +28491,6 @@
 	  var thread = arguments.length <= 0 || arguments[0] === undefined ? { source: null } : arguments[0];
 	  var action = arguments[1];
 	
-	  (0, _deepFreeze2.default)(thread);
 	  switch (action.type) {
 	    case 'SET_FILE':
 	      return Object.assign({}, thread, {
@@ -28510,7 +28505,6 @@
 	  var thread = arguments.length <= 0 || arguments[0] === undefined ? { crop: false, source: null, angle: 0 } : arguments[0];
 	  var action = arguments[1];
 	
-	  (0, _deepFreeze2.default)(thread);
 	  switch (action.type) {
 	    case 'ROTATE_LEFT':
 	      return Object.assign({}, thread, {
@@ -28588,7 +28582,6 @@
 	      var newState = void 0;
 	      var newThread = void 0;
 	
-	      (0, _deepFreeze2.default)(state);
 	      switch (action.type) {
 	        case "SET_FILE":
 	          nextThread = fileController(state.thread[state.step], action);
@@ -28844,26 +28837,6 @@
 
 /***/ },
 /* 246 */
-/***/ function(module, exports) {
-
-	module.exports = function deepFreeze (o) {
-	  Object.freeze(o);
-	
-	  Object.getOwnPropertyNames(o).forEach(function (prop) {
-	    if (o.hasOwnProperty(prop)
-	    && o[prop] !== null
-	    && (typeof o[prop] === "object" || typeof o[prop] === "function")
-	    && !Object.isFrozen(o[prop])) {
-	      deepFreeze(o[prop]);
-	    }
-	  });
-	  
-	  return o;
-	};
-
-
-/***/ },
-/* 247 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28873,27 +28846,27 @@
 	});
 	exports.FilePicker = exports.Toolbar = exports.History = exports.Darkroom = exports.CropMenu = exports.Canvas = undefined;
 	
-	var _Canvas = __webpack_require__(248);
+	var _Canvas = __webpack_require__(247);
 	
 	var _Canvas2 = _interopRequireDefault(_Canvas);
 	
-	var _Darkroom = __webpack_require__(252);
+	var _Darkroom = __webpack_require__(251);
 	
 	var _Darkroom2 = _interopRequireDefault(_Darkroom);
 	
-	var _History = __webpack_require__(253);
+	var _History = __webpack_require__(252);
 	
 	var _History2 = _interopRequireDefault(_History);
 	
-	var _Toolbar = __webpack_require__(254);
+	var _Toolbar = __webpack_require__(253);
 	
 	var _Toolbar2 = _interopRequireDefault(_Toolbar);
 	
-	var _FilePicker = __webpack_require__(255);
+	var _FilePicker = __webpack_require__(254);
 	
 	var _FilePicker2 = _interopRequireDefault(_FilePicker);
 	
-	var _CropMenu = __webpack_require__(256);
+	var _CropMenu = __webpack_require__(255);
 	
 	var _CropMenu2 = _interopRequireDefault(_CropMenu);
 	
@@ -28907,7 +28880,7 @@
 	exports.FilePicker = _FilePicker2.default;
 
 /***/ },
-/* 248 */
+/* 247 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28922,7 +28895,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _utils = __webpack_require__(249);
+	var _utils = __webpack_require__(248);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -28996,6 +28969,7 @@
 	          this.cropBox.render();
 	        }
 	      }
+	
 	      if (this.props.source && !this.cache) {
 	        var image = this.getBitmapData(this.props.source);
 	        var angle = parseInt(this.props.angle) || 0;
@@ -29044,7 +29018,6 @@
 	      var height = _props.height;
 	      var children = _props.children;
 	
-	
 	      var canvasStyle = {
 	        display: source ? 'block' : 'none'
 	      };
@@ -29064,7 +29037,7 @@
 	exports.default = Canvas;
 
 /***/ },
-/* 249 */
+/* 248 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29073,7 +29046,7 @@
 	  value: true
 	});
 	
-	var _Transform = __webpack_require__(250);
+	var _Transform = __webpack_require__(249);
 	
 	Object.defineProperty(exports, 'Transform', {
 	  enumerable: true,
@@ -29082,7 +29055,7 @@
 	  }
 	});
 	
-	var _CropBox = __webpack_require__(251);
+	var _CropBox = __webpack_require__(250);
 	
 	Object.defineProperty(exports, 'CropBox', {
 	  enumerable: true,
@@ -29092,7 +29065,7 @@
 	});
 
 /***/ },
-/* 250 */
+/* 249 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -29236,7 +29209,7 @@
 	}();
 
 /***/ },
-/* 251 */
+/* 250 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -29697,7 +29670,7 @@
 	}();
 
 /***/ },
-/* 252 */
+/* 251 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -29706,47 +29679,23 @@
 	  value: true
 	});
 	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
 	var _react = __webpack_require__(75);
 	
 	var _react2 = _interopRequireDefault(_react);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var Darkroom = function (_React$Component) {
-	  _inherits(Darkroom, _React$Component);
-	
-	  function Darkroom(props) {
-	    _classCallCheck(this, Darkroom);
-	
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Darkroom).call(this, props));
-	  }
-	
-	  _createClass(Darkroom, [{
-	    key: "render",
-	    value: function render() {
-	      return _react2.default.createElement(
-	        "div",
-	        { ref: "container", className: "darkroom" },
-	        this.props.children
-	      );
-	    }
-	  }]);
-	
-	  return Darkroom;
-	}(_react2.default.Component);
-	
-	exports.default = Darkroom;
+	exports.default = function (_ref) {
+	  var children = _ref.children;
+	  return _react2.default.createElement(
+	    "div",
+	    { className: "darkroom" },
+	    children
+	  );
+	};
 
 /***/ },
-/* 253 */
+/* 252 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29810,7 +29759,7 @@
 	exports.default = History;
 
 /***/ },
-/* 254 */
+/* 253 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29825,35 +29774,29 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
+	var toList = function toList(node, index) {
+	  return _react2.default.createElement(
+	    'li',
+	    { key: index },
+	    node
+	  );
+	};
+	
 	exports.default = function (_ref) {
 	  var children = _ref.children;
-	
-	
-	  var childNodes = [];
-	
-	  _react2.default.Children.forEach(children, function (child) {
-	    childNodes.push(child);
-	  });
-	
 	  return _react2.default.createElement(
 	    'menu',
 	    null,
 	    _react2.default.createElement(
 	      'ul',
 	      null,
-	      childNodes.map(function (childNode, index) {
-	        return _react2.default.createElement(
-	          'li',
-	          { key: index },
-	          childNode
-	        );
-	      })
+	      _react2.default.Children.toArray(children).map(toList)
 	    )
 	  );
 	};
 
 /***/ },
-/* 255 */
+/* 254 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29932,7 +29875,7 @@
 	exports.default = FilePicker;
 
 /***/ },
-/* 256 */
+/* 255 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29950,24 +29893,18 @@
 	exports.default = function (_ref) {
 	  var isCropping = _ref.isCropping;
 	  var children = _ref.children;
-	
-	
-	  var childNodes = [];
-	
-	  _react2.default.Children.forEach(children, function (child) {
-	    var showOnlyWhen = child.props['data-showOnlyWhen'];
-	
-	    if (isCropping && showOnlyWhen === "croppingIsOn") {
-	      childNodes.push(child);
-	    } else if (!isCropping && showOnlyWhen === "croppingIsOff") {
-	      childNodes.push(child);
-	    }
-	  });
-	
 	  return _react2.default.createElement(
 	    'span',
 	    null,
-	    childNodes
+	    _react2.default.Children.map(children, function (child) {
+	      var showOnlyWhen = child.props['data-showOnlyWhen'];
+	
+	      if (isCropping && showOnlyWhen === "croppingIsOn") {
+	        return child;
+	      } else if (!isCropping && showOnlyWhen === "croppingIsOff") {
+	        return child;
+	      }
+	    })
 	  );
 	};
 
