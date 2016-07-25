@@ -28508,11 +28508,11 @@
 	  switch (action.type) {
 	    case 'ROTATE_LEFT':
 	      return Object.assign({}, thread, {
-	        angle: thread.angle + 90
+	        angle: thread.angle - 90
 	      });
 	    case 'ROTATE_RIGHT':
 	      return Object.assign({}, thread, {
-	        angle: thread.angle - 90
+	        angle: thread.angle + 90
 	      });
 	    case 'START_CROPPING':
 	      return Object.assign({}, thread, {
