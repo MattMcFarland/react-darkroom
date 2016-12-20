@@ -10,6 +10,7 @@ export default class Canvas extends React.Component {
     this._prevAngle = 0;
     this._data = null;
     this._cache = null;
+    this._interval = null;
   }
 
   /**
@@ -52,7 +53,7 @@ export default class Canvas extends React.Component {
         this.cropBox.render();
       }
     }
-    
+
     if (this.props.source && !this.cache) {
       let image = this.getBitmapData(this.props.source);
       let angle = parseInt(this.props.angle) || 0;
@@ -80,9 +81,17 @@ export default class Canvas extends React.Component {
   }
 
   componentDidMount() {
-    setInterval(() => {
+    this._interval = setInterval(() => {
       this.renderCanvas();
     }, 30);
+  }
+
+  componentWillUnmount() {
+    if (this._interval === null) {
+      return;
+    }
+
+    clearInterval(this._interval);
   }
 
   componentWillUpdate() {
