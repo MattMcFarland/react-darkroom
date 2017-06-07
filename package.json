@@ -15,8 +15,9 @@
     "start": "webpack && webpack-dev-server",
     "prepublish": "npm run test && npm run build",
     "build": "rm -rf lib/* && babel src --ignore __tests__ --out-dir lib && npm run copy",
-    "copy": "npm run copy:fonts",
-    "copy:fonts": "cp -R src/fonts lib"
+    "copy": "npm run copy:fonts && npm run copy:css",
+    "copy:fonts": "cp -R src/fonts lib",
+    "copy:css": "cp -R src/css lib"
   },
   "main": "lib/index.js",
   "repository": {
