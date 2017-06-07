@@ -47,7 +47,7 @@ export class Transform {
   static renderCentered(ctx, image, imgRect, boundRect) {
     let scaledRect = Transform.constrainProportions(imgRect, boundRect);
     let position = Transform.centerRect(scaledRect, boundRect);
-    
+
     Transform.renderImage(ctx, image, position, scaledRect);
   }
 
@@ -76,7 +76,6 @@ export class Transform {
    * @returns {Promise}
    */
   static cropImage(image, cropRect, boundRect, angle) {
-    console.log('crop image', cropRect, boundRect);
     return new Promise((resolve, reject) => {
       let scaledCanvas = document.createElement('canvas');
       scaledCanvas.width = boundRect.width;
