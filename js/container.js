@@ -30167,7 +30167,6 @@
 	  }, {
 	    key: 'cropImage',
 	    value: function cropImage(image, cropRect, boundRect, angle) {
-	      console.log('crop image', cropRect, boundRect);
 	      return new Promise(function (resolve, reject) {
 	        var scaledCanvas = document.createElement('canvas');
 	        scaledCanvas.width = boundRect.width;
