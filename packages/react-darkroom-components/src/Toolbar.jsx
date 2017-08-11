@@ -1,13 +1,22 @@
 import React from 'react';
-import injectSheet from 'react-jss'
+import injectSheet from 'react-jss';
+import PropTypes from 'prop-types';
 
-const Toolbar = ({ classes, children }) => 
-  <menu className={classes.menu}>
+const Toolbar = ({ classes, children }) =>
+  (<menu className={classes.menu}>
     <ul className={classes.list}>
-      { React.Children.toArray(children).map((node, index) => 
-        <li className={classes.listItem} key={index}>{node}</li>) }
+      { React.Children.toArray(children).map((node, index) =>
+        <li className={classes.listItem} key={`toolbar-${index + 1}`}>{node}</li>) }
     </ul>
-  </menu>
+  </menu>);
+
+Toolbar.propTypes = {
+  classes: PropTypes.shape({
+    menu: PropTypes.object,
+    list: PropTypes.object,
+  }),
+  children: PropTypes.node,
+};
 
 const styles = {
   menu: {
@@ -31,7 +40,7 @@ const styles = {
       borderWidth: 10,
       bottom: -20,
       left: '1em',
-      marginLeft: -10
+      marginLeft: -10,
     },
     '&:after': {
       content: ' ',
@@ -45,18 +54,18 @@ const styles = {
       bottom: -18,
       borderTopColor: '#444',
       left: '1em',
-      marginLeft: -9      
-    }
+      marginLeft: -9,
+    },
   },
   list: {
     listStyleType: 'none',
     padding: 0,
     margin: 0,
-    display: 'inline-block'
+    display: 'inline-block',
   },
   listItem: {
-    display: 'inline-block'
-  }
-}
+    display: 'inline-block',
+  },
+};
 
-export default injectSheet(styles)(Toolbar)
+export default injectSheet(styles)(Toolbar);

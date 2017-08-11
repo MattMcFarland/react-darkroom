@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Icon /> constants are used to map to classnames CHECKMARK maps to kind: checkmark 1`] = `
+<span
+  className="checkmark-0-8"
+/>
+`;
+
+exports[`<Icon /> constants are used to map to classnames CROP maps to kind: crop 1`] = `
+<span
+  className="crop-0-5"
+/>
+`;
+
+exports[`<Icon /> constants are used to map to classnames CROSS maps to kind: cross 1`] = `
+<span
+  className="cross-0-7"
+/>
+`;
+
+exports[`<Icon /> constants are used to map to classnames FLOPPYDISK maps to kind: floppyDisk 1`] = `
+<span
+  className="floppyDisk-0-0"
+/>
+`;
+
+exports[`<Icon /> constants are used to map to classnames IMAGE maps to kind: image 1`] = `
+<span
+  className="image-0-6"
+/>
+`;
+
+exports[`<Icon /> constants are used to map to classnames REDO maps to kind: redo 1`] = `
+<span
+  className="redo-0-3"
+/>
+`;
+
+exports[`<Icon /> constants are used to map to classnames REDO2 maps to kind: redo2 1`] = `
+<span
+  className="redo2-0-4"
+/>
+`;
+
+exports[`<Icon /> constants are used to map to classnames UNDO maps to kind: undo 1`] = `
+<span
+  className="undo-0-1"
+/>
+`;
+
+exports[`<Icon /> constants are used to map to classnames UNDO2 maps to kind: undo2 1`] = `
+<span
+  className="undo2-0-2"
+/>
+`;

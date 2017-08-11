@@ -16,7 +16,7 @@ Icon.propTypes = {
   kind: PropTypes.oneOf(Object.values(iconKinds)).isRequired,
   /** react-jss classes */
   classes: PropTypes.object.isRequired,
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node,
 };
 
 export default compose(
