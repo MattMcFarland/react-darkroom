@@ -1,6 +1,7 @@
 import { iconKinds } from './constants';
-import fonticon from './fonts/icomoon.woff'
-const icon = (unicode) => ({
+import fonticon from './fonts/icomoon.woff';
+
+const icon = unicode => ({
   fontFamily: 'darkroom-icons',
   speak: 'none',
   fontStyle: 'normal',
@@ -10,15 +11,15 @@ const icon = (unicode) => ({
   lineHeight: 1,
   '-webkit-font-smoothing': 'antialiased',
   '-moz-osx-font-smoothing': 'grayscale',
-   '&:before': { content: `"\\${unicode}"` }
-})
+  '&:before': { content: `"\\${unicode}"` },
+});
 
 export default {
   '@font-face': {
     fontFamily: 'darkroom-icons',
     src: `url("${fonticon}") format("woff")`,
     fontWeight: 'normal',
-    fontStyle: 'normal'
+    fontStyle: 'normal',
   },
   [iconKinds.FLOPPYDISK]: icon('e900'),
   [iconKinds.UNDO]: icon('e901'),
@@ -29,4 +30,4 @@ export default {
   [iconKinds.IMAGE]: icon('e906'),
   [iconKinds.CROSS]: icon('e907'),
   [iconKinds.CHECKMARK]: icon('e908'),
-}
+};
