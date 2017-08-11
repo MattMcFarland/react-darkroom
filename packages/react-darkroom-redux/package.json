@@ -1,0 +1,11 @@
+{
+  "name": "react-darkroom-redux",
+  "version": "2.0.0",
+  "description": "Redux Selectors and logic for react-darkroom",
+  "main": "lib",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Matt McFarland",
+  "license": "MIT"
+}
