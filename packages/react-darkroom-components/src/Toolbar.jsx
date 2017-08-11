@@ -1,6 +1,14 @@
 import React from 'react';
 import injectSheet from 'react-jss'
 
+const Toolbar = ({ classes, children }) => 
+  <menu className={classes.menu}>
+    <ul className={classes.list}>
+      { React.Children.toArray(children).map((node, index) => 
+        <li className={classes.listItem} key={index}>{node}</li>) }
+    </ul>
+  </menu>
+
 const styles = {
   menu: {
     margin: 0,
@@ -50,13 +58,5 @@ const styles = {
     display: 'inline-block'
   }
 }
-
-const Toolbar = ({ classes, children }) => 
-  <menu className={classes.menu}>
-    <ul className={classes.list}>
-      { React.Children.toArray(children).map((node, index) => 
-        <li className={classes.listItem} key={index}>{node}</li>) }
-    </ul>
-  </menu>;
 
 export default injectSheet(styles)(Toolbar)

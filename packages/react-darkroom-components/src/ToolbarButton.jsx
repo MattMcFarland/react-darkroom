@@ -1,6 +1,26 @@
 import React from 'react'
 import injectSheet from 'react-jss'
 import PropTypes from 'prop-types'
+
+const ToolbarButton = ({
+  classes,
+  children,
+  icon,
+  tooltip,
+  onClick
+}) => (
+  <button className={classes.button} type="button">
+    {children}
+  </button>
+)
+
+ToolbarButton.propTypes = {
+  classes: PropTypes.shape({
+    button: PropTypes.object
+  }),
+  children: PropTypes.node, 
+}
+
 const styles = { 
   button: {
     padding: 8,
@@ -15,26 +35,6 @@ const styles = {
       opacity: 0.2
     }
   }
-}
-
-const ToolbarButton = ({
-  classes,
-  children,
-  icon,
-  tooltip,
-  onClick
-}) => (
-  <button className={classes.button} type="button">
-    {children}
-  </button>
-);
-
-ToolbarButton.propTypes = {
-  classes: PropTypes.shape({
-    button: PropTypes.object
-  }),
-  children: PropTypes.node,
-  
 }
 
 export default injectSheet(styles)(ToolbarButton)
