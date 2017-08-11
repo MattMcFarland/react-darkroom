@@ -1,5 +1,5 @@
 import { iconKinds } from './constants';
-import fonticon from './fonts/icomoon.woff';
+import fonticon from './fonts/darkroom.woff';
 
 const icon = unicode => ({
   fontFamily: 'darkroom-icons',
