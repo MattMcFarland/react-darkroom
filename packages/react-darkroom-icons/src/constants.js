@@ -1,4 +1,4 @@
-export const iconKinds = {
+export default {
   FLOPPYDISK: 'floppyDisk',
   UNDO: 'undo',
   UNDO2: 'undo2',
@@ -7,5 +7,5 @@ export const iconKinds = {
   CROP: 'crop',
   IMAGE: 'image',
   CROSS: 'cross',
-  CHECKMARK: 'checkmark'
-}
+  CHECKMARK: 'checkmark',
+};

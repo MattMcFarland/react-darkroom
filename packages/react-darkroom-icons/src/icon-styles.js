@@ -1,4 +1,4 @@
-import { iconKinds } from './constants';
+import iconKinds from './constants';
 import fonticon from './fonts/darkroom.woff';
 
 const icon = unicode => ({

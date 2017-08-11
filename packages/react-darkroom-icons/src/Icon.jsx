@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { compose, pure, setDisplayName } from 'recompose';
 import injectSheet from 'react-jss';
 import iconStyles from './icon-styles';
-import { iconKinds } from './constants';
+import iconKinds from './constants';
 
 const Icon = ({
   children,
