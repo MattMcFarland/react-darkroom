@@ -15,7 +15,7 @@ Icon.propTypes = {
   /** One of available icon types (see example) */
   kind: PropTypes.oneOf(Object.values(iconKinds)).isRequired,
   /** react-jss classes */
-  classes: PropTypes.shape(iconStyles).isRequired,
+  classes: PropTypes.object.isRequired,
   children: PropTypes.node.isRequired,
 };
 
