@@ -1,10 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import injectSheet from 'react-jss';
+import {
+  compose,
+  pure,
+  setDisplayName,
+} from 'recompose';
+
 import CARDINAL_DIRECTIONS from './constants';
+import { configureTooltip } from './styles';
 
-import { TooltipFactory } from './';
-
-export const Tooltip = ({
+const Tooltip = ({
   position,
   classes,
   children,
@@ -39,6 +45,23 @@ Tooltip.propTypes = {
 
 Tooltip.defaultProps = {
   position: 's',
+};
+
+export const TooltipFactory = ({
+  radius,
+  color,
+  arrowSize,
+}) => {
+  const styles = Object.values(CARDINAL_DIRECTIONS).reduce((acc, direction) =>
+    Object.assign(acc, {
+      [`tooltip-${direction}`]: configureTooltip({ direction, color, arrowSize, radius }),
+    }), {});
+
+  return compose(
+    pure,
+    injectSheet(styles),
+    setDisplayName('Tooltip'),
+  )(Tooltip);
 };
 
 export default TooltipFactory({

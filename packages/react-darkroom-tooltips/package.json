@@ -4,7 +4,7 @@
   "description": "Tooltips used by react-darkroom",
   "main": "src",
   "scripts": {
-    "test": "echo \"Warn: no test specified\" && exit 0",
+    "test": "jest",
     "build": "webpack src lib"
   },
   "author": "Matt McFarland",
@@ -19,6 +19,7 @@
     "babel-core": "^6.25.0",
     "babel-jest": "^20.0.3",
     "babel-loader": "^7.1.1",
+    "babel-plugin-transform-es2015-modules-commonjs-simple": "^6.7.4",
     "babel-preset-env": "^1.6.0",
     "babel-preset-es2017": "^6.24.1",
     "babel-preset-react": "^6.24.1",
@@ -42,5 +43,17 @@
   },
   "dependencies": {
     "deepmerge": "^1.5.0"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "jsx"
+    ],
+    "transform": {
+      "^.+\\.(js|jsx)$": "babel-jest"
+    },
+    "testMatch": [
+      "**/__tests__/*.(jsx|js)"
+    ]
   }
 }

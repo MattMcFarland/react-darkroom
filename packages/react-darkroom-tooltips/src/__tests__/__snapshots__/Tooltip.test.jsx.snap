@@ -1,0 +1,82 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Tooltip TooltipFactory Creates a tooltip  1`] = `
+<span
+  className="tooltip-s-0-13"
+  data-label="test"
+>
+  hai
+</span>
+`;
+
+exports[`Tooltip constants are used to map to position props E maps to position: e 1`] = `
+<span
+  className="tooltip-e-0-3"
+  data-label="test"
+>
+  test
+</span>
+`;
+
+exports[`Tooltip constants are used to map to position props N maps to position: n 1`] = `
+<span
+  className="tooltip-n-0-1"
+  data-label="test"
+>
+  test
+</span>
+`;
+
+exports[`Tooltip constants are used to map to position props NE maps to position: ne 1`] = `
+<span
+  className="tooltip-ne-0-2"
+  data-label="test"
+>
+  test
+</span>
+`;
+
+exports[`Tooltip constants are used to map to position props NW maps to position: nw 1`] = `
+<span
+  className="tooltip-nw-0-0"
+  data-label="test"
+>
+  test
+</span>
+`;
+
+exports[`Tooltip constants are used to map to position props S maps to position: s 1`] = `
+<span
+  className="tooltip-s-0-5"
+  data-label="test"
+>
+  test
+</span>
+`;
+
+exports[`Tooltip constants are used to map to position props SE maps to position: se 1`] = `
+<span
+  className="tooltip-se-0-4"
+  data-label="test"
+>
+  test
+</span>
+`;
+
+exports[`Tooltip constants are used to map to position props SW maps to position: sw 1`] = `
+<span
+  className="tooltip-sw-0-6"
+  data-label="test"
+>
+  test
+</span>
+`;
+
+exports[`Tooltip constants are used to map to position props W maps to position: w 1`] = `
+<span
+  className="tooltip-w-0-7"
+  data-label="test"
+>
+  test
+</span>
+`;
