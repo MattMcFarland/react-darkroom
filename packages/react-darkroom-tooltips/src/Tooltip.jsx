@@ -10,7 +10,7 @@ import {
 import CARDINAL_DIRECTIONS from './constants';
 import { configureTooltip } from './styles';
 
-const Tooltip = ({
+export const Tooltip = ({
   position,
   classes,
   children,

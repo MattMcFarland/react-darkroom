@@ -27,7 +27,7 @@ Hover the text in **bold** below:
 You can customize the appearance of tooltips by using the `TooltipFactory`
 
     // import { TooltipFactory } from 'react-darkroom-tooltips' // es6
-    const TooltipFactory = require('./TooltipFactory').default; // es5
+    const TooltipFactory = require('./Tooltip').TooltipFactory; // es5
 
     // configure your tooltip with ToolTipFactory
     const MyTooltip = TooltipFactory({

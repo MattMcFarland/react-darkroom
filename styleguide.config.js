@@ -20,7 +20,7 @@ module.exports = {
     },
     {
       name: 'Dumb Components',
-      components: 'packages/react-darkroom*[*icons*|*tooltips*|*components*]*/src/[A-Z]*.jsx',
+      components: 'packages/react-darkroom*[*icons*|*tooltips*|*toolbar*]*/src/[A-Z]*.jsx',
     },
     // {
     //   name: 'All',
