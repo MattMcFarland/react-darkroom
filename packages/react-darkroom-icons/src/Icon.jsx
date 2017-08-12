@@ -14,9 +14,10 @@ const Icon = ({
 Icon.propTypes = {
   /** One of available icon types (see example) */
   kind: PropTypes.oneOf(Object.values(iconKinds)).isRequired,
-  /** react-jss classes */
-  classes: PropTypes.object.isRequired,
-  children: PropTypes.node,
+  /** @ignore JSS */
+  classes: PropTypes.any.isRequired,
+  /** @ignore React Child node(s) */
+  children: PropTypes.oneOfType([PropTypes.node, PropTypes.string]),
 };
 
 export default compose(

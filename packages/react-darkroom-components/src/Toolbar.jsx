@@ -11,10 +11,13 @@ const Toolbar = ({ classes, children }) =>
   </menu>);
 
 Toolbar.propTypes = {
+  /** @ignore JSS styles */
   classes: PropTypes.shape({
-    menu: PropTypes.object,
-    list: PropTypes.object,
-  }),
+    menu: PropTypes.string,
+    list: PropTypes.string,
+  }).isRequired,
+  /** The buttons which exist in the toolbar, 
+   * best results are used in conjunction with `<ToolbarButton/>` but can be anything! */
   children: PropTypes.node,
 };
 

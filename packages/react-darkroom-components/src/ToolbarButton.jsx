@@ -13,10 +13,13 @@ const ToolbarButton = ({
 );
 
 ToolbarButton.propTypes = {
+  /** JSS styles */
   classes: PropTypes.shape({
-    button: PropTypes.object,
-  }),
-  children: PropTypes.node,
+    button: PropTypes.string,
+  }).isRequired,
+  /** React Child node(s) */
+  children: PropTypes.oneOfType([PropTypes.node, PropTypes.string]),
+  /** Onclick handler, no-op by default */
   onClick: PropTypes.func,
 };
 
