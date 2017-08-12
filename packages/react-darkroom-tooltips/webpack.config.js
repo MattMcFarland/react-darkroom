@@ -1,7 +1,3 @@
-const webpack = require('webpack');
-
-require('babel-core/register');
-
 module.exports = {
   module: {
     rules: [
@@ -11,17 +7,10 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['env']
-          }
-        }
-      },
-      {
-        test: /\.woff$/,
-        loader: 'url-loader',
-        options: {
-          limit: 50000,
+            presets: ['env'],
+          },
         },
       },
-    ]
-  }
+    ],
+  },
 };
