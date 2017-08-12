@@ -1,7 +1,7 @@
 {
-  "name": "react-darkroom-components",
+  "name": "react-darkroom-toolbar",
   "version": "2.0.0",
-  "description": "Components used with react-darkroom",
+  "description": "Toolbar used with react-darkroom",
   "main": "lib",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
