@@ -20,6 +20,12 @@ To use, install via npm first.
 ```
 npm install react-darkroom --save
 ```
+Clone the github project first.
+
+```
+npm install && npm start
+```
+
 
 Once installed, you can access the different parts of react-darkroom as follows:
 

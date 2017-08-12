@@ -1,3 +1,43 @@
 module.exports = {
-  components: 'packages/react-darkroom*/src/[A-Z]*.jsx'
+  title: 'React Darkroom Style Guide',
+  sections: [
+    {
+      name: 'Introduction',
+      content: 'docs/introduction.md',
+    },
+    {
+      name: 'Documentation',
+      sections: [
+        {
+          name: 'Installation',
+          content: 'docs/installation.md',
+        },
+        {
+          name: 'Configuration',
+          content: 'docs/configuration.md',
+        },
+      ],
+    },
+    {
+      name: 'Dumb Components',
+      components: 'packages/react-darkroom*[*icons*|*tooltips*|*components*]*/src/[A-Z]*.jsx',
+    },
+    // {
+    //   name: 'All',
+    //   components: 'packages/react-darkroom*/src/[A-Z]*.jsx',
+    // },
+    // {
+    //   name: 'Documentation',
+    //   sections: [
+    //     {
+    //       name: 'First File',
+    //       content: 'docs/One.md',
+    //     },
+    //     {
+    //       name: 'Second File',
+    //       content: 'docs/Two.md',
+    //     },
+    //   ],
+    // },
+  ],
 };
