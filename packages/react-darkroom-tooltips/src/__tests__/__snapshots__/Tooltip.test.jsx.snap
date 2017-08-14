@@ -1,17 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Tooltip TooltipFactory Creates a tooltip  1`] = `
-<span
-  className="tooltip-s-0-13"
-  data-label="test"
->
-  hai
-</span>
-`;
-
 exports[`Tooltip constants are used to map to position props E maps to position: e 1`] = `
 <span
-  className="tooltip-e-0-3"
+  className="tooltip-e-0-193 tooltip-e-0-4 base-0-189 base-0-0 "
   data-label="test"
 >
   test
@@ -20,7 +11,7 @@ exports[`Tooltip constants are used to map to position props E maps to position:
 
 exports[`Tooltip constants are used to map to position props N maps to position: n 1`] = `
 <span
-  className="tooltip-n-0-1"
+  className="tooltip-n-0-71 tooltip-n-0-2 base-0-69 base-0-0 "
   data-label="test"
 >
   test
@@ -29,7 +20,7 @@ exports[`Tooltip constants are used to map to position props N maps to position:
 
 exports[`Tooltip constants are used to map to position props NE maps to position: ne 1`] = `
 <span
-  className="tooltip-ne-0-2"
+  className="tooltip-ne-0-132 tooltip-ne-0-3 base-0-129 base-0-0 "
   data-label="test"
 >
   test
@@ -38,7 +29,7 @@ exports[`Tooltip constants are used to map to position props NE maps to position
 
 exports[`Tooltip constants are used to map to position props NW maps to position: nw 1`] = `
 <span
-  className="tooltip-nw-0-0"
+  className="tooltip-nw-0-10 tooltip-nw-0-1 base-0-9 base-0-0 "
   data-label="test"
 >
   test
@@ -47,7 +38,7 @@ exports[`Tooltip constants are used to map to position props NW maps to position
 
 exports[`Tooltip constants are used to map to position props S maps to position: s 1`] = `
 <span
-  className="tooltip-s-0-5"
+  className="tooltip-s-0-315 tooltip-s-0-6 base-0-309 base-0-0 "
   data-label="test"
 >
   test
@@ -56,7 +47,7 @@ exports[`Tooltip constants are used to map to position props S maps to position:
 
 exports[`Tooltip constants are used to map to position props SE maps to position: se 1`] = `
 <span
-  className="tooltip-se-0-4"
+  className="tooltip-se-0-254 tooltip-se-0-5 base-0-249 base-0-0 "
   data-label="test"
 >
   test
@@ -65,7 +56,7 @@ exports[`Tooltip constants are used to map to position props SE maps to position
 
 exports[`Tooltip constants are used to map to position props SW maps to position: sw 1`] = `
 <span
-  className="tooltip-sw-0-6"
+  className="tooltip-sw-0-376 tooltip-sw-0-7 base-0-369 base-0-0 "
   data-label="test"
 >
   test
@@ -74,7 +65,7 @@ exports[`Tooltip constants are used to map to position props SW maps to position
 
 exports[`Tooltip constants are used to map to position props W maps to position: w 1`] = `
 <span
-  className="tooltip-w-0-7"
+  className="tooltip-w-0-437 tooltip-w-0-8 base-0-429 base-0-0 "
   data-label="test"
 >
   test

@@ -8,7 +8,7 @@ import {
 } from 'recompose';
 
 import CARDINAL_DIRECTIONS from './constants';
-import { configureTooltip } from './styles';
+import styles from './styles';
 
 export const Tooltip = ({
   position,
@@ -16,7 +16,7 @@ export const Tooltip = ({
   children,
   label,
 }) =>
-  (<span className={classes[`tooltip-${position}`]} data-label={label}>{children}</span>);
+  (<span className={`${classes[`tooltip-${position}`]} ${classes.base} `} data-label={label}>{children}</span>);
 
 Tooltip.propTypes = {
   /**
@@ -24,7 +24,6 @@ Tooltip.propTypes = {
    */
   label: PropTypes.string.isRequired,
   /** Determines the position the tooltip appears from, 
-   * Default: 's'
    * 
    * One of the following: `nw, n, ne, e, se, s, sw, w` */
   position: PropTypes.oneOf(Object.values(CARDINAL_DIRECTIONS)),
@@ -41,31 +40,21 @@ Tooltip.propTypes = {
   }).isRequired,
   /** Element to which the tooltip belongs, like a `<Button>` */
   children: PropTypes.oneOfType([PropTypes.element, PropTypes.string]).isRequired,
+  /* eslint react/no-unused-prop-types: 0 */
+  radius: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  backgroundColor: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  arrowSize: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
 Tooltip.defaultProps = {
   position: 's',
-};
-
-export const TooltipFactory = ({
-  radius,
-  color,
-  arrowSize,
-}) => {
-  const styles = Object.values(CARDINAL_DIRECTIONS).reduce((acc, direction) =>
-    Object.assign(acc, {
-      [`tooltip-${direction}`]: configureTooltip({ direction, color, arrowSize, radius }),
-    }), {});
-
-  return compose(
-    pure,
-    injectSheet(styles),
-    setDisplayName('Tooltip'),
-  )(Tooltip);
-};
-
-export default TooltipFactory({
   radius: '0.3em',
-  color: '#333',
+  backgroundColor: '#333',
   arrowSize: '0.5em',
-});
+};
+
+export default compose(
+  pure,
+  injectSheet(styles),
+  setDisplayName('Tooltip'),
+)(Tooltip);

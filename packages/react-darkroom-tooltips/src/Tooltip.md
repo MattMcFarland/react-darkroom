@@ -21,32 +21,3 @@ Hover the text in **bold** below:
       <Tooltip position="w" label="foo bar"><b>Donec</b></Tooltip> feugiat auctor nunc, id suscipit quam luctus at. 
     </p>
 
-### Customizing tooltips:
-*advanced feature*
-
-You can customize the appearance of tooltips by using the `TooltipFactory`
-
-    // import { TooltipFactory } from 'react-darkroom-tooltips' // es6
-    const TooltipFactory = require('./Tooltip').TooltipFactory; // es5
-
-    // configure your tooltip with ToolTipFactory
-    const MyTooltip = TooltipFactory({
-      radius: '0.9em',
-      color: '#ba4333',
-      arrowSize: '0.5em',
-    })
-    
-    // In your components, you can now use your tooltip the same way, but it
-    // now has your new style settings!
-    class Example extends React.Component {
-      render() {
-        return (
-          <div>
-            <MyTooltip position="e" label="niiice">Hover me...</MyTooltip>
-          </div>
-        );
-      }
-    }
-
-    <Example/>
-    

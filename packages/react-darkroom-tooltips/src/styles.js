@@ -1,10 +1,9 @@
-import merge from 'deepmerge';
-import CARDINAL_DIRECTIONS from '../constants';
+import CARDINAL_DIRECTIONS from './constants';
 
 const { NW, N, NE, E, SE, S, SW, W } = CARDINAL_DIRECTIONS;
 
-const positionStyles = {
-  [NW]: color => ({
+export const positionStyles = {
+  [NW]: {
     '&:hover, &:focus': {
       '&:before': {
         top: '-15%',
@@ -14,7 +13,7 @@ const positionStyles = {
       },
     },
     '&:before': {
-      borderTopColor: `${color}`,
+      borderTopColor: ({ backgroundColor }) => `${backgroundColor}`,
       top: '-35%',
       right: '60%',
     },
@@ -22,8 +21,8 @@ const positionStyles = {
       bottom: '135%',
       right: '50%',
     },
-  }),
-  [N]: color => ({
+  },
+  [N]: {
     '&:hover, &:focus': {
       '&:before': {
         top: '-15%',
@@ -37,14 +36,14 @@ const positionStyles = {
       transform: 'translateX(-50%)',
     },
     '&:before': {
-      borderTopColor: `${color}`,
+      borderTopColor: ({ backgroundColor }) => `${backgroundColor}`,
       top: '-35%',
     },
     '&:after': {
       bottom: '135%',
     },
-  }),
-  [NE]: color => ({
+  },
+  [NE]: {
     '&:hover, &:focus': {
       '&:before': {
         top: '-15%',
@@ -54,7 +53,7 @@ const positionStyles = {
       },
     },
     '&:before': {
-      borderTopColor: `${color}`,
+      borderTopColor: ({ backgroundColor }) => `${backgroundColor}`,
       top: '-35%',
       left: '60%',
     },
@@ -62,8 +61,8 @@ const positionStyles = {
       bottom: '135%',
       left: '50%',
     },
-  }),
-  [E]: color => ({
+  },
+  [E]: {
     '&:hover, &:focus': {
       '&:before': {
         right: '-15%',
@@ -77,14 +76,14 @@ const positionStyles = {
       transform: 'translateY(-50%)',
     },
     '&:before': {
-      borderRightColor: `${color}`,
+      borderRightColor: ({ backgroundColor }) => `${backgroundColor}`,
       right: '-35%',
     },
     '&:after': {
       left: '135%',
     },
-  }),
-  [SE]: color => ({
+  },
+  [SE]: {
     '&:hover, &:focus': {
       '&:before': {
         bottom: '-15%',
@@ -94,7 +93,7 @@ const positionStyles = {
       },
     },
     '&:before': {
-      borderBottomColor: `${color}`,
+      borderBottomColor: ({ backgroundColor }) => `${backgroundColor}`,
       left: '60%',
       bottom: '-35%',
     },
@@ -102,8 +101,8 @@ const positionStyles = {
       left: '50%',
       top: '135%',
     },
-  }),
-  [S]: color => ({
+  },
+  [S]: {
     '&:hover, &:focus': {
       '&:before': {
         bottom: '-15%',
@@ -117,14 +116,14 @@ const positionStyles = {
       transform: 'translateX(-50%)',
     },
     '&:before': {
-      borderBottomColor: `${color}`,
+      borderBottomColor: ({ backgroundColor }) => `${backgroundColor}`,
       bottom: '-35%',
     },
     '&:after': {
       top: '135%',
     },
-  }),
-  [SW]: color => ({
+  },
+  [SW]: {
     '&:hover, &:focus': {
       '&:before': {
         bottom: '-15%',
@@ -134,7 +133,7 @@ const positionStyles = {
       },
     },
     '&:before': {
-      borderBottomColor: `${color}`,
+      borderBottomColor: ({ backgroundColor }) => `${backgroundColor}`,
       right: '60%',
       bottom: '-35%',
     },
@@ -142,8 +141,8 @@ const positionStyles = {
       right: '50%',
       top: '135%',
     },
-  }),
-  [W]: color => ({
+  },
+  [W]: {
     '&:hover, &:focus': {
       '&:before': {
         left: '-15%',
@@ -157,25 +156,33 @@ const positionStyles = {
       transform: 'translateY(-50%)',
     },
     '&:before': {
-      borderLeftColor: `${color}`,
+      borderLeftColor: ({ backgroundColor }) => `${backgroundColor}`,
       left: '-35%',
     },
     '&:after': {
       right: '125%',
     },
-  }),
+  },
 };
 
-const allStyles = (color, arrowSize, radius) => ({
+export const base = {
   position: 'relative',
   display: 'inline-block',
+  lineHeight: 1.125,
   '&:hover, &:focus': {
     '&:before, &:after': {
       visibility: 'visible',
       opacity: 1,
     },
   },
+  '&[disabled]': {
+    '&:before, &:after': {
+      display: 'none',
+    },
+  },
   '&:before, &:after': {
+    fontSize: 12,
+    lineHeight: '18px',
     position: 'absolute',
     visibility: 'hidden',
     opacity: 0,
@@ -186,31 +193,25 @@ const allStyles = (color, arrowSize, radius) => ({
   },
   '&:before': {
     content: '""',
-    border: `${arrowSize} solid transparent`,
+    border: ({ arrowSize }) => `${arrowSize} solid transparent`,
     bottom: 0,
     zIndex: 1000001,
   },
   '&:after': {
     content: 'attr(data-label)',
-    backgroundColor: `${color}`,
-    borderRadius: `${radius}`,
+    backgroundColor: ({ backgroundColor }) => `${backgroundColor}`,
+    borderRadius: ({ radius }) => `${radius}`,
     color: 'white',
     textShadow: '0 -1px 0 rgba(0, 0, 0, .2)',
     padding: '5px 10px',
     whiteSpace: 'nowrap',
     boxShadow: '1px 1px 3px rgba(0, 0, 0, .2)',
   },
-});
-
-const createTooltipStyle = (
-  position,
-  color,
-  arrowSize,
-  radius,
-) => {
-  const withAllStyles = allStyles(color, arrowSize, radius);
-  const withDirectionalStyles = positionStyles[position](color);
-  return merge(withAllStyles, withDirectionalStyles);
 };
 
-export default createTooltipStyle;
+export default Object.values(CARDINAL_DIRECTIONS).reduce((acc, direction) =>
+  Object.assign(acc, {
+    [`tooltip-${direction}`]: positionStyles[direction],
+  }), {
+  base,
+});

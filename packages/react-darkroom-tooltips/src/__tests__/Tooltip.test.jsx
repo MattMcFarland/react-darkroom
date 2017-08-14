@@ -23,17 +23,5 @@ describe('Tooltip', () => {
       });
     });
   });
-
-  describe('TooltipFactory', () => {
-    test('Creates a tooltip ', () => {
-      const TestTooltip = TooltipFactory({
-        radius: 'test-radius',
-        color: 'test-color',
-        arrowSize: 'test-arrowSize',
-      });
-      const node = <TestTooltip label="test">hai</TestTooltip>;
-      expect(renderer.create(node)).toMatchSnapshot();
-    });
-  });
 });
 
