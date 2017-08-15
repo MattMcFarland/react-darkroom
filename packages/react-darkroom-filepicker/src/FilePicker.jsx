@@ -7,11 +7,14 @@ import {
   setDisplayName,
   withHandlers,
   defaultProps,
+  withState,
+  lifecycle,
 } from 'recompose';
+import generateUUID from 'uuid/v4';
 
 /* global window */
 
-let fileInput = null;
+const fileInput = {};
 
 const readFile = (file, done) => {
   const reader = new window.FileReader();
@@ -25,8 +28,10 @@ export const FilePicker = ({
   children,
   getFileData,
   triggerInputChange,
+  uuid,
 }) => (
   /* eslint jsx-a11y/no-static-element-interactions: 0 */
+  // a11y will have to be set by the consumer because we cant double nest buttons
   <span aria-label="select file">
     <span
       onClick={triggerInputChange}
@@ -38,15 +43,13 @@ export const FilePicker = ({
       onChange={getFileData}
       type="file"
       style={{ display: 'none' }}
-      ref={(input) => { fileInput = input; }}
+      ref={(input) => { fileInput[uuid] = input; }}
     />
   </span>
 );
 
 FilePicker.propTypes = {
-  /** Us
-   *  <button></button>e a child or children to design the look of the component, 
-   * wrapped in a button tag. */
+  /** To meet a11y standards please use a button for the child! */
   children: PropTypes.oneOfType([PropTypes.node, PropTypes.element, PropTypes.string]).isRequired,
   /** Leave empty to use default styling, which by default inherits it's parents attributes */
   className: PropTypes.string,
@@ -63,6 +66,8 @@ FilePicker.propTypes = {
   getFileData: PropTypes.func.isRequired,
   /** @ignore */
   triggerInputChange: PropTypes.func.isRequired,
+  /** @ignore */
+  uuid: PropTypes.string,
 };
 
 FilePicker.defaultProps = {
@@ -84,6 +89,12 @@ const styles = {
 
 export default compose(
   pure,
+  withState('uuid', 'setUUID', null),
+  lifecycle({
+    componentDidMount() {
+      this.props.setUUID(generateUUID());
+    },
+  }),
   defaultProps({
     fileDataError: (e) => { throw e; },
     fileDataLoaded: () => {},
@@ -105,8 +116,8 @@ export default compose(
         props.fileDataError(e);
       }
     },
-    triggerInputChange: () => () => {
-      fileInput.click();
+    triggerInputChange: props => () => {
+      fileInput[props.uuid].click();
     },
   }),
   injectSheet(styles),
