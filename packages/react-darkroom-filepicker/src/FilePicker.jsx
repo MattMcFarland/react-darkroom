@@ -58,9 +58,20 @@ FilePicker.propTypes = {
     filePicker: PropTypes.string,
   }).isRequired,
   /* eslint react/no-unused-prop-types: 0 */
-  /** Event handler for when the file data has loaded, which async occurs after user selects file */
+  /** 
+   * Event handler *callback* for when the file data has loaded after user a selects file.
+   * It provides one paramater to the callback which is an object 
+   * containing the two keys `meta`, and `data` as its arguments. `({meta, data})`
+   * @param {Object} meta KeyValue map of MetaData: `lastModified, name, size, type`
+   * @param {number} meta.lastModified  Unix timestamp
+   * @param {string} meta.name  File name, with extension
+   * @param {number} meta.size  File size, in bytes
+   * @param {string} meta.type  MimeType of the file.
+   * @param {string} data  base64 encoded *buffer-as-a-string*
+   * */
   onFileDataLoaded: PropTypes.func,
-  /** Event handler for when an error occurs while loading the file from the user's system */
+  /** Event handler  *callback* for when an error occurs while 
+   * loading the file from the user's system */
   onFileDataError: PropTypes.func,
   /** @ignore */
   getFileData: PropTypes.func.isRequired,
