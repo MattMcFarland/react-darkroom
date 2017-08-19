@@ -107,6 +107,9 @@ export default compose(
     componentDidMount() {
       this.props.setUUID(generateUUID());
     },
+    componentWillUnmount() {
+      delete fileInput[this.props.uuid];
+    },
   }),
   defaultProps({
     fileDataError: (e) => { throw e; },
