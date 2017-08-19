@@ -6,13 +6,14 @@
   "private": true,
   "scripts": {
     "postinstall": "npm run bootstrap",
-    "bootstrap": "lerna bootstrap --hoist",
+    "bootstrap": "lerna bootstrap",
     "start": "npm run styleguide",
     "test": "lerna exec npm test --concurrency 1",
     "lint": "lerna exec npm run lint --concurrency 1",
     "build": "lerna exec npm run build --concurrency 1",
     "styleguide": "styleguidist server",
-    "styleguide:build": "styleguidist build"
+    "styleguide:build": "styleguidist build",
+    "lerna": "lerna"
   },
   "repository": {
     "type": "git",
