@@ -14,7 +14,7 @@ import generateUUID from 'uuid/v4';
 
 /* global window */
 
-const fileInput = {};
+export const fileInput = {};
 
 const readFile = (file, done) => {
   const reader = new window.FileReader();
@@ -32,9 +32,8 @@ export const FilePicker = ({
 }) => (
   /* eslint jsx-a11y/no-static-element-interactions: 0 */
   // a11y will have to be set by the consumer because we cant double nest buttons
-  <span aria-label="select file">
+  <span onClick={triggerInputChange} aria-label="select file">
     <span
-      onClick={triggerInputChange}
       className={className || classes.filePicker}
     >
       {children}
@@ -58,7 +57,9 @@ FilePicker.propTypes = {
     filePicker: PropTypes.string,
   }).isRequired,
   /* eslint react/no-unused-prop-types: 0 */
-  /** 
+  /** // for testing purposes
+
+
    * Event handler *callback* for when the file data has loaded after user a selects file.
    * It provides one paramater to the callback which is an object 
    * containing the two keys `meta`, and `data` as its arguments. `({meta, data})`
@@ -98,6 +99,7 @@ const styles = {
   },
 };
 
+
 export default compose(
   pure,
   withState('uuid', 'setUUID', null),
@@ -134,3 +136,4 @@ export default compose(
   injectSheet(styles),
   setDisplayName('FilePicker'),
 )(FilePicker);
+

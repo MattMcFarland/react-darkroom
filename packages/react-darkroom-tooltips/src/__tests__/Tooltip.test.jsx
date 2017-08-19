@@ -1,7 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 
-import Tooltip, { TooltipFactory } from '../Tooltip';
+import Tooltip from '../Tooltip';
 import constants from '../constants';
 
 const { describe, test, expect } = global;
