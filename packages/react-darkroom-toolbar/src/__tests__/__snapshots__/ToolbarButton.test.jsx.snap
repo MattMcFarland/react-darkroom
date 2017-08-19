@@ -1,0 +1,68 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Toolbar matches snapshot 1`] = `
+initialize {
+  "0": Object {
+    "attribs": Object {},
+    "children": Array [
+      Object {
+        "attribs": Object {
+          "class": "menu-0-0",
+        },
+        "children": Array [
+          Object {
+            "attribs": Object {
+              "class": "list-0-1",
+            },
+            "children": Array [
+              Object {
+                "attribs": Object {
+                  "class": "listItem-0-2",
+                },
+                "children": Array [
+                  Object {
+                    "data": "test",
+                    "next": null,
+                    "parent": [Circular],
+                    "prev": null,
+                    "type": "text",
+                  },
+                ],
+                "name": "li",
+                "next": null,
+                "parent": [Circular],
+                "prev": null,
+                "type": "tag",
+              },
+            ],
+            "name": "ul",
+            "next": null,
+            "parent": [Circular],
+            "prev": null,
+            "type": "tag",
+          },
+        ],
+        "name": "menu",
+        "next": null,
+        "parent": null,
+        "prev": null,
+        "root": [Circular],
+        "type": "tag",
+      },
+    ],
+    "name": "root",
+    "next": null,
+    "parent": null,
+    "prev": null,
+    "type": "root",
+  },
+  "_root": [Circular],
+  "length": 1,
+  "options": Object {
+    "decodeEntities": true,
+    "normalizeWhitespace": false,
+    "withDomLvl1": true,
+    "xmlMode": false,
+  },
+}
+`;
