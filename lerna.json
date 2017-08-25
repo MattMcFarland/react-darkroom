@@ -3,5 +3,11 @@
   "packages": [
     "packages/*"
   ],
-  "version": "0.0.0"
+  "version": "0.0.0",
+  "command": {
+    "bootstrap": {
+      "hoist": "**",
+      "npmClient": "yarn"
+    }
+  }
 }
