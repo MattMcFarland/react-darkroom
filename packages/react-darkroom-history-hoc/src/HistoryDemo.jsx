@@ -8,17 +8,15 @@ const HistoryDemo = ({
   redo,
   index,
   thread,
-  onIncrement = () => pushHistory({counter: counter + 1}),
-  onDecrement = () => pushHistory({counter: counter - 1})
 }) => (
   <div>
     <h1>HistoryDemo</h1>
     <p><span>Count:</span><num>{counter}</num></p>
-    <button onClick={onIncrement}>increment</button>
-    <button onClick={onDecrement}>decrement</button>
+    <button onClick={() => pushHistory({counter: counter + 1})}>increment</button>
+    <button onClick={() => pushHistory({counter: counter - 1})}>decrement</button>
     <hr/>
-    <button disabled={index <= 0} onClick={() => undo()}>Undo</button>
-    <button disabled={index >= thread.length-1} onClick={() => redo()}>Redo</button>
+    <button disabled={index <= 0} onClick={undo}>Undo</button>
+    <button disabled={index >= thread.length-1} onClick={redo}>Redo</button>
   </div>
 )
 

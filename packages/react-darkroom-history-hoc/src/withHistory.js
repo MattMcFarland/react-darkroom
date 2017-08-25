@@ -3,6 +3,15 @@ import {
   withStateHandlers
 } from 'recompose'
 
+export default (initialState) => withStateHandlers({ thread: [initialState], index: 0, ...initialState }, {
+  pushHistory: (state, props) => newState => _updateThread(state, newState),
+  go: (state, props) => n => _moveIndex(state, n),
+  forward: (state, props) => () => _moveIndex(state, 1),
+  backward: (state, props) => () => _moveIndex(state, -1),
+  undo: (state, props) => () => _moveIndex(state, -1),
+  redo: (state, props) => () => _moveIndex(state, 1)
+})
+
 function _updateThread (state, newState) {
   const updateThread = [
     ...state.thread.slice(0, state.index + 1),
@@ -29,15 +38,3 @@ function clamp(num, min, max) {
   return num <= min ? min : num >= max ? max : num;
 }
 
-function withHistory (state) { return compose(
-  withStateHandlers({ thread: [state], index: 0, ...state }, {
-    pushHistory: (state, props) => newState => _updateThread(state, newState),
-    go: (state, props) => i => _moveIndex(state, i),
-    forward: (state, props) => () => _moveIndex(state, 1),
-    backward: (state, props) => () => _moveIndex(state, -1),
-    undo: (state, props) => () => _moveIndex(state, -1),
-    redo: (state, props) => () => _moveIndex(state, 1)
-  })
-)}
-
-export default withHistory
