@@ -14,8 +14,7 @@ const FilePickerNode = (
   </FilePicker>);
 
 const createFilepicker = () => mount(FilePickerNode).find(FilePickerClass);
-createFilepicker.shallow = () => shallow(FilePickerNode).find(FilePickerClass);
-createFilepicker.render = () => render(FilePickerNode).find(FilePickerClass);
+
 
 describe('FilePicker', () => {
   describe('Rendering', () => {
