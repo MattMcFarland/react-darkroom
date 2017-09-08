@@ -1,0 +1,169 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`withHistory higher order component go() relatively adds the index to change the state down 1`] = `
+Object {
+  "counter": 3,
+  "index": 2,
+  "thread": Array [
+    Object {
+      "counter": 1,
+    },
+    Object {
+      "counter": 2,
+    },
+    Object {
+      "counter": 3,
+    },
+    Object {
+      "counter": 4,
+    },
+    Object {
+      "counter": 5,
+    },
+  ],
+}
+`;
+
+exports[`withHistory higher order component go() relatively adds the index to change the state up 1`] = `
+Object {
+  "counter": 5,
+  "index": 4,
+  "thread": Array [
+    Object {
+      "counter": 1,
+    },
+    Object {
+      "counter": 2,
+    },
+    Object {
+      "counter": 3,
+    },
+    Object {
+      "counter": 4,
+    },
+    Object {
+      "counter": 5,
+    },
+  ],
+}
+`;
+
+exports[`withHistory higher order component pushHistory() pushHistory adds actions called to thread 1`] = `
+Object {
+  "counter": 2,
+  "index": 3,
+  "thread": Array [
+    Object {
+      "counter": 1,
+    },
+    Object {
+      "counter": 2,
+    },
+    Object {
+      "counter": 1,
+    },
+    Object {
+      "counter": 2,
+    },
+  ],
+}
+`;
+
+exports[`withHistory higher order component redo/forward prevents index from going out of range 1`] = `
+Object {
+  "counter": 1,
+  "index": 0,
+  "thread": Array [
+    Object {
+      "counter": 1,
+    },
+  ],
+}
+`;
+
+exports[`withHistory higher order component redo/forward raises the index when it is less than the length 1`] = `
+Object {
+  "counter": 1,
+  "index": 2,
+  "thread": Array [
+    Object {
+      "counter": 1,
+    },
+    Object {
+      "counter": 2,
+    },
+    Object {
+      "counter": 1,
+    },
+  ],
+}
+`;
+
+exports[`withHistory higher order component thread root state contains data stored in the thread by index 1`] = `
+Object {
+  "counter": 2,
+  "index": 1,
+  "thread": Array [
+    Object {
+      "counter": 1,
+    },
+    Object {
+      "counter": 2,
+    },
+    Object {
+      "counter": 1,
+    },
+  ],
+}
+`;
+
+exports[`withHistory higher order component undo/backward prevents index from going out of range 1`] = `
+Object {
+  "counter": 1,
+  "index": 0,
+  "thread": Array [
+    Object {
+      "counter": 1,
+    },
+  ],
+}
+`;
+
+exports[`withHistory higher order component undo/backward subtracts the index, but not the length 1`] = `
+Object {
+  "counter": 2,
+  "index": 1,
+  "thread": Array [
+    Object {
+      "counter": 1,
+    },
+    Object {
+      "counter": 2,
+    },
+    Object {
+      "counter": 1,
+    },
+    Object {
+      "counter": 2,
+    },
+  ],
+}
+`;
+
+exports[`withHistory higher order component undo/backward whenever a new action follows an undo, the thread is cut to the index of the new action 1`] = `
+Object {
+  "counter": 1,
+  "index": 2,
+  "thread": Array [
+    Object {
+      "counter": 1,
+    },
+    Object {
+      "counter": 2,
+    },
+    Object {
+      "counter": 1,
+    },
+  ],
+}
+`;

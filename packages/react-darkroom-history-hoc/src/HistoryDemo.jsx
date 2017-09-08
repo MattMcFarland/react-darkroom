@@ -1,9 +1,11 @@
 import React from 'react'
 import withHistory from './withHistory'
+import { compose } from 'recompose'
 
 const HistoryDemo = ({
   counter,
-  pushHistory,
+  go,
+  pushHistory,  
   undo,
   redo,
   index,
