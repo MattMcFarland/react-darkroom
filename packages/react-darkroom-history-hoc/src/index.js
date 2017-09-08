@@ -1,1 +1,1 @@
-export { default as withHistory } from 'withHistory'
+export { default } from './withHistory';
