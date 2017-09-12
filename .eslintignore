@@ -1,0 +1,5 @@
+# Ignore example until it is removed from the project
+example/*
+
+# Ignore "old" until it is removed from the project
+old/*

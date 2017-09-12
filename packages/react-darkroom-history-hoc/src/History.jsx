@@ -1,7 +1,7 @@
 import React from 'react';
 import withHistory from './withHistory';
 
-const HistoryDemo = ({
+const History = ({
   /* eslint react/prop-types: 0 */
   counter,
   pushHistory,
@@ -11,7 +11,7 @@ const HistoryDemo = ({
   thread,
 }) => (
   <div>
-    <h1>HistoryDemo</h1>
+    <h1>History</h1>
     <p><span>Count:</span><num>{counter}</num></p>
     <button onClick={() => pushHistory({ counter: counter + 1 })}>increment</button>
     <button onClick={() => pushHistory({ counter: counter - 1 })}>decrement</button>
@@ -25,4 +25,4 @@ const initialState = {
   counter: 1,
 };
 
-export default withHistory(initialState)(HistoryDemo);
+export default withHistory(initialState)(History);

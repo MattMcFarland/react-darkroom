@@ -19,8 +19,12 @@ module.exports = {
       ],
     },
     {
+      name: 'Higher Order Components',
+      components: 'packages/react-darkroom-history-hoc/src/[A-Z]*.jsx',
+    },
+    {
       name: 'Dumb Components',
-      components: 'packages/react-darkroom*[*icons*|*tooltips*|*toolbar*]*/src/[A-Z]*.jsx',
+      components: 'packages/react-darkroom-[icons|tooltips|toolbar]*/src/[A-Z]*.jsx',
     },
     // {
     //   name: 'All',
