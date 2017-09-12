@@ -12,7 +12,7 @@ The component `props` are automatically updated to reflect the contents within t
 
 ```js
 /*
-import { withHistory } from 'react-darkroom-history-hoc'
+import withHistory from 'react-darkroom-history-hoc'
 */
 const withHistory = require('./withHistory').default
 const ComponentToWrap = ({
