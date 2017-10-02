@@ -2,10 +2,17 @@
 The primary purpose of the `<Canvas>` is to be wrapped by higher order components (such as cropping), and to display an image.
 
 ```js
-const randomImage = () => 'http://lorempixel.com/320/240/cats?' + Math.random().toString(36).substring(4);
+
+initialState = {
+  src: 'https://i.imgur.com/Xb2azNr.jpg',
+  angle: 0
+};
 
 <div>
-  <Canvas src={ state.src || randomImage() } width={320} height={240} />
-  <p><button onClick={() => setState({ src: randomImage() })}>Random Image</button></p>
+  <Canvas angle={state.angle} src={ state.src } width={320} height={240} />
+  <p>
+    <button onClick={() => setState({ angle: state.angle-90 })}>Rotate Left</button>
+    <button onClick={() => setState({ angle: state.angle+90 })}>Rotate Right</button>
+  </p>
 </div>
 ```
