@@ -5,6 +5,8 @@
         "jsx-a11y/anchor-is-valid": ["warn", { "aspects": ["invalidHref"] }],
         "react/forbid-prop-types": 0,
         "react/require-default-props": 0,
-        "import/no-named-as-default": 0
+        "import/no-named-as-default": 0,
+        "no-nested-ternary": 0,
+        "no-underscore-dangle": 0
     }
 }
