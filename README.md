@@ -56,7 +56,7 @@ If `crop` is set to false, then it will not show the crop handles, set `crop` to
 ## History
 
 History component uses `step` and `length` to determine where user is in history, and looks for children with
-`action` prop `back` or `next` - it also uses the `ifEmpty` tag to `disable` or `hide` the button if user is
+`action` prop `back` or `next` - it also uses the `ifempty` tag to `disable` or `hide` the button if user is
 at beginning or end of history.
 
 ```jsx
@@ -64,7 +64,7 @@ at beginning or end of history.
   <button
     action="back"
     onClick={this.onUndo}
-    data-ifEmpty="disable">
+    data-ifempty="disable">
 
     Undo
 
@@ -72,7 +72,7 @@ at beginning or end of history.
   <button
     action="forward"
     onClick={this.onRedo}
-    data-ifEmpty="disable">
+    data-ifempty="disable">
 
     Redo
 
@@ -113,21 +113,21 @@ Filepicker can be used to upload files, but not needed, it is used in the kitche
 
 ## CropMenu
 
-To add crop functionality, you can create a cropmenu, the buttons can be configured to `showOnlyWhen` a value of `croppingIsOff` or `croppingIsOn`.
+To add crop functionality, you can create a cropmenu, the buttons can be configured to `showonlywhen` a value of `croppingIsOff` or `croppingIsOn`.
 The CropMenu is entirely optional, and you can create your own composition for the crop menu if you choose.
 
 ```jsx
     <CropMenu isCropping={crop}>
-      <button disabled={!hasFile} data-showOnlyWhen='croppingIsOff' onClick={this.onCropStart} data-tipsy="Crop" className="tipsy tipsy--sw">
+      <button disabled={!hasFile} data-showonlywhen='croppingIsOff' onClick={this.onCropStart} data-tipsy="Crop" className="tipsy tipsy--sw">
         <span className="icon icon-crop"/>
       </button>
-      <button disabled={!hasFile} data-showOnlyWhen='croppingIsOn' style={{color: 'cyan'}}>
+      <button disabled={!hasFile} data-showonlywhen='croppingIsOn' style={{color: 'cyan'}}>
         <span className="icon icon-crop"/>
       </button>
-      <button disabled={!hasFile} data-showOnlyWhen='croppingIsOn' onClick={this.onCropConfirm} style={{color: 'green'}} data-tipsy="Confirm" className="tipsy tipsy--sw">
+      <button disabled={!hasFile} data-showonlywhen='croppingIsOn' onClick={this.onCropConfirm} style={{color: 'green'}} data-tipsy="Confirm" className="tipsy tipsy--sw">
         <span className="icon icon-checkmark"/>
       </button>
-      <button disabled={!hasFile} data-showOnlyWhen='croppingIsOn' onClick={this.onCropCancel} style={{color: 'red'}} data-tipsy="Cancel" className="tipsy tipsy--sw">
+      <button disabled={!hasFile} data-showonlywhen='croppingIsOn' onClick={this.onCropCancel} style={{color: 'red'}} data-tipsy="Cancel" className="tipsy tipsy--sw">
         <span className="icon icon-cross"/>
       </button>
     </CropMenu>
@@ -148,7 +148,7 @@ The CropMenu is entirely optional, and you can create your own composition for t
       <button
         action="back"
         onClick={this.onUndo}
-        ifEmpty="disable"
+        data-ifempty="disable"
         data-tipsy="Undo"
         className="tipsy tipsy--sw">
         <span className="icon icon-undo2"/>
@@ -156,7 +156,7 @@ The CropMenu is entirely optional, and you can create your own composition for t
       <button
         action="forward"
         onClick={this.onRedo}
-        ifEmpty="disable"
+        data-ifempty="disable"
         data-tipsy="Redo"
         className="tipsy tipsy--sw">
         <span className="icon icon-redo2"/>
@@ -169,16 +169,16 @@ The CropMenu is entirely optional, and you can create your own composition for t
       <span className="icon icon-redo"/>
     </button>
     <CropMenu isCropping={crop}>
-      <button disabled={!hasFile} data-showOnlyWhen='croppingIsOff' onClick={this.onCropStart} data-tipsy="Crop" className="tipsy tipsy--sw">
+      <button disabled={!hasFile} data-showonlywhen='croppingIsOff' onClick={this.onCropStart} data-tipsy="Crop" className="tipsy tipsy--sw">
         <span className="icon icon-crop"/>
       </button>
-      <button disabled={!hasFile} data-showOnlyWhen='croppingIsOn' style={{color: 'cyan'}}>
+      <button disabled={!hasFile} data-showonlywhen='croppingIsOn' style={{color: 'cyan'}}>
         <span className="icon icon-crop"/>
       </button>
-      <button disabled={!hasFile} data-showOnlyWhen='croppingIsOn' onClick={this.onCropConfirm} style={{color: 'green'}} data-tipsy="Confirm" className="tipsy tipsy--sw">
+      <button disabled={!hasFile} data-showonlywhen='croppingIsOn' onClick={this.onCropConfirm} style={{color: 'green'}} data-tipsy="Confirm" className="tipsy tipsy--sw">
         <span className="icon icon-checkmark"/>
       </button>
-      <button disabled={!hasFile} data-showOnlyWhen='croppingIsOn' onClick={this.onCropCancel} style={{color: 'red'}} data-tipsy="Cancel" className="tipsy tipsy--sw">
+      <button disabled={!hasFile} data-showonlywhen='croppingIsOn' onClick={this.onCropCancel} style={{color: 'red'}} data-tipsy="Cancel" className="tipsy tipsy--sw">
         <span className="icon icon-cross"/>
       </button>
     </CropMenu>
