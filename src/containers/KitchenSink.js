@@ -211,7 +211,7 @@ export default class KitchenSink extends React.Component {
                 <button
                   action="back"
                   onClick={this.onUndo}
-                  data-ifEmpty="disable"
+                  data-ifempty="disable"
                   data-tipsy="Undo"
                   className="tipsy tipsy--sw">
                   <span className="icon icon-undo2"/>
@@ -219,7 +219,7 @@ export default class KitchenSink extends React.Component {
                 <button
                   action="forward"
                   onClick={this.onRedo}
-                  data-ifEmpty="disable"
+                  data-ifempty="disable"
                   data-tipsy="Redo"
                   className="tipsy tipsy--sw">
                   <span className="icon icon-redo2"/>
@@ -242,18 +242,18 @@ export default class KitchenSink extends React.Component {
               <CropMenu isCropping={crop}>
                 <button
                   disabled={!hasFile}
-                  data-showOnlyWhen='croppingIsOff'
+                  data-showonlywhen='croppingIsOff'
                   onClick={this.onCropStart}
                   data-tipsy="Crop"
                   className="tipsy tipsy--sw">
                   <span className="icon icon-crop"/>
                 </button>
-                <button disabled={!hasFile} showOnlyWhen='croppingIsOn' style={{color: 'cyan'}}>
+                <button disabled={!hasFile} showonlywhen='croppingIsOn' style={{color: 'cyan'}}>
                   <span className="icon icon-crop"/>
                 </button>
                 <button
                   disabled={!hasFile}
-                  data-showOnlyWhen='croppingIsOn'
+                  data-showonlywhen='croppingIsOn'
                   onClick={this.onCropConfirm}
                   style={{color: 'green'}}
                   data-tipsy="Confirm"
@@ -262,7 +262,7 @@ export default class KitchenSink extends React.Component {
                 </button>
                 <button
                   disabled={!hasFile}
-                  data-showOnlyWhen='croppingIsOn'
+                  data-showonlywhen='croppingIsOn'
                   onClick={this.onCropCancel}
                   style={{color: 'red'}}
                   data-tipsy="Cancel"
