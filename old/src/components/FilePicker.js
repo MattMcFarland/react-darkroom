@@ -3,7 +3,7 @@ import React from 'react';
 export default class FilePicker extends React.Component {
   render() {
 
-    let {onChange, hasFile} = this.props;
+    let {onChange, hasFile, accept} = this.props;
     let btnStyle = {
       display: hasFile ? 'none' : 'block',
       width: '100%',
@@ -24,7 +24,7 @@ export default class FilePicker extends React.Component {
       <button style={btnStyle} onClick={() => this.refs.fileInput.click()} type="button" className="filepicker">
         <span style={iconStyle} className="icon icon-image"/>
         <span style={textStyle}>Select image</span>
-        <input ref="fileInput" style={{display: 'none'}} type="file" onChange={onChange}/>
+        <input ref="fileInput" style={{display: 'none'}} type="file" onChange={onChange} accept={accept} />
       </button>
     );
   }

@@ -23,6 +23,7 @@ const readFile = (file, done) => {
 };
 
 export const FilePicker = ({
+  accept,
   classes,
   className,
   children,
@@ -41,6 +42,7 @@ export const FilePicker = ({
     <input
       onChange={getFileData}
       type="file"
+      accept={accept}
       style={{ display: 'none' }}
       ref={(input) => { fileInput[uuid] = input; }}
     />
@@ -52,6 +54,7 @@ FilePicker.propTypes = {
   children: PropTypes.oneOfType([PropTypes.node, PropTypes.element, PropTypes.string]).isRequired,
   /** Leave empty to use default styling, which by default inherits it's parents attributes */
   className: PropTypes.string,
+  accept: PropTypes.string,
   /** @ignore */
   classes: PropTypes.shape({
     filePicker: PropTypes.string,
